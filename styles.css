@@ -1,95 +1,250 @@
-/* Reset some default browser styles */
-body, h1, h2, h3, p, ul, ol {
+/* Reset and Base Styles */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f4f4f4;
-    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
 }
 
-/* Styling the header */
-header {
-    background-color: #ff6f61;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Main content */
-main {
-    max-width: 800px;
+.container {
+    max-width: 1200px;
     margin: 0 auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 0 20px;
 }
 
-h1, h2, h3 {
-    margin-bottom: 15px;
+/* Hero Header */
+.hero {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 60px 0;
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+/* Main Content */
+main {
+    padding: 0 0 60px;
+}
+
+section {
+    margin-bottom: 60px;
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #667eea;
+}
+
+h3 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
 }
 
 p {
     margin-bottom: 15px;
-    font-size: 1.1em;
+    font-size: 1.05em;
 }
 
-/* Recipe sections */
-.recipe {
-    margin-bottom: 30px;
+/* Portfolio Grid */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
 
-.ingredients ul {
-    list-style-type: square;
-    padding-left: 20px;
-    margin-bottom: 20px;
+.portfolio-item {
+    background: #f8f9fa;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.method ol {
-    padding-left: 20px;
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
-.external-link {
-    display: block;
-    margin-top: 15px;
-    color: #ff6f61;
+.portfolio-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.portfolio-image.church-associates {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    color: white;
+}
+
+.portfolio-image.apple-samosa {
+    background: linear-gradient(135deg, #ff6f61 0%, #ff8e72 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    color: white;
+}
+
+.portfolio-image.placeholder {
+    background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    color: #666;
+}
+
+.portfolio-content {
+    padding: 20px;
+}
+
+.portfolio-content h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    background: #667eea;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
     text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    margin-top: 15px;
 }
 
-.external-link:hover {
-    text-decoration: underline;
+.btn:hover {
+    background: #764ba2;
 }
 
-/* Styling the footer */
+.btn.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Services Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.service-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+}
+
+.service-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.service-card p {
+    color: #666;
+}
+
+/* Contact Section */
+.contact {
+    text-align: center;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.contact-link {
+    background: #667eea;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.contact-link:hover {
+    background: #764ba2;
+}
+
+/* Footer */
 footer {
-    background-color: #333;
+    background: rgba(0, 0, 0, 0.3);
     color: white;
     text-align: center;
-    padding: 15px;
-    margin-top: 20px;
-    border-radius: 8px;
+    padding: 30px 0;
+    margin-top: 60px;
 }
 
-footer h2 {
+footer p {
     margin: 0;
+    opacity: 0.9;
 }
 
-/* Responsive design */
-@media (max-width: 600px) {
-    main {
-        padding: 15px;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 1.8em;
     }
 
-    header, footer {
-        padding: 15px;
-    }
-
-    p {
+    .hero p {
         font-size: 1em;
+    }
+
+    section {
+        padding: 25px;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-links {
+        flex-direction: column;
     }
 }
