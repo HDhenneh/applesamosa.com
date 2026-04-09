@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  --font-sans: 'Inter', sans-serif;
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-amber-500;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
