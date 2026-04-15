@@ -1,195 +1,151 @@
-# Business Website Portfolio
+# Business Portfolio by Messi Kwessi
 
-A collection of modern, responsive website designs by Messi Kwessi. Each project showcases different design approaches for various business types.
+A modern, responsive portfolio showcasing professional business websites built with the Fabrica design system.
 
-## 🌟 Featured Projects
+## 🎨 Design System
 
-### [Church Associates](portfolio/church-associates/index.html)
-Professional plastering services website featuring:
-- Clean, modern design with trustworthy color scheme
-- Service highlights with detailed descriptions
-- Customer testimonials section
-- Contact form for inquiries
-- Fully responsive layout
-- Mobile-friendly navigation
+This portfolio uses a custom implementation of the **Fabrica design system** - inspired by Framer's modern portfolio templates. The design emphasizes:
 
-### [Apple Samosa Recipe](portfolio/apple-samosa/index.html)
-A fun, colorful recipe site demonstrating:
-- Playful design approach for food content
-- Easy-to-follow recipe layout
-- Mobile-optimized presentation
-- Simple, effective navigation
+- Clean, minimalist layouts
+- Strong typography and visual hierarchy
+- Smooth animations and transitions
+- Modern spacing and whitespace
+- Professional color usage
+- Responsive design across all devices
 
-### [Prem Dent](portfolio/prem-dent/index.html)
-Dental clinic website featuring:
-- Professional healthcare design with blue gradient theme
-- Treatment showcase with detailed descriptions
-- Patient statistics and social proof
-- CQC registration information
-- Google reviews integration
+### Design Tokens
 
-### [Long Lane Launderette](portfolio/longlanelaunderette/index.html)
-Local business website featuring:
-- Clean, service-focused design with teal accents
-- Self-service and service wash options
-- Clear pricing structure
-- Facility information
-- Opening hours and contact details
-- Facebook integration
+The system includes comprehensive CSS custom properties for:
+- **Colors**: Each site has its own branded color palette
+- **Spacing**: Consistent spacing scale (xs, sm, md, lg, xl)
+- **Typography**: System fonts with optimized readability
+- **Shadows**: Subtle depth for cards and interactive elements
+- **Radius**: Consistent border-radius values
+- **Transitions**: Smooth micro-interactions
 
-### [Alex Mendes Photography](portfolio/alex-mendes-photography/index.html)
-Netflix-style portfolio website featuring:
-- Dark theme with Netflix-inspired layout
-- Horizontal scrolling galleries
-- Smooth animations and hover effects
-- Multiple photography categories
-- Contact section with social links
-- London landmark placeholders
-
-## 🚀 Getting Started
-
-Each project is self-contained in the `portfolio/` directory. To view any project:
-
-1. Navigate to the project folder (e.g., `portfolio/church-associates/`)
-2. Open `index.html` in your web browser
-3. Or use a local server for better development experience
-
-### Using a Local Server
-
-```bash
-# Using Python 3
-python3 -m http.server 8000
-
-# Using Node.js (http-server)
-npx http-server
-
-# Using PHP
-php -S localhost:8000
-```
-
-Then visit `http://localhost:8000/portfolio/church-associates/` in your browser.
-
-## 🎨 Features
-
-All designs share common strengths:
-
-- **Modern Aesthetics**: Clean, contemporary layouts
-- **Responsive Design**: Perfect on desktop, tablet, and mobile
-- **Fast Loading**: Optimized code for quick page loads
-- **Easy Maintenance**: Simple structure for updates
-- **Accessibility**: Good color contrast and readable typography
-
-## 📁 Structure
+## 📁 Project Structure
 
 ```
 applesamosa.com/
-├── index.html                        # Portfolio landing page
-├── styles.css                        # Main portfolio styles
-├── portfolio/
-│   ├── church-associates/            # Plastering business site
-│   │   ├── index.html
-│   │   └── styles.css
-│   ├── apple-samosa/                 # Recipe site
-│   │   ├── index.html
-│   │   ├── styles.css
-│   │   └── Punjabi-Samosa-Recipe-by-Food-fusion-1.jpg
-│   ├── prem-dent/                    # Dental clinic site
-│   │   ├── index.html
-│   │   └── styles.css
-│   ├── longlanelaunderette/          # Launderette site
-│   │   ├── index.html
-│   │   └── styles.css
-│   └── alex-mendes-photography/     # Photography portfolio
-│       ├── index.html
-│       ├── styles.css
-│       └── script.js
-└── README.md
+├── fabrica-design-system.css    # Core design system
+├── index.html                   # Main portfolio page
+├── styles.css                   # Main portfolio styles
+└── portfolio/
+    ├── apple-samosa/            # Original recipe site
+    ├── church-associates/        # Plastering services
+    ├── prem-dent/              # Dental clinic
+    ├── longlanelaunderette/     # Local launderette
+    ├── alex-mendes-photography/ # Photography portfolio
+    ├── nipnip/                 # Bike repairs (NEW)
+    └── zerowaste/             # Rubbish removal (NEW)
 ```
 
-## 🔧 Customization
+## 🚀 Featured Projects
 
-Each project can be easily customized:
+### Main Portfolio
+- **Design**: Fabrica-inspired clean, modern aesthetic
+- **Colors**: Purple/blue gradient (#667eea → #764ba2)
+- **Features**: Smooth scrolling, animated sections, responsive grid
 
-1. **Content**: Edit HTML files to change text, images, and structure
-2. **Styling**: Modify CSS files for colors, fonts, and layouts
-3. **Images**: Add your own images in the project folders
-4. **Contact**: Update contact information and social media links
+### NipNip Bike Repairs
+- **Industry**: Bicycle servicing and repairs
+- **Colors**: Blue, orange, yellow (energetic, bold)
+- **Features**: Service tiers, pricing, multiple London locations
+- **Services**: Bronze, Silver, Gold, PRO packages
+
+### Zero Waste Group
+- **Industry**: Rubbish removal and house clearance
+- **Colors**: Green, lime, earth tones (eco-friendly)
+- **Features**: Service grid, process steps, booking system
+- **Services**: House clearance, man & van, sofa collection, skip hire
+
+### Church Associates
+- **Industry**: Professional plastering services
+- **Colors**: Blue/white (trustworthy, professional)
+- **Features**: Service highlights, testimonials, contact forms
+
+### Apple Samosa Recipe
+- **Industry**: Food/culinary
+- **Colors**: Orange/red (warm, appetizing)
+- **Features**: Recipe presentation, ingredients, cooking instructions
+
+### Prem Dent
+- **Industry**: Dental healthcare
+- **Colors**: Blue/white (clean, medical)
+- **Features**: Treatments, services, patient information
+
+### Long Lane Launderette
+- **Industry**: Laundry services
+- **Colors**: Teal/cyan (fresh, clean)
+- **Features**: Service options, pricing, facility information
+
+### Alex Mendes Photography
+- **Industry**: Professional photography
+- **Colors**: Dark theme with Netflix-style aesthetics
+- **Features**: Horizontal galleries, immersive viewing experience
+
+## 🛠️ Technologies & Features
+
+- **HTML5**: Semantic markup
+- **CSS3**: Modern features (Grid, Flexbox, Custom Properties)
+- **JavaScript**: Intersection Observer for animations
+- **Responsive Design**: Mobile-first approach
+- **Accessibility**: WCAG compliant colors and contrast
+- **Performance**: Optimized CSS, no external dependencies
+- **Dark Mode**: Automatic system preference detection
 
 ## 📱 Responsive Design
 
-All sites are fully responsive and adapt to:
-- Desktop screens (> 1024px)
-- Tablets (768px - 1024px)
-- Mobile devices (< 768px)
+All sites are fully responsive and optimized for:
+- Desktop (1200px+)
+- Tablet (768px - 1199px)
+- Mobile (< 768px)
 
-## 🛠️ Technologies
+## 🎯 Design Philosophy
 
-- Pure HTML5
-- Vanilla CSS3
-- JavaScript (for Church Associates mobile menu)
-- No frameworks required
+### Fabrica Principles
+1. **Content-First**: Layout serves the content, not vice versa
+2. **Typography-Driven**: Strong type hierarchy for readability
+3. **Micro-Interactions**: Subtle animations enhance user experience
+4. **Consistent Spacing**: 4px base unit scale
+5. **Purposeful Color**: Each color has semantic meaning
 
-## 🌐 Deployment
+### User Experience
+- **Fast Loading**: Optimized assets and code
+- **Intuitive Navigation**: Clear information architecture
+- **Scannable Content**: Easy to find information quickly
+- **Call-to-Action**: Strategic placement of conversion buttons
+- **Mobile Optimized**: Thumb-friendly touch targets
 
-These static sites can be deployed anywhere:
+## 🔧 Customization
 
-- **GitHub Pages**: Perfect for free hosting
-- **Netlify**: Drag-and-drop deployment
-- **Vercel**: Fast, global CDN
-- **Any static hosting provider**
+### Adding New Projects
 
-### GitHub Pages Setup
+1. Create a new directory in `portfolio/`
+2. Copy the design system: `@import url('../fabrica-design-system.css')`
+3. Define brand colors in your site's CSS
+4. Customize content and features
+5. Add to main portfolio grid
 
-1. Push this repository to GitHub
-2. Go to Settings → Pages
-3. Select `main` branch as source
-4. Your site will be live at `https://yourusername.github.io/applesamosa.com/`
+### Color Scheme Examples
 
-## 💼 Business Use Cases
-
-Each design serves different business needs:
-
-**Trade Services** (like Church Associates):
-- Services showcase
-- Customer testimonials
-- Easy contact options
-- Trust-building design
-
-**Content Sites** (like Apple Samosa):
-- Content-focused layouts
-- Easy readability
-- Visual appeal
-- Simple navigation
-
-**Healthcare Services** (like Prem Dent):
-- Professional medical design
-- Trust-building elements
-- Treatment showcases
-- Patient information
-
-**Local Services** (like Long Lane Launderette):
-- Service-focused layout
-- Clear pricing
-- Operating hours
-- Contact convenience
-
-**Creative Portfolios** (like Alex Mendes Photography):
-- Visually striking designs
-- Gallery showcases
-- Modern aesthetics
-- Interactive elements
-
-## 📞 Contact
-
-Interested in a custom website design? Connect:
-
-- **GitHub**: [HDhenneh](https://github.com/HDhenneh)
-- **Instagram**: @church_associates
+```css
+:root {
+    --brand-primary: #your-primary-color;
+    --brand-secondary: #your-secondary-color;
+    --brand-accent: #your-accent-color;
+}
+```
 
 ## 📄 License
 
-Free to use for personal or commercial projects. Attribution appreciated but not required.
+This portfolio is a demonstration of web design capabilities. All brands and services shown are concept redesigns for portfolio purposes.
+
+## 👤 Contact
+
+- **GitHub**: https://github.com/HDhenneh
+- **Portfolio**: https://github.com/HDhenneh/applesamosa.com
 
 ---
 
-Built with ❤️ by Messi Kwessi
+Built with ❤️ using the Fabrica design system philosophy.
