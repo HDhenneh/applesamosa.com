@@ -3,88 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Portfolio by Messi Kwessi</title>
+    <title>Business Portfolio by Messi Kwessi | Modern Web Design</title>
+    <meta name="description" content="Professional portfolio showcasing modern, responsive business websites. Clean design, great user experience.">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="#" style="text-decoration: none; font-weight: 700; color: var(--apple-primary); font-size: 1.5rem;">
+                    MK<span style="color: var(--apple-secondary);">.Design</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#work">Work</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <header class="hero">
-        <div class="container">
-            <h1>Business Website Portfolio</h1>
-            <p>Modern, responsive designs for growing businesses</p>
+        <div class="hero-content animate-fade-in">
+            <h1>Crafting Digital Experiences</h1>
+            <p style="font-size: 1.25rem; margin-bottom: 2rem; color: var(--apple-dark);">
+                Modern, responsive websites that help businesses stand out and convert visitors into customers.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#work" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Let's Talk</a>
+            </div>
         </div>
     </header>
 
-    <main class="container">
-        <section class="intro">
-            <h2>Welcome to My Portfolio</h2>
-            <p>I create clean, professional websites that help businesses stand out. Each design is crafted with attention to detail, focusing on user experience and modern aesthetics.</p>
+    <main>
+        <section id="work" class="section">
+            <div class="container">
+                <div class="section-header" style="text-align: center; margin-bottom: var(--spacing-lg);">
+                    <h2>Featured Work</h2>
+                    <p style="max-width: 600px; margin: 0 auto;">
+                        Each project is crafted with attention to detail, focusing on user experience and modern aesthetics.
+                    </p>
+                </div>
+
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <div class="portfolio-image" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🏗️</div>
+                        <div class="portfolio-content">
+                            <h3>Church Associates</h3>
+                            <p>Professional plastering services with a modern, trustworthy design. Features service highlights, testimonials, and easy contact options.</p>
+                            <a href="portfolio/church-associates/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-image" style="background: linear-gradient(135deg, #ff6f61 0%, #ff8e72 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🍎</div>
+                        <div class="portfolio-content">
+                            <h3>Apple Samosa Recipe</h3>
+                            <p>A fun, colorful recipe site showcasing traditional meets modern cooking. Simple navigation and clear presentation.</p>
+                            <a href="portfolio/apple-samosa/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-image" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🦷</div>
+                        <div class="portfolio-content">
+                            <h3>Prem Dent</h3>
+                            <p>Dental clinic in Elephant & Castle featuring treatments, services, and patient-focused design. Clean, professional aesthetic.</p>
+                            <a href="portfolio/prem-dent/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-image" style="background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">👔</div>
+                        <div class="portfolio-content">
+                            <h3>Long Lane Launderette</h3>
+                            <p>Local launderette in SE1 with clear service options, pricing, and facility information. Practical and user-friendly.</p>
+                            <a href="portfolio/longlanelaunderette/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-image" style="background: linear-gradient(135deg, #e50914 0%, #b81d24 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">📸</div>
+                        <div class="portfolio-content">
+                            <h3>Alex Mendes Photography</h3>
+                            <p>Netflix-style portfolio showcasing London photography. Sleek dark theme with horizontal scrolling galleries.</p>
+                            <a href="portfolio/alex-mendes-photography/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-image" style="background: linear-gradient(135deg, #0ea5e9 0%, #f59e0b 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🚴</div>
+                        <div class="portfolio-content">
+                            <h3>NipNip Bike Repairs</h3>
+                            <p>Same-day bike repairs and servicing with a bold, energetic design. Features three London locations and pricing tiers.</p>
+                            <a href="portfolio/nipnip/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-image" style="background: linear-gradient(135deg, #22c55e 0%, #84cc16 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">♻️</div>
+                        <div class="portfolio-content">
+                            <h3>Zero Waste Group</h3>
+                            <p>Eco-friendly rubbish removal service with clean, professional design. House clearance, man & van, and more.</p>
+                            <a href="portfolio/zerowaste/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section class="portfolio-grid">
-            <div class="portfolio-item">
-                <div class="portfolio-image church-associates"></div>
-                <div class="portfolio-content">
-                    <h3>Church Associates</h3>
-                    <p>Professional plastering services with a modern, trustworthy design. Features service highlights, testimonials, and easy contact options.</p>
-                    <a href="portfolio/church-associates/index.html" class="btn">View Project</a>
+        <section id="services" class="section section-dark">
+            <div class="container">
+                <div class="section-header" style="text-align: center; margin-bottom: var(--spacing-lg);">
+                    <h2>What I Offer</h2>
+                    <p style="max-width: 600px; margin: 0 auto;">
+                        Comprehensive web design services tailored to your business needs
+                    </p>
                 </div>
-            </div>
 
-            <div class="portfolio-item">
-                <div class="portfolio-image apple-samosa"></div>
-                <div class="portfolio-content">
-                    <h3>Apple Samosa Recipe</h3>
-                    <p>A fun, colorful recipe site showcasing traditional meets modern cooking. Simple navigation and clear presentation.</p>
-                    <a href="portfolio/apple-samosa/index.html" class="btn">View Project</a>
-                </div>
-            </div>
+                <div class="grid grid-4">
+                    <div class="service-card">
+                        <div class="service-icon">🎨</div>
+                        <h3>Modern Design</h3>
+                        <p>Clean, contemporary layouts that look great on any device</p>
+                    </div>
 
-            <div class="portfolio-item coming-soon">
-                <div class="portfolio-image placeholder"></div>
-                <div class="portfolio-content">
-                    <h3>More Coming Soon</h3>
-                    <p>Currently working on designs for cafés, tech startups, and local services. Stay tuned!</p>
-                    <span class="btn disabled">In Development</span>
-                </div>
-            </div>
-        </section>
+                    <div class="service-card">
+                        <div class="service-icon">📱</div>
+                        <h3>Responsive</h3>
+                        <p>Perfect experience whether on desktop, tablet, or mobile</p>
+                    </div>
 
-        <section class="services">
-            <h2>What I Offer</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>🎨 Modern Design</h3>
-                    <p>Clean, contemporary layouts that look great on any device</p>
-                </div>
-                <div class="service-card">
-                    <h3>📱 Responsive</h3>
-                    <p>Perfect experience whether on desktop, tablet, or mobile</p>
-                </div>
-                <div class="service-card">
-                    <h3>⚡ Fast & Lightweight</h3>
-                    <p>Optimized code for quick loading and smooth performance</p>
-                </div>
-                <div class="service-card">
-                    <h3>🔧 Easy to Update</h3>
-                    <p>Simple structure that's easy to maintain and expand</p>
+                    <div class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h3>Fast & Lightweight</h3>
+                        <p>Optimized code for quick loading and smooth performance</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🔧</div>
+                        <h3>Easy to Update</h3>
+                        <p>Simple structure that's easy to maintain and expand</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="contact">
-            <h2>Let's Work Together</h2>
-            <p>Have a project in mind? I'd love to hear about it. Let's create something amazing together.</p>
-            <div class="contact-links">
-                <a href="https://github.com/HDhenneh" class="contact-link" target="_blank">GitHub</a>
-                <a href="https://instagram.com/church_associates" class="contact-link" target="_blank">Instagram</a>
+        <section id="about" class="section">
+            <div class="container container-narrow">
+                <div style="text-align: center;">
+                    <h2>About Me</h2>
+                    <p style="font-size: 1.25rem; margin: var(--spacing-md) 0;">
+                        I'm Messi Kwessi, a web designer passionate about creating clean, professional websites that help businesses thrive online. With a focus on user experience and modern aesthetics, I transform digital presence into real business results.
+                    </p>
+                    <p>
+                        Every project is an opportunity to create something exceptional. Whether it's a small business site or a complex portfolio, I bring the same level of care and attention to detail to ensure your website stands out and works perfectly for your needs.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section section-dark">
+            <div class="container container-narrow" style="text-align: center;">
+                <h2>Let's Work Together</h2>
+                <p style="font-size: 1.25rem; margin: var(--spacing-md) 0;">
+                    Have a project in mind? I'd love to hear about it. Let's create something amazing together.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-md);">
+                    <a href="https://github.com/HDhenneh" class="btn btn-primary" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://instagram.com/church_associates" class="btn btn-secondary" target="_blank" rel="noopener">Instagram</a>
+                </div>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Messi Kwessi. Built with passion and precision.</p>
+            <p>&copy; 2024 Messi Kwessi. Built with passion and precision. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>

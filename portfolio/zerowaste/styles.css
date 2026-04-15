@@ -1,0 +1,170 @@
+/**
+ * Zero Waste Group - Fabrica Design System
+ * Colors: Green, Lime, Earth Tones (Eco-friendly, Clean, Sustainable)
+ */
+
+@import url('../fabrica-design-system.css');
+
+/* Override colors for Zero Waste Group brand */
+:root {
+    --primary: var(--zerowaste-primary);
+    --secondary: var(--zerowaste-secondary);
+    --accent: var(--zerowaste-accent);
+    --light: var(--zerowaste-light);
+    --dark: var(--zerowaste-dark);
+    --text: var(--zerowaste-text);
+}
+
+body {
+    background: #ffffff;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--zerowaste-light) 0%, #ffffff 100%);
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.hero h1 {
+    background: linear-gradient(135deg, var(--zerowaste-primary) 0%, var(--zerowaste-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Card Enhancements */
+.card {
+    border-top: 4px solid var(--zerowaste-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.05), transparent);
+    transition: left var(--transition-slow);
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.15);
+}
+
+/* Button Styles */
+.btn-primary {
+    background: var(--zerowaste-primary);
+}
+
+.btn-primary:hover {
+    background: var(--zerowaste-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+}
+
+.btn-secondary {
+    color: var(--zerowaste-primary);
+    border-color: var(--zerowaste-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--zerowaste-primary);
+    color: white;
+}
+
+/* Section Headers */
+.section-header h2 {
+    background: linear-gradient(135deg, var(--zerowaste-primary) 0%, var(--zerowaste-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Price Highlight */
+.card h3 {
+    color: var(--zerowaste-primary);
+}
+
+/* Popular Badge */
+.card span[style*="background: var(--zerowaste-accent)"] {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-4 {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #0a0a0a;
+        color: #e5e5e5;
+    }
+
+    .card {
+        background: #1a1a1a;
+        border-color: var(--zerowaste-primary);
+    }
+
+    .section-dark {
+        background: #0f0f0f !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    nav,
+    .hero,
+    footer {
+        display: none;
+    }
+
+    .card {
+        break-inside: avoid;
+    }
+
+    .btn {
+        display: none;
+    }
+}

@@ -1,0 +1,426 @@
+/* Alex Mendes Photography - Netflix Style Portfolio */
+
+body {
+    background: #141414;
+    color: #fff;
+}
+
+/* Netflix Hero */
+.netflix-hero {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    background: linear-gradient(to right, rgba(20, 20, 20, 0.9) 0%, rgba(20, 20, 20, 0.7) 50%, transparent 100%),
+                url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1600') center/cover;
+    display: flex;
+    align-items: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to top, #141414, transparent);
+}
+
+.hero-content {
+    padding: 0 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-text h1 {
+    font-size: 4em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, #e50914, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-text h2 {
+    font-size: 2.5em;
+    font-weight: 300;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.hero-text p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    opacity: 0.8;
+    max-width: 600px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.play-btn, .more-btn {
+    padding: 12px 30px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.play-btn {
+    background: #e50914;
+    color: white;
+}
+
+.play-btn:hover {
+    background: #b81d24;
+}
+
+.more-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+.more-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Main Content */
+.netflix-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 0 40px;
+}
+
+/* Netflix Sections */
+.netflix-section {
+    padding: 30px 50px;
+    margin-bottom: 20px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h3 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #fff;
+}
+
+.section-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Gallery Scrolling */
+.gallery-scroll {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 20px 0;
+    scroll-behavior: smooth;
+}
+
+.gallery-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.gallery-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.gallery-scroll::-webkit-scrollbar-thumb {
+    background: #e50914;
+    border-radius: 4px;
+}
+
+.gallery-item {
+    flex: 0 0 300px;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-img {
+    width: 100%;
+    height: 450px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* London Landmark Images */
+.london-bridge {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+}
+
+.big-ben {
+    background: linear-gradient(135deg, #1a1a2e 0%, #e50914 100%);
+}
+
+.tower-bridge {
+    background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+}
+
+.eye {
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a40 100%);
+}
+
+.shard {
+    background: linear-gradient(135deg, #1a1a2e 0%, #4a69bd 100%);
+}
+
+.piccadilly {
+    background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+}
+
+.hyde-park {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+}
+
+.covent-garden {
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+}
+
+.soho {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+}
+
+.notting-hill {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+}
+
+.camden {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+.southbank {
+    background: linear-gradient(135deg, #1a1a2e 0%, #4a69bd 100%);
+}
+
+.greenwich {
+    background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%);
+}
+
+.shoreditch {
+    background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%);
+}
+
+.kensington {
+    background: linear-gradient(135deg, #607d8b 0%, #455a64 100%);
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay h4 {
+    font-size: 1.3em;
+    margin-bottom: 5px;
+    color: #e50914;
+}
+
+.gallery-overlay p {
+    font-size: 0.9em;
+    color: #ccc;
+    margin: 0;
+}
+
+/* Services Section */
+.services-section {
+    padding: 50px 50px;
+}
+
+.services-section h3 {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    color: #e50914;
+}
+
+.services-grid-netflix {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.service-card-netflix {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.service-card-netflix:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #e50914;
+    transform: translateY(-5px);
+}
+
+.service-card-netflix h4 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.service-card-netflix p {
+    color: #ccc;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+/* Contact Section */
+.contact-section-netflix {
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    padding: 50px;
+    text-align: center;
+    margin: 30px 50px;
+    border-radius: 8px;
+    border: 1px solid rgba(229, 9, 20, 0.2);
+}
+
+.contact-content h3 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.contact-content p {
+    font-size: 1.2em;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.contact-btn {
+    padding: 15px 35px;
+    background: #e50914;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+    background: #b81d24;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(229, 9, 20, 0.4);
+}
+
+/* Footer */
+.netflix-footer {
+    background: rgba(0, 0, 0, 0.5);
+    color: #ccc;
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 50px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.netflix-footer p {
+    margin: 5px 0;
+}
+
+/* Back Link */
+.back-link {
+    text-align: center;
+    padding: 20px 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .netflix-hero {
+        height: 50vh;
+        min-height: 350px;
+    }
+
+    .hero-text h1 {
+        font-size: 2.5em;
+    }
+
+    .hero-text h2 {
+        font-size: 1.5em;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .netflix-section {
+        padding: 20px;
+    }
+
+    .gallery-item {
+        flex: 0 0 200px;
+    }
+
+    .gallery-img {
+        height: 300px;
+    }
+
+    .services-section {
+        padding: 30px 20px;
+    }
+
+    .contact-section-netflix {
+        padding: 30px 20px;
+        margin: 30px 20px;
+    }
+
+    .contact-buttons {
+        flex-direction: column;
+    }
+}

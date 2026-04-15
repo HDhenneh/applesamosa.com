@@ -20,6 +20,32 @@ A fun, colorful recipe site demonstrating:
 - Mobile-optimized presentation
 - Simple, effective navigation
 
+### [Prem Dent](portfolio/prem-dent/index.html)
+Dental clinic website featuring:
+- Professional healthcare design with blue gradient theme
+- Treatment showcase with detailed descriptions
+- Patient statistics and social proof
+- CQC registration information
+- Google reviews integration
+
+### [Long Lane Launderette](portfolio/longlanelaunderette/index.html)
+Local business website featuring:
+- Clean, service-focused design with teal accents
+- Self-service and service wash options
+- Clear pricing structure
+- Facility information
+- Opening hours and contact details
+- Facebook integration
+
+### [Alex Mendes Photography](portfolio/alex-mendes-photography/index.html)
+Netflix-style portfolio website featuring:
+- Dark theme with Netflix-inspired layout
+- Horizontal scrolling galleries
+- Smooth animations and hover effects
+- Multiple photography categories
+- Contact section with social links
+- London landmark placeholders
+
 ## 🚀 Getting Started
 
 Each project is self-contained in the `portfolio/` directory. To view any project:
@@ -57,16 +83,26 @@ All designs share common strengths:
 
 ```
 applesamosa.com/
-├── index.html              # Portfolio landing page
-├── styles.css              # Main portfolio styles
+├── index.html                        # Portfolio landing page
+├── styles.css                        # Main portfolio styles
 ├── portfolio/
-│   ├── church-associates/  # Plastering business site
+│   ├── church-associates/            # Plastering business site
 │   │   ├── index.html
 │   │   └── styles.css
-│   └── apple-samosa/       # Recipe site
+│   ├── apple-samosa/                 # Recipe site
+│   │   ├── index.html
+│   │   ├── styles.css
+│   │   └── Punjabi-Samosa-Recipe-by-Food-fusion-1.jpg
+│   ├── prem-dent/                    # Dental clinic site
+│   │   ├── index.html
+│   │   └── styles.css
+│   ├── longlanelaunderette/          # Launderette site
+│   │   ├── index.html
+│   │   └── styles.css
+│   └── alex-mendes-photography/     # Photography portfolio
 │       ├── index.html
 │       ├── styles.css
-│       └── Punjabi-Samosa-Recipe-by-Food-fusion-1.jpg
+│       └── script.js
 └── README.md
 ```
 
@@ -124,6 +160,24 @@ Each design serves different business needs:
 - Easy readability
 - Visual appeal
 - Simple navigation
+
+**Healthcare Services** (like Prem Dent):
+- Professional medical design
+- Trust-building elements
+- Treatment showcases
+- Patient information
+
+**Local Services** (like Long Lane Launderette):
+- Service-focused layout
+- Clear pricing
+- Operating hours
+- Contact convenience
+
+**Creative Portfolios** (like Alex Mendes Photography):
+- Visually striking designs
+- Gallery showcases
+- Modern aesthetics
+- Interactive elements
 
 ## 📞 Contact
 

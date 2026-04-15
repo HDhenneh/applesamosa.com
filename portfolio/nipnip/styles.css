@@ -1,0 +1,135 @@
+/**
+ * NipNip Bike Repairs - Fabrica Design System
+ * Colors: Blue, Orange, Yellow (Active, Bold, Energetic)
+ */
+
+@import url('../fabrica-design-system.css');
+
+/* Override colors for NipNip brand */
+:root {
+    --primary: var(--nipnip-primary);
+    --secondary: var(--nipnip-secondary);
+    --accent: var(--nipnip-accent);
+    --light: var(--nipnip-light);
+    --dark: var(--nipnip-dark);
+    --text: var(--nipnip-text);
+}
+
+body {
+    background: #ffffff;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--nipnip-light) 0%, #ffffff 100%);
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.hero h1 {
+    background: linear-gradient(135deg, var(--nipnip-primary) 0%, var(--nipnip-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Card Enhancements */
+.card {
+    border-top: 4px solid var(--nipnip-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.05), transparent);
+    transition: left var(--transition-slow);
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(14, 165, 233, 0.15);
+}
+
+/* Button Styles */
+.btn-primary {
+    background: var(--nipnip-primary);
+}
+
+.btn-primary:hover {
+    background: var(--nipnip-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+}
+
+.btn-secondary {
+    color: var(--nipnip-primary);
+    border-color: var(--nipnip-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--nipnip-primary);
+    color: white;
+}
+
+/* Section Headers */
+.section-header h2 {
+    background: linear-gradient(135deg, var(--nipnip-primary) 0%, var(--nipnip-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Price Highlight */
+.card h3 {
+    color: var(--nipnip-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #0a0a0a;
+        color: #e5e5e5;
+    }
+
+    .card {
+        background: #1a1a1a;
+        border-color: var(--nipnip-primary);
+    }
+
+    .section-dark {
+        background: #0f0f0f !important;
+    }
+}
