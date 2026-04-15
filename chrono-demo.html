@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrono Mode Demo | Time-Aware Design System</title>
+    <meta name="description" content="Experience Chrono Mode - a dynamic color theme system that adapts to natural light cycles throughout the day.">
+    <link rel="stylesheet" href="fabrica-design-system.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="chrono-mode.css">
+</head>
+<body>
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="#" style="text-decoration: none; font-weight: 700; color: var(--chrono-primary); font-size: 1.5rem;">
+                    🎨 Chrono<span style="color: var(--chrono-secondary);">Mode</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#phases">Phases</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#try-it">Try It</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content animate-fade-in">
+            <h1>Design That Flows With Your Day</h1>
+            <p style="font-size: 1.25rem; margin-bottom: 2rem;">
+                <strong>Chrono Mode</strong> automatically adapts your website's colors to match natural light cycles throughout the day. From dawn's soft pastels to night's deep blues, experience design that respects your circadian rhythm.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#try-it" class="btn btn-primary">Try Chrono Mode</a>
+                <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="how-it-works" class="section">
+            <div class="container">
+                <div class="section-header" style="text-align: center; margin-bottom: var(--spacing-lg);">
+                    <h2>How Chrono Mode Works</h2>
+                    <p style="max-width: 600px; margin: 0 auto;">
+                        Unlike traditional light/dark mode, Chrono Mode uses 8 distinct phases that flow naturally throughout the day
+                    </p>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>⏰ Time-Aware</h3>
+                        <p>Automatically detects the current time and applies the appropriate color phase. Works 24/7 without user intervention.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎨 8 Distinct Phases</h3>
+                        <p>From dawn's soft pastels to night's deep blues, each phase is carefully designed to match natural lighting conditions.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>🔄 Smooth Transitions</h3>
+                        <p>Colors fade gently between phases (2-3 seconds), creating a seamless, organic experience.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>⚙️ Manual Override</h3>
+                        <p>Need to focus? Jump to any phase manually. Full control with automatic fallback.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="phases" class="section section-dark">
+            <div class="container">
+                <div class="section-header" style="text-align: center; margin-bottom: var(--spacing-lg);">
+                    <h2>The 8 Chrono Phases</h2>
+                    <p style="max-width: 600px; margin: 0 auto;">
+                        Each phase is designed to optimize readability and comfort for that time of day
+                    </p>
+                </div>
+
+                <div class="grid grid-4">
+                    <div class="card" style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🌅</div>
+                        <h3>Dawn</h3>
+                        <p style="font-size: 0.875rem;"><strong>5AM-7AM</strong></p>
+                        <p>Soft pastels, gentle awakening. Perfect for early risers.</p>
+                    </div>
+
+                    <div class="card" style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">☀️</div>
+                        <h3>Morning</h3>
+                        <p style="font-size: 0.875rem;"><strong>7AM-11AM</strong></p>
+                        <p>Bright, energizing colors for productive mornings.</p>
+                    </div>
+
+                    <div class="card" style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🌞</div>
+                        <h3>Midday</h3>
+                        <p style="font-size: 0.875rem;"><strong>11AM-2PM</strong></p>
+                        <p>Strong, confident daylight. Maximum visibility.</p>
+                    </div>
+
+                    <div class="card" style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🌤️</div>
+                        <h3>Afternoon</h3>
+                        <p style="font-size: 0.875rem;"><strong>2PM-5PM</strong></p>
+                        <p>Warm, golden hour tones. Natural energy boost.</p>
+                    </div>
+
+                    <div class="card" style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🌆</div>
+                        <h3>Dusk</h3>
+                        <p style="font-size: 0.875rem;"><strong>5PM-8PM</strong></p>
+                        <p>Softening, calming colors for evening transition.</p>
+                    </div>
+
+                    <div class="card" style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🌙</div>
+                        <h3>Evening</h3>
+                        <p style="font-size: 0.875rem;"><strong>8PM-11PM</strong></p>
+                        <p>Deep, rich twilight. Reduced eye strain.</p>
+                    </div>
+
+                    <div class="card" style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🌑</div>
+                        <h3>Night</h3>
+                        <p style="font-size: 0.875rem;"><strong>11PM-2AM</strong></p>
+                        <p>Dark, sleep-friendly. Blue light reduction.</p>
+                    </div>
+
+                    <div class="card" style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">✨</div>
+                        <h3>Late Night</h3>
+                        <p style="font-size: 0.875rem;"><strong>2AM-5AM</strong></p>
+                        <p>Ultra-dark, minimal. Maximum eye comfort.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="benefits" class="section">
+            <div class="container">
+                <div class="section-header" style="text-align: center; margin-bottom: var(--spacing-lg);">
+                    <h2>Why Chrono Mode?</h2>
+                    <p style="max-width: 600px; margin: 0 auto;">
+                        More than just a visual feature - it's about user wellbeing
+                    </p>
+                </div>
+
+                <div class="grid grid-3">
+                    <div class="service-card">
+                        <div class="service-icon">😴</div>
+                        <h3>Circadian Rhythm</h3>
+                        <p>Design that respects your natural sleep-wake cycle. Reduced blue light at night helps maintain healthy sleep patterns.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">👁️</div>
+                        <h3>Reduced Eye Strain</h3>
+                        <p>Colors optimized for each time of day. Soft transitions prevent jarring changes that cause visual fatigue.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h3>Natural Productivity</h3>
+                        <p>Energizing colors during peak hours, calming colors when winding down. Design that works with your body, not against it.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🌿</div>
+                        <h3>Organic Feel</h3>
+                        <p>Websites feel more natural and alive. No more harsh binary switches between light and dark.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">♿</div>
+                        <h3>Accessible</h3>
+                        <p>Manual overrides available for accessibility needs. WCAG-compliant color contrast across all phases.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🚀</div>
+                        <h3>Modern Innovation</h3>
+                        <p>Stand out with cutting-edge design. Your site will be memorable for its thoughtful UX.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="try-it" class="section section-dark">
+            <div class="container container-narrow" style="text-align: center;">
+                <h2>Try Chrono Mode</h2>
+                <p style="font-size: 1.25rem; margin: var(--spacing-md) 0;">
+                    <strong>Use the control panel in the top-right corner</strong> to manually switch between phases or enable auto-detection.
+                </p>
+                <p>
+                    Notice how the colors transition smoothly and naturally? That's Chrono Mode in action.
+                </p>
+
+                <div class="card" style="margin-top: var(--spacing-lg);">
+                    <h3>💡 Pro Tip</h3>
+                    <p>
+                        Try enabling "Auto-detect time" and watch the site adapt to your local time throughout the day.
+                        You can also manually click any phase to see how your content looks in different lighting conditions.
+                    </p>
+                </div>
+
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-lg);">
+                    <a href="#" class="btn btn-primary">Get This Template</a>
+                    <a href="#" class="btn btn-secondary">View Documentation</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Chrono Mode. Time-aware design for the modern web.</p>
+        </div>
+    </footer>
+
+    <script src="chrono-mode.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

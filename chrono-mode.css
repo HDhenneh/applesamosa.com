@@ -1,0 +1,297 @@
+/**
+ * Chrono Mode - Time-Aware Color Theme System
+ * A dynamic theming system that adapts to natural light cycles
+ */
+
+:root {
+    /* Default (will be overridden by JavaScript) */
+    --chrono-primary: #667eea;
+    --chrono-secondary: #764ba2;
+    --chrono-accent: #ff6f61;
+    --chrono-background: #ffffff;
+    --chrono-text: #333333;
+    --chrono-text-secondary: #666666;
+    --chrono-border: rgba(0, 0, 0, 0.1);
+    --chrono-shadow: rgba(0, 0, 0, 0.1);
+
+    /* Transition timing */
+    --chrono-transition: all 2s ease-in-out;
+}
+
+/* Dawn Phase (5AM-7AM) */
+body.chrono-dawn {
+    --chrono-primary: #FFE4E1;
+    --chrono-secondary: #FFF0E6;
+    --chrono-accent: #FFB6C1;
+    --chrono-background: #FFF5F0;
+    --chrono-text: #5A4A42;
+    --chrono-text-secondary: #8A7A72;
+    --chrono-border: rgba(255, 228, 225, 0.3);
+    --chrono-shadow: rgba(255, 228, 225, 0.2);
+}
+
+/* Morning Phase (7AM-11AM) */
+body.chrono-morning {
+    --chrono-primary: #87CEEB;
+    --chrono-secondary: #B0E0E6;
+    --chrono-accent: #00CED1;
+    --chrono-background: #F0F8FF;
+    --chrono-text: #1A4A6B;
+    --chrono-text-secondary: #3A6A8B;
+    --chrono-border: rgba(135, 206, 235, 0.3);
+    --chrono-shadow: rgba(135, 206, 235, 0.15);
+}
+
+/* Midday Phase (11AM-2PM) */
+body.chrono-midday {
+    --chrono-primary: #00CED1;
+    --chrono-secondary: #20B2AA;
+    --chrono-accent: #48D1CC;
+    --chrono-background: #E0F7FA;
+    --chrono-text: #0B2E3A;
+    --chrono-text-secondary: #1B4E5A;
+    --chrono-border: rgba(0, 206, 209, 0.2);
+    --chrono-shadow: rgba(0, 206, 209, 0.1);
+}
+
+/* Afternoon Phase (2PM-5PM) */
+body.chrono-afternoon {
+    --chrono-primary: #FFD700;
+    --chrono-secondary: #FFA500;
+    --chrono-accent: #FF8C00;
+    --chrono-background: #FFF8DC;
+    --chrono-text: #2C1810;
+    --chrono-text-secondary: #4C2820;
+    --chrono-border: rgba(255, 215, 0, 0.3);
+    --chrono-shadow: rgba(255, 215, 0, 0.2);
+}
+
+/* Dusk Phase (5PM-8PM) */
+body.chrono-dusk {
+    --chrono-primary: #FF6B6B;
+    --chrono-secondary: #FF8E8E;
+    --chrono-accent: #FFA07A;
+    --chrono-background: #FFF0F5;
+    --chrono-text: #3A1A1A;
+    --chrono-text-secondary: #5A2A2A;
+    --chrono-border: rgba(255, 107, 107, 0.3);
+    --chrono-shadow: rgba(255, 107, 107, 0.2);
+}
+
+/* Evening Phase (8PM-11PM) */
+body.chrono-evening {
+    --chrono-primary: #4A4A8A;
+    --chrono-secondary: #5A5A9A;
+    --chrono-accent: #6A6AAA;
+    --chrono-background: #1A1A2E;
+    --chrono-text: #E6E6FF;
+    --chrono-text-secondary: #C6C6DF;
+    --chrono-border: rgba(74, 74, 138, 0.3);
+    --chrono-shadow: rgba(74, 74, 138, 0.2);
+}
+
+/* Night Phase (11PM-2AM) */
+body.chrono-night {
+    --chrono-primary: #1A1A2E;
+    --chrono-secondary: #16213E;
+    --chrono-accent: #0F3460;
+    --chrono-background: #0A0A0A;
+    --chrono-text: #E6E6FF;
+    --chrono-text-secondary: #B0B0C0;
+    --chrono-border: rgba(74, 74, 138, 0.2);
+    --chrono-shadow: rgba(74, 74, 138, 0.1);
+}
+
+/* Late Night Phase (2AM-5AM) */
+body.chrono-latenight {
+    --chrono-primary: #0A0A0A;
+    --chrono-secondary: #111111;
+    --chrono-accent: #1A1A1A;
+    --chrono-background: #050505;
+    --chrono-text: #E0E0E0;
+    --chrono-text-secondary: #A0A0A0;
+    --chrono-border: rgba(255, 255, 255, 0.05);
+    --chrono-shadow: rgba(255, 255, 255, 0.05);
+}
+
+/* Chrono Control Panel */
+.chrono-control-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--chrono-background);
+    border: 1px solid var(--chrono-border);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--chrono-shadow);
+    z-index: 1000;
+    transition: var(--chrono-transition);
+    max-width: 280px;
+}
+
+.chrono-control-panel h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: var(--chrono-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chrono-current-phase {
+    font-weight: 600;
+    color: var(--chrono-primary);
+    text-transform: uppercase;
+    font-size: 0.875rem;
+}
+
+.chrono-time-display {
+    font-family: monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--chrono-text);
+    margin: 12px 0;
+    text-align: center;
+}
+
+.chrono-phase-selector {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.chrono-phase-btn {
+    background: transparent;
+    border: 1px solid var(--chrono-border);
+    color: var(--chrono-text);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: var(--chrono-transition);
+    text-align: center;
+}
+
+.chrono-phase-btn:hover {
+    background: var(--chrono-primary);
+    color: var(--chrono-text);
+    transform: scale(1.05);
+}
+
+.chrono-phase-btn.active {
+    background: var(--chrono-primary);
+    color: var(--chrono-text);
+    font-weight: 600;
+}
+
+.chrono-auto-toggle {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--chrono-border);
+}
+
+.chrono-auto-toggle label {
+    font-size: 0.875rem;
+    color: var(--chrono-text);
+    cursor: pointer;
+}
+
+.chrono-auto-toggle input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Apply chrono variables to existing elements */
+body {
+    background: var(--chrono-background);
+    color: var(--chrono-text);
+    transition: var(--chrono-transition);
+}
+
+.hero {
+    background: linear-gradient(135deg, var(--chrono-primary) 0%, var(--chrono-secondary) 100%);
+    color: var(--chrono-text);
+    transition: var(--chrono-transition);
+}
+
+.card {
+    background: var(--chrono-background);
+    border-color: var(--chrono-border);
+    box-shadow: var(--chrono-shadow);
+    transition: var(--chrono-transition);
+}
+
+.btn-primary {
+    background: var(--chrono-primary);
+    color: var(--chrono-text);
+    transition: var(--chrono-transition);
+}
+
+.btn-primary:hover {
+    background: var(--chrono-secondary);
+}
+
+/* Text colors */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--chrono-text);
+    transition: var(--chrono-transition);
+}
+
+p, span, li, a {
+    color: var(--chrono-text);
+    transition: var(--chrono-transition);
+}
+
+.text-secondary {
+    color: var(--chrono-text-secondary) !important;
+}
+
+/* Navigation */
+nav {
+    background: var(--chrono-background);
+    border-color: var(--chrono-border);
+    transition: var(--chrono-transition);
+}
+
+.nav-links a {
+    color: var(--chrono-text);
+    transition: var(--chrono-transition);
+}
+
+.nav-links a:hover {
+    color: var(--chrono-primary);
+}
+
+/* Footer */
+footer {
+    background: var(--chrono-secondary);
+    color: var(--chrono-text);
+    transition: var(--chrono-transition);
+}
+
+/* Section backgrounds */
+.section {
+    background: var(--chrono-background);
+    transition: var(--chrono-transition);
+}
+
+.section-dark {
+    background: var(--chrono-secondary);
+    transition: var(--chrono-transition);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .chrono-control-panel {
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+        left: 20px;
+        max-width: none;
+    }
+}
