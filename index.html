@@ -3,222 +3,497 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Portfolio by Messi Kwessi | Modern Web Design</title>
-    <meta name="description" content="Professional portfolio showcasing modern, responsive business websites. Clean design, great user experience.">
+    <title>Applesamosa - Digital Projects by Messi Kwessi</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
-        <div class="container nav-container">
-            <div class="logo">
-                <a href="#" style="text-decoration: none; font-weight: 700; color: var(--apple-primary); font-size: 1.5rem;">
-                    MK<span style="color: var(--apple-secondary);">.Design</span>
-                </a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#work">Work</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <!-- Navigation -->
+    <nav class="main-nav"></nav>
 
-    <header class="hero">
-        <div class="hero-content animate-fade-in">
-            <h1>Crafting Digital Experiences</h1>
-            <p style="font-size: 1.25rem; margin-bottom: 2rem; color: var(--apple-dark);">
-                Modern, responsive websites that help businesses stand out and convert visitors into customers.
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Where Ideas Take Shape</h1>
+            <p class="hero-subtitle">A portfolio of digital experiments, services, and possibilities</p>
+            <p class="hero-description">
+                From fitness platforms to automated laundry solutions, Applesamosa is the home of Messi Kwessi's creative journey. Explore projects, discover services, and see what the future holds.
             </p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="#work" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Let's Talk</a>
+            <div class="hero-cta-group">
+                <a href="#messi-projects" class="hero-cta">My Projects</a>
+                <a href="#mirror-machine" class="hero-cta hero-cta--secondary">Mirror Machine</a>
             </div>
         </div>
-    </header>
+    </section>
 
-    <main>
-        <section id="work" class="section">
-            <div class="container">
-                <div class="section-header" style="text-align: center; margin-bottom: var(--spacing-lg);">
-                    <h2>Featured Work</h2>
-                    <p style="max-width: 600px; margin: 0 auto;">
-                        Each project is crafted with attention to detail, focusing on user experience and modern aesthetics.
-                    </p>
-                </div>
-
-                <div class="portfolio-grid">
-                    <div class="portfolio-item">
-                        <div class="portfolio-image" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🏗️</div>
-                        <div class="portfolio-content">
-                            <h3>Church Associates</h3>
-                            <p>Professional plastering services with a modern, trustworthy design. Features service highlights, testimonials, and easy contact options.</p>
-                            <a href="portfolio/church-associates/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
-                        </div>
-                    </div>
-
-                    <div class="portfolio-item">
-                        <div class="portfolio-image" style="background: linear-gradient(135deg, #ff6f61 0%, #ff8e72 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🍎</div>
-                        <div class="portfolio-content">
-                            <h3>Apple Samosa Recipe</h3>
-                            <p>A fun, colorful recipe site showcasing traditional meets modern cooking. Simple navigation and clear presentation.</p>
-                            <a href="portfolio/apple-samosa/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
-                        </div>
-                    </div>
-
-                    <div class="portfolio-item">
-                        <div class="portfolio-image" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🦷</div>
-                        <div class="portfolio-content">
-                            <h3>Prem Dent</h3>
-                            <p>Dental clinic in Elephant & Castle featuring treatments, services, and patient-focused design. Clean, professional aesthetic.</p>
-                            <a href="portfolio/prem-dent/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
-                        </div>
-                    </div>
-
-                    <div class="portfolio-item">
-                        <div class="portfolio-image" style="background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">👔</div>
-                        <div class="portfolio-content">
-                            <h3>Long Lane Launderette</h3>
-                            <p>Local launderette in SE1 with clear service options, pricing, and facility information. Practical and user-friendly.</p>
-                            <a href="portfolio/longlanelaunderette/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
-                        </div>
-                    </div>
-
-                    <div class="portfolio-item">
-                        <div class="portfolio-image" style="background: linear-gradient(135deg, #e50914 0%, #b81d24 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">📸</div>
-                        <div class="portfolio-content">
-                            <h3>Alex Mendes Photography</h3>
-                            <p>Netflix-style portfolio showcasing London photography. Sleek dark theme with horizontal scrolling galleries.</p>
-                            <a href="portfolio/alex-mendes-photography/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
-                        </div>
-                    </div>
-
-                    <div class="portfolio-item">
-                        <div class="portfolio-image" style="background: linear-gradient(135deg, #0ea5e9 0%, #f59e0b 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🚴</div>
-                        <div class="portfolio-content">
-                            <h3>NipNip Bike Repairs</h3>
-                            <p>Same-day bike repairs and servicing with a bold, energetic design. Features three London locations and pricing tiers.</p>
-                            <a href="portfolio/nipnip/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
-                        </div>
-                    </div>
-
-                    <div class="portfolio-item">
-                        <div class="portfolio-image" style="background: linear-gradient(135deg, #22c55e 0%, #84cc16 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">♻️</div>
-                        <div class="portfolio-content">
-                            <h3>Zero Waste Group</h3>
-                            <p>Eco-friendly rubbish removal service with clean, professional design. House clearance, man & van, and more.</p>
-                            <a href="portfolio/zerowaste/index.html" class="btn btn-primary" style="margin-top: 1rem;">View Project</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="services" class="section section-dark">
-            <div class="container">
-                <div class="section-header" style="text-align: center; margin-bottom: var(--spacing-lg);">
-                    <h2>What I Offer</h2>
-                    <p style="max-width: 600px; margin: 0 auto;">
-                        Comprehensive web design services tailored to your business needs
-                    </p>
-                </div>
-
-                <div class="grid grid-4">
-                    <div class="service-card">
-                        <div class="service-icon">🎨</div>
-                        <h3>Modern Design</h3>
-                        <p>Clean, contemporary layouts that look great on any device</p>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">📱</div>
-                        <h3>Responsive</h3>
-                        <p>Perfect experience whether on desktop, tablet, or mobile</p>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">⚡</div>
-                        <h3>Fast & Lightweight</h3>
-                        <p>Optimized code for quick loading and smooth performance</p>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">🔧</div>
-                        <h3>Easy to Update</h3>
-                        <p>Simple structure that's easy to maintain and expand</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="section">
-            <div class="container container-narrow">
-                <div style="text-align: center;">
-                    <h2>About Me</h2>
-                    <p style="font-size: 1.25rem; margin: var(--spacing-md) 0;">
-                        I'm Messi Kwessi, a web designer passionate about creating clean, professional websites that help businesses thrive online. With a focus on user experience and modern aesthetics, I transform digital presence into real business results.
-                    </p>
-                    <p>
-                        Every project is an opportunity to create something exceptional. Whether it's a small business site or a complex portfolio, I bring the same level of care and attention to detail to ensure your website stands out and works perfectly for your needs.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="section section-dark">
-            <div class="container container-narrow" style="text-align: center;">
-                <h2>Let's Work Together</h2>
-                <p style="font-size: 1.25rem; margin: var(--spacing-md) 0;">
-                    Have a project in mind? I'd love to hear about it. Let's create something amazing together.
+    <!-- MessiKwessi Projects Section -->
+    <section id="messi-projects" class="section messi-section">
+        <div class="section-content">
+            <div class="messi-header">
+                <a href="https://messikwessi.com" class="messi-brand-btn" target="_blank">MessiKwessi ↗</a>
+                <h2 class="section-title messi-title">Personal Brands</h2>
+                <p class="section-description messi-desc">
+                    Five registered domains. Each one a live idea — from finance intelligence to faith-based fitness. These are the ventures, not the experiments.
                 </p>
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-md);">
-                    <a href="https://github.com/HDhenneh" class="btn btn-primary" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://instagram.com/church_associates" class="btn btn-secondary" target="_blank" rel="noopener">Instagram</a>
+            </div>
+
+            <div class="messi-grid">
+                <div class="messi-card">
+                    <div class="messi-card__badge">Finance &amp; Recruitment</div>
+                    <h3 class="messi-card__title">spentIQ.com</h3>
+                    <p class="messi-card__desc">Recruitment finance and spending intelligence platform — bringing clarity to where money goes.</p>
+                    <a href="https://spentiq.com" class="messi-card__link" target="_blank">Visit spentIQ.com ↗</a>
+                </div>
+
+                <div class="messi-card">
+                    <div class="messi-card__badge">Immersive Experiences</div>
+                    <h3 class="messi-card__title">sensorush.com</h3>
+                    <p class="messi-card__desc">Sensory and immersive digital experiences — where technology meets emotion.</p>
+                    <a href="https://sensorush.com" class="messi-card__link" target="_blank">Visit sensorush.com ↗</a>
+                </div>
+
+                <div class="messi-card">
+                    <div class="messi-card__badge">Digital Frontier</div>
+                    <h3 class="messi-card__title">digidrifters.com</h3>
+                    <p class="messi-card__desc">Exploring the digital frontier and connected experiences — always in motion, always discovering.</p>
+                    <a href="https://digidrifters.com" class="messi-card__link" target="_blank">Visit digidrifters.com ↗</a>
+                </div>
+
+                <div class="messi-card">
+                    <div class="messi-card__badge">Faith &amp; Fitness</div>
+                    <h3 class="messi-card__title">spirifix.com</h3>
+                    <p class="messi-card__desc">Faith-based fitness platform with curated nutrition, workout guidance, and spiritual wellness integration.</p>
+                    <a href="https://spirifix.com" class="messi-card__link" target="_blank">Visit spirifix.com ↗</a>
+                </div>
+
+                <div class="messi-card">
+                    <div class="messi-card__badge">Wellbeing &amp; Retail</div>
+                    <h3 class="messi-card__title">fidgetyfarm.com</h3>
+                    <p class="messi-card__desc">Stress relief and fidget toys marketplace — products that help people focus and decompress.</p>
+                    <a href="https://fidgetyfarm.com" class="messi-card__link" target="_blank">Visit fidgetyfarm.com ↗</a>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Messi Kwessi. Built with passion and precision. All rights reserved.</p>
+    <!-- Mirror Machine Section -->
+    <section id="mirror-machine" class="section">
+        <div class="section-content section-content--wide">
+            <h2 class="section-title">Mirror Machine</h2>
+            <p class="section-description">
+                Every business has a gap between where they are and what they could be. The Mirror shows it — a redesigned website is just the entry point to a deeper look at the whole operation.
+            </p>
+
+            <div class="mirror-method-explainer">
+                <div class="method-step">
+                    <span class="method-step__num">01</span>
+                    <p>We redesign the business website to show its potential</p>
+                </div>
+                <div class="method-step__arrow">→</div>
+                <div class="method-step">
+                    <span class="method-step__num">02</span>
+                    <p>The comparison reveals gaps in brand, trust, and conversion</p>
+                </div>
+                <div class="method-step__arrow">→</div>
+                <div class="method-step">
+                    <span class="method-step__num">03</span>
+                    <p>We apply the same lens to the whole business to find savings and revenue</p>
+                </div>
+            </div>
+
+            <div class="mirror-grid">
+
+                <!-- Church Associates -->
+                <div class="mirror-card">
+                    <div class="mirror-card__header">
+                        <span class="mirror-card__sector">Plastering &amp; Construction</span>
+                        <h3 class="mirror-card__title">Church Associates</h3>
+                        <p class="mirror-card__desc">Professional plastering services. Service highlights, testimonials, and easy contact options.</p>
+                    </div>
+                    <div class="mirror-card__body">
+                        <div class="mirror-card__side mirror-card__side--live">
+                            <span class="mirror-card__side-label">🌐 Live Site</span>
+                            <p class="mirror-card__side-note">Current business website</p>
+                            <a href="#" class="mirror-card__btn mirror-card__btn--live">View Live Site ↗</a>
+                        </div>
+                        <div class="mirror-card__divider"></div>
+                        <div class="mirror-card__side mirror-card__side--mirror">
+                            <span class="mirror-card__side-label">🪞 The Mirror</span>
+                            <p class="mirror-card__side-note">Redesigned with conversion in mind</p>
+                            <a href="portfolio/church-associates/index.html" class="mirror-card__btn mirror-card__btn--mirror">View Mirror ↗</a>
+                        </div>
+                    </div>
+                    <div class="mirror-card__opportunity">
+                        <span class="opp-icon">💡</span>
+                        <span class="opp-text">Strong local trust signals could drive significantly more inbound leads with a clear booking flow</span>
+                    </div>
+                </div>
+
+                <!-- Prem Dent -->
+                <div class="mirror-card">
+                    <div class="mirror-card__header">
+                        <span class="mirror-card__sector">Dental &amp; Healthcare</span>
+                        <h3 class="mirror-card__title">Prem Dent</h3>
+                        <p class="mirror-card__desc">Dental clinic in Elephant &amp; Castle. Treatments, services, and patient-focused design.</p>
+                    </div>
+                    <div class="mirror-card__body">
+                        <div class="mirror-card__side mirror-card__side--live">
+                            <span class="mirror-card__side-label">🌐 Live Site</span>
+                            <p class="mirror-card__side-note">Current business website</p>
+                            <a href="#" class="mirror-card__btn mirror-card__btn--live">View Live Site ↗</a>
+                        </div>
+                        <div class="mirror-card__divider"></div>
+                        <div class="mirror-card__side mirror-card__side--mirror">
+                            <span class="mirror-card__side-label">🪞 The Mirror</span>
+                            <p class="mirror-card__side-note">Clean, professional aesthetic rebuilt</p>
+                            <a href="portfolio/prem-dent/index.html" class="mirror-card__btn mirror-card__btn--mirror">View Mirror ↗</a>
+                        </div>
+                    </div>
+                    <div class="mirror-card__opportunity">
+                        <span class="opp-icon">💡</span>
+                        <span class="opp-text">Online appointment booking alone could eliminate admin overhead and increase new patient uptake</span>
+                    </div>
+                </div>
+
+                <!-- Long Lane Launderette -->
+                <div class="mirror-card">
+                    <div class="mirror-card__header">
+                        <span class="mirror-card__sector">Retail Services &amp; Local</span>
+                        <h3 class="mirror-card__title">Long Lane Launderette</h3>
+                        <p class="mirror-card__desc">Local launderette in SE1 with clear service options, pricing, and facility information.</p>
+                    </div>
+                    <div class="mirror-card__body">
+                        <div class="mirror-card__side mirror-card__side--live">
+                            <span class="mirror-card__side-label">🌐 Live Site</span>
+                            <p class="mirror-card__side-note">Current business website</p>
+                            <a href="#" class="mirror-card__btn mirror-card__btn--live">View Live Site ↗</a>
+                        </div>
+                        <div class="mirror-card__divider"></div>
+                        <div class="mirror-card__side mirror-card__side--mirror">
+                            <span class="mirror-card__side-label">🪞 The Mirror</span>
+                            <p class="mirror-card__side-note">Glassmorphism redesign with modern UX</p>
+                            <a href="portfolio/longlanelaunderette/index.html" class="mirror-card__btn mirror-card__btn--mirror">View Mirror ↗</a>
+                        </div>
+                    </div>
+                    <div class="mirror-card__opportunity">
+                        <span class="opp-icon">💡</span>
+                        <span class="opp-text">Collection &amp; delivery add-on with simple scheduling could open a new revenue stream with zero new footfall</span>
+                    </div>
+                </div>
+
+                <!-- Alex Mendes Photography -->
+                <div class="mirror-card">
+                    <div class="mirror-card__header">
+                        <span class="mirror-card__sector">Photography &amp; Creative</span>
+                        <h3 class="mirror-card__title">Alex Mendes Photography</h3>
+                        <p class="mirror-card__desc">Netflix-style portfolio showcasing London photography. Sleek dark theme with horizontal scrolling galleries.</p>
+                    </div>
+                    <div class="mirror-card__body">
+                        <div class="mirror-card__side mirror-card__side--live">
+                            <span class="mirror-card__side-label">🌐 Live Site</span>
+                            <p class="mirror-card__side-note">Current business website</p>
+                            <a href="#" class="mirror-card__btn mirror-card__btn--live">View Live Site ↗</a>
+                        </div>
+                        <div class="mirror-card__divider"></div>
+                        <div class="mirror-card__side mirror-card__side--mirror">
+                            <span class="mirror-card__side-label">🪞 The Mirror</span>
+                            <p class="mirror-card__side-note">Cinematic portfolio reimagined</p>
+                            <a href="portfolio/alex-mendes-photography/index.html" class="mirror-card__btn mirror-card__btn--mirror">View Mirror ↗</a>
+                        </div>
+                    </div>
+                    <div class="mirror-card__opportunity">
+                        <span class="opp-icon">💡</span>
+                        <span class="opp-text">Print sales and licensing integrated directly into the portfolio could turn views into passive income</span>
+                    </div>
+                </div>
+
+                <!-- NipNip Bike Repairs -->
+                <div class="mirror-card">
+                    <div class="mirror-card__header">
+                        <span class="mirror-card__sector">Transport &amp; Repair</span>
+                        <h3 class="mirror-card__title">NipNip Bike Repairs</h3>
+                        <p class="mirror-card__desc">Same-day bike repairs and servicing with a bold, energetic design. Three London locations.</p>
+                    </div>
+                    <div class="mirror-card__body">
+                        <div class="mirror-card__side mirror-card__side--live">
+                            <span class="mirror-card__side-label">🌐 Live Site</span>
+                            <p class="mirror-card__side-note">Current business website</p>
+                            <a href="#" class="mirror-card__btn mirror-card__btn--live">View Live Site ↗</a>
+                        </div>
+                        <div class="mirror-card__divider"></div>
+                        <div class="mirror-card__side mirror-card__side--mirror">
+                            <span class="mirror-card__side-label">🪞 The Mirror</span>
+                            <p class="mirror-card__side-note">Bold redesign with pricing tiers</p>
+                            <a href="portfolio/nipnip/index.html" class="mirror-card__btn mirror-card__btn--mirror">View Mirror ↗</a>
+                        </div>
+                    </div>
+                    <div class="mirror-card__opportunity">
+                        <span class="opp-icon">💡</span>
+                        <span class="opp-text">A subscription servicing plan would convert one-off customers into recurring monthly revenue</span>
+                    </div>
+                </div>
+
+                <!-- Zero Waste Group -->
+                <div class="mirror-card">
+                    <div class="mirror-card__header">
+                        <span class="mirror-card__sector">Eco &amp; Waste Removal</span>
+                        <h3 class="mirror-card__title">Zero Waste Group</h3>
+                        <p class="mirror-card__desc">Eco-friendly rubbish removal service. House clearance, man &amp; van, and more.</p>
+                    </div>
+                    <div class="mirror-card__body">
+                        <div class="mirror-card__side mirror-card__side--live">
+                            <span class="mirror-card__side-label">🌐 Live Site</span>
+                            <p class="mirror-card__side-note">Current business website</p>
+                            <a href="#" class="mirror-card__btn mirror-card__btn--live">View Live Site ↗</a>
+                        </div>
+                        <div class="mirror-card__divider"></div>
+                        <div class="mirror-card__side mirror-card__side--mirror">
+                            <span class="mirror-card__side-label">🪞 The Mirror</span>
+                            <p class="mirror-card__side-note">Clean, professional eco redesign</p>
+                            <a href="portfolio/zerowaste/index.html" class="mirror-card__btn mirror-card__btn--mirror">View Mirror ↗</a>
+                        </div>
+                    </div>
+                    <div class="mirror-card__opportunity">
+                        <span class="opp-icon">💡</span>
+                        <span class="opp-text">Instant online quoting with postcode lookup could replace expensive call handling and speed up conversions</span>
+                    </div>
+                </div>
+
+
+                <!-- London's Computer Recycling -->
+                <div class="mirror-card">
+                    <div class="mirror-card__header">
+                        <span class="mirror-card__sector">IT &amp; E-Waste Recycling</span>
+                        <h3 class="mirror-card__title">London's Computer Recycling</h3>
+                        <p class="mirror-card__desc">Secure recycling and data destruction of redundant IT equipment — national collection service for businesses and individuals.</p>
+                    </div>
+                    <div class="mirror-card__body">
+                        <div class="mirror-card__side mirror-card__side--live">
+                            <span class="mirror-card__side-label">🌐 Live Site</span>
+                            <p class="mirror-card__side-note">Current business website</p>
+                            <a href="https://londonscomputerrecycling.co.uk/" class="mirror-card__btn mirror-card__btn--live" target="_blank">View Live Site ↗</a>
+                        </div>
+                        <div class="mirror-card__divider"></div>
+                        <div class="mirror-card__side mirror-card__side--mirror">
+                            <span class="mirror-card__side-label">🪞 The Mirror</span>
+                            <p class="mirror-card__side-note">Redesign in progress</p>
+                            <span class="mirror-card__btn mirror-card__btn--soon">Coming Soon</span>
+                        </div>
+                    </div>
+                    <div class="mirror-card__opportunity">
+                        <span class="opp-icon">💡</span>
+                        <span class="opp-text">An instant online quote tool for bulk IT disposal could attract corporate procurement teams and remove the phone bottleneck entirely</span>
+                    </div>
+                </div>
+
+                <!-- Tiffin Sandwiches -->
+                <div class="mirror-card">
+                    <div class="mirror-card__header">
+                        <span class="mirror-card__sector">Food Manufacturing &amp; Supply</span>
+                        <h3 class="mirror-card__title">Tiffin Sandwiches</h3>
+                        <p class="mirror-card__desc">Independent national food-to-go manufacturer supplying ready-to-eat sandwiches, salads, and paninis to UK businesses.</p>
+                    </div>
+                    <div class="mirror-card__body">
+                        <div class="mirror-card__side mirror-card__side--live">
+                            <span class="mirror-card__side-label">🌐 Live Site</span>
+                            <p class="mirror-card__side-note">Current business website</p>
+                            <a href="https://www.tiffinsandwiches.co.uk/" class="mirror-card__btn mirror-card__btn--live" target="_blank">View Live Site ↗</a>
+                        </div>
+                        <div class="mirror-card__divider"></div>
+                        <div class="mirror-card__side mirror-card__side--mirror">
+                            <span class="mirror-card__side-label">🪞 The Mirror</span>
+                            <p class="mirror-card__side-note">Redesign in progress</p>
+                            <span class="mirror-card__btn mirror-card__btn--soon">Coming Soon</span>
+                        </div>
+                    </div>
+                    <div class="mirror-card__opportunity">
+                        <span class="opp-icon">💡</span>
+                        <span class="opp-text">A B2B trade portal with standing order accounts could convert one-off buyers into contracted weekly supply clients</span>
+                    </div>
+                </div>
+
+                <!-- The Art of Baking -->
+                <div class="mirror-card">
+                    <div class="mirror-card__header">
+                        <span class="mirror-card__sector">Artisan Bakery</span>
+                        <h3 class="mirror-card__title">The Art of Baking</h3>
+                        <p class="mirror-card__desc">Artisan bakery — the live site currently shows a blank page, making this an ideal Mirror Machine candidate from a standing start.</p>
+                    </div>
+                    <div class="mirror-card__body">
+                        <div class="mirror-card__side mirror-card__side--live">
+                            <span class="mirror-card__side-label">🌐 Live Site</span>
+                            <p class="mirror-card__side-note">Site currently blank</p>
+                            <a href="https://theartofbaking.co.uk" class="mirror-card__btn mirror-card__btn--live" target="_blank">View Live Site ↗</a>
+                        </div>
+                        <div class="mirror-card__divider"></div>
+                        <div class="mirror-card__side mirror-card__side--mirror">
+                            <span class="mirror-card__side-label">🪞 The Mirror</span>
+                            <p class="mirror-card__side-note">Redesign in progress</p>
+                            <span class="mirror-card__btn mirror-card__btn--soon">Coming Soon</span>
+                        </div>
+                    </div>
+                    <div class="mirror-card__opportunity">
+                        <span class="opp-icon">💡</span>
+                        <span class="opp-text">Starting from a blank site means the mirror delivers maximum contrast — a product showcase with an order form would unlock online revenue from zero</span>
+                    </div>
+                </div>
+
+                <!-- Harvey's Brewery -->
+                <div class="mirror-card">
+                    <div class="mirror-card__header">
+                        <span class="mirror-card__sector">Craft Brewery &amp; Hospitality</span>
+                        <h3 class="mirror-card__title">Harvey's Brewery</h3>
+                        <p class="mirror-card__desc">Independent family-run brewery producing cask ales, bottled beers, and spirits — also operating pubs and boutique accommodation.</p>
+                    </div>
+                    <div class="mirror-card__body">
+                        <div class="mirror-card__side mirror-card__side--live">
+                            <span class="mirror-card__side-label">🌐 Live Site</span>
+                            <p class="mirror-card__side-note">Current business website</p>
+                            <a href="https://www.harveys.org.uk/" class="mirror-card__btn mirror-card__btn--live" target="_blank">View Live Site ↗</a>
+                        </div>
+                        <div class="mirror-card__divider"></div>
+                        <div class="mirror-card__side mirror-card__side--mirror">
+                            <span class="mirror-card__side-label">🪞 The Mirror</span>
+                            <p class="mirror-card__side-note">Redesign in progress</p>
+                            <span class="mirror-card__btn mirror-card__btn--soon">Coming Soon</span>
+                        </div>
+                    </div>
+                    <div class="mirror-card__opportunity">
+                        <span class="opp-icon">💡</span>
+                        <span class="opp-text">Brewery tours and events buried in nested menus — surfacing these above the fold could meaningfully grow a high-margin direct revenue stream</span>
+                    </div>
+                </div>
+
+                <!-- Platter Up -->
+                <div class="mirror-card">
+                    <div class="mirror-card__header">
+                        <span class="mirror-card__sector">Corporate &amp; Event Catering</span>
+                        <h3 class="mirror-card__title">Platter Up</h3>
+                        <p class="mirror-card__desc">Premium catering across London — platters, grazing tables, brunch spreads, and pop-up dining for corporate events and occasions.</p>
+                    </div>
+                    <div class="mirror-card__body">
+                        <div class="mirror-card__side mirror-card__side--live">
+                            <span class="mirror-card__side-label">🌐 Live Site</span>
+                            <p class="mirror-card__side-note">Current business website</p>
+                            <a href="https://platterup.co.uk/" class="mirror-card__btn mirror-card__btn--live" target="_blank">View Live Site ↗</a>
+                        </div>
+                        <div class="mirror-card__divider"></div>
+                        <div class="mirror-card__side mirror-card__side--mirror">
+                            <span class="mirror-card__side-label">🪞 The Mirror</span>
+                            <p class="mirror-card__side-note">Redesign in progress</p>
+                            <span class="mirror-card__btn mirror-card__btn--soon">Coming Soon</span>
+                        </div>
+                    </div>
+                    <div class="mirror-card__opportunity">
+                        <span class="opp-icon">💡</span>
+                        <span class="opp-text">Clear pricing, delivery areas, and a self-serve quote builder upfront would eliminate the friction that sends corporate buyers to competitors</span>
+                    </div>
+                </div>
+
+                <!-- Nurture Landscapes -->
+                <div class="mirror-card">
+                    <div class="mirror-card__header">
+                        <span class="mirror-card__sector">Landscaping &amp; Grounds</span>
+                        <h3 class="mirror-card__title">Nurture Landscapes</h3>
+                        <p class="mirror-card__desc">Professional landscaping and grounds maintenance services — site currently down, but the business is actively listed in trade directories.</p>
+                    </div>
+                    <div class="mirror-card__body">
+                        <div class="mirror-card__side mirror-card__side--live">
+                            <span class="mirror-card__side-label">🌐 Live Site</span>
+                            <p class="mirror-card__side-note">Site currently unavailable</p>
+                            <a href="http://www.nurturelandscapes.co.uk/" class="mirror-card__btn mirror-card__btn--live" target="_blank">View Live Site ↗</a>
+                        </div>
+                        <div class="mirror-card__divider"></div>
+                        <div class="mirror-card__side mirror-card__side--mirror">
+                            <span class="mirror-card__side-label">🪞 The Mirror</span>
+                            <p class="mirror-card__side-note">Redesign in progress</p>
+                            <span class="mirror-card__btn mirror-card__btn--soon">Coming Soon</span>
+                        </div>
+                    </div>
+                    <div class="mirror-card__opportunity">
+                        <span class="opp-icon">💡</span>
+                        <span class="opp-text">A before/after gallery with a quote request form would win contracts currently going to competitors with better digital presence — the bar is low</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Republic Section -->
+    <section id="tech-republic" class="section">
+        <div class="section-content">
+            <h2 class="section-title">Tech Republic</h2>
+            <p class="section-description">
+                A multi-page platform showcasing how technology transforms our world, connecting innovation with practical application.
+            </p>
+
+            <div class="tech-republic-content">
+                <div class="subpage-preview">
+                    <h3 class="subpage-title">Tech Runner</h3>
+                    <p class="subpage-description">
+                        Navigate the evolving tech landscape — your gateway to emerging technologies, tools, and platforms. Discover what's new, understand trends, and make informed decisions about your tech stack.
+                    </p>
+                    <a href="tech-runner.html" class="subpage-link">Explore Tech Runner →</a>
+                </div>
+
+                <div class="subpage-preview">
+                    <h3 class="subpage-title">Tech Lab</h3>
+                    <p class="subpage-description">
+                        Spirifix.com is the first lab in the Tech Lab series. Faith-based fitness with curated nutrition, workout guidance, and spiritual wellness integration. Curated protein powders, energy snacks, and faith-compliant supplements.
+                    </p>
+                    <p class="subpage-description">
+                        <strong>Current Status:</strong> Live service with full website — not a concept, an operating business.
+                    </p>
+                    <a href="tech-lab.html" class="subpage-link">Visit Spirifix.com →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applesamosa Section -->
+    <section id="applesamosa" class="section">
+        <div class="section-content">
+            <h2 class="section-title">Applesamosa</h2>
+            <p class="section-description">
+                Preserving the original page as Messi Kwessi's first digital journey — showing how every great venture begins.
+            </p>
+
+            <div class="applesamosa-content">
+                <div class="origin-story">
+                    <h3 class="story-title">Origin Story</h3>
+                    <p class="story-text">
+                        This is where it all started. Applesamosa represents Messi Kwessi's first major project — a testament to ambition, creativity, and the courage to begin. Every successful venture has its roots in that first brave step.
+                    </p>
+                </div>
+
+                <div class="journey-note">
+                    <h3 class="story-title">The Journey Continues</h3>
+                    <p class="story-text">
+                        The Mirror Machine, Tech Republic, and all projects you see here are built on the foundation laid by Applesamosa. It's a living portfolio of growth, learning, and iteration — the ongoing story of a digital creator on a mission to build something meaningful.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Applesamosa</h3>
+                <p>Digital Projects by Messi Kwessi</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://messikwessi.com" class="footer-link" target="_blank">MessiKwessi</a>
+                <a href="https://github.com/messikwessi" class="footer-link" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/messikwessi" class="footer-link" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Applesamosa. Built with creativity &amp; code.</p>
         </div>
     </footer>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
