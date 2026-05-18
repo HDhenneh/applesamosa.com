@@ -754,6 +754,100 @@ body {
 }
 
 /* ==================== */
+/* SECTION MODIFIERS    */
+/* ==================== */
+
+.section--strip {
+    min-height: auto;
+    padding: 64px 24px;
+    background: var(--bg-darker);
+}
+
+.section--strip .section-title {
+    color: var(--text-inverse);
+}
+
+.section--strip .section-description {
+    color: var(--text-muted);
+}
+
+/* ==================== */
+/* TECH REPUBLIC STRIP  */
+/* ==================== */
+
+.tech-strip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.tech-strip-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tech-strip-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--brand-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.tech-strip-card__badge {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--brand-accent);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    width: fit-content;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.tech-strip-card__title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-inverse);
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.tech-strip-card__desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    flex-grow: 1;
+}
+
+.tech-strip-card__link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--brand-accent);
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+    transition: all 0.3s ease;
+}
+
+.tech-strip-card:hover .tech-strip-card__link {
+    color: var(--text-inverse);
+    letter-spacing: 0.3px;
+}
+
+/* ==================== */
 /* MIRROR MACHINE CARDS */
 /* ==================== */
 

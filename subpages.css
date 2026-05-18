@@ -1,0 +1,101 @@
+/* Use Case Cards */
+.use-cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 40px 0;
+}
+
+.use-case-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+}
+
+.use-case-card:hover {
+    transform: var(--card-hover);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.use-case-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.use-case-description {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Definition Cards */
+.definition-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin: 40px 0;
+}
+
+.definition-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+}
+
+.definition-card:hover {
+    transform: var(--card-hover);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.definition-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.definition-text {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.definition-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.definition-list li {
+    font-size: 15px;
+    color: var(--text-secondary);
+    padding: 10px 0 12px 12px;
+    border-left: 3px solid var(--brand-accent);
+    line-height: 1.6;
+}
+
+.definition-list li strong {
+    color: var(--text-primary);
+}
+
+/* Workflow Step Card */
+.definition-card {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.03), rgba(16, 185, 129, 0.08));
+}
+
+/* Adjust section title */
+#what-is .section-title,
+#use-cases .section-title,
+#definition-use-cases .section-title {
+    font-size: 42px;
+    margin-bottom: 16px;
+}
