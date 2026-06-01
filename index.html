@@ -1,354 +1,472 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applesamosa - Digital Projects by Messi Kwessi</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple Samosa — Hubalicious Directory Lab</title>
+<meta name="description" content="Every project starts as a directory. Audiences are built before products. Revenue triggers independence. Hubalicious is the directory lab.">
+<style>
+:root {
+  --brand-primary: #2D3436;
+  --brand-secondary: #1E293B;
+  --brand-accent: #10B981;
+  --brand-highlight: #F59E0B;
+  --text-primary: #1F2937;
+  --text-secondary: #4B5563;
+  --text-muted: #9CA3AF;
+  --text-inverse: #FFFFFF;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --bg-tertiary: #EFF6FF;
+  --bg-dark: #1F2937;
+  --bg-darker: #111827;
+  --card-bg: #FFFFFF;
+  --card-border: #E5E7EB;
+  --card-shadow: 0 4px 6px rgba(0,0,0,0.07);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-secondary);color:var(--text-primary);line-height:1.6;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 10px rgba(0,0,0,0.1);}
+.nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 24px;height:70px;}
+.nav-logo{font-size:22px;font-weight:800;letter-spacing:-0.5px;background:linear-gradient(135deg,#2D3436,#1E293B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:8px;align-items:center;list-style:none;}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text-secondary);padding:8px 14px;border-radius:8px;transition:all 0.2s;}
+.nav-links a:hover{background:var(--bg-tertiary);color:var(--text-primary);}
+.nav-cta{background:var(--brand-accent)!important;color:#fff!important;border-radius:50px!important;box-shadow:0 4px 12px rgba(16,185,129,0.3);transition:all 0.3s!important;}
+.nav-cta:hover{background:#059669!important;transform:translateY(-1px);box-shadow:0 6px 18px rgba(16,185,129,0.4)!important;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 24px 100px;text-align:center;background:linear-gradient(135deg,var(--bg-tertiary),var(--bg-secondary));position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at center,rgba(16,185,129,0.1) 0%,transparent 50%);animation:float 20s ease-in-out infinite;pointer-events:none;}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,-20px)}}
+.hero-content{max-width:800px;position:relative;z-index:1;}
+.hero-badge{display:inline-block;background:rgba(16,185,129,0.12);color:var(--brand-accent);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:7px 18px;border-radius:50px;border:1px solid rgba(16,185,129,0.3);margin-bottom:28px;}
+.hero-title{font-size:clamp(44px,7vw,72px);font-weight:900;color:var(--text-primary);margin-bottom:20px;line-height:1.05;letter-spacing:-2px;}
+.hero-subtitle{font-size:22px;color:var(--text-secondary);font-weight:600;margin-bottom:16px;letter-spacing:0.3px;}
+.hero-desc{font-size:18px;color:var(--text-muted);line-height:1.8;margin-bottom:44px;max-width:620px;margin-left:auto;margin-right:auto;}
+.hero-cta-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{display:inline-block;background:var(--brand-primary);color:#fff;padding:18px 44px;border-radius:50px;font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:1px;box-shadow:0 6px 20px rgba(45,55,72,0.3);transition:all 0.3s;}
+.btn-primary:hover{background:var(--brand-secondary);transform:translateY(-2px);box-shadow:0 8px 25px rgba(45,55,72,0.4);}
+.btn-outline{display:inline-block;background:transparent;border:2px solid var(--brand-primary);color:var(--brand-primary);padding:18px 44px;border-radius:50px;font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:1px;transition:all 0.3s;}
+.btn-outline:hover{background:var(--brand-primary);color:#fff;}
+
+/* TICKER */
+.ticker{background:var(--bg-darker);padding:16px 0;overflow:hidden;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 4%,#000 96%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,#000 4%,#000 96%,transparent 100%);}
+.ticker-track{display:flex;align-items:center;width:max-content;}
+.t-item{font-size:13px;font-weight:500;letter-spacing:0.3px;color:var(--text-muted);padding:0 28px;white-space:nowrap;}
+.t-sep{color:var(--brand-accent);font-size:11px;flex-shrink:0;opacity:0.7;}
+.t-brand{font-size:14px;font-weight:700;color:var(--brand-accent);padding:0 32px;letter-spacing:1px;}
+
+/* SECTION SHELLS */
+.section{padding:100px 24px;}
+.section-dark{background:var(--bg-darker);}
+.section-mid{background:var(--bg-dark);}
+.section-light{background:var(--bg-secondary);}
+.inner{max-width:1100px;margin:0 auto;}
+
+.s-eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--brand-accent);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.s-eyebrow::before{content:'';width:24px;height:2px;background:var(--brand-accent);border-radius:2px;}
+.s-title{font-size:clamp(30px,4vw,46px);font-weight:800;letter-spacing:-1px;margin-bottom:16px;line-height:1.15;}
+.s-title--light{color:var(--text-primary);}
+.s-title--dark{color:var(--text-inverse);}
+.s-desc{font-size:18px;line-height:1.7;margin-bottom:48px;max-width:640px;}
+.s-desc--light{color:var(--text-secondary);}
+.s-desc--dark{color:var(--text-muted);}
+
+/* LAB GRID */
+.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
+.lab-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);}
+.lab-card:hover{background:rgba(255,255,255,0.08);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.4);border-color:rgba(255,255,255,0.2);}
+.lab-card__top{display:flex;align-items:center;justify-content:space-between;}
+.lab-card__cat{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);font-weight:500;}
+.lab-card__status{display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;}
+.s-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.st-live{color:#4ade80;} .st-live .s-dot{background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,0.5);}
+.st-build{color:var(--brand-highlight);} .st-build .s-dot{background:var(--brand-highlight);}
+.st-concept{color:var(--text-muted);} .st-concept .s-dot{background:var(--text-muted);}
+.lab-card__name{font-size:20px;font-weight:700;color:var(--text-inverse);line-height:1.2;}
+.lab-card__desc{font-size:14px;color:var(--text-muted);line-height:1.65;flex:1;}
+.lab-card__link{font-size:13px;font-weight:600;color:var(--brand-accent);margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:6px;transition:color 0.2s;}
+.lab-card__link:hover{color:#fff;}
+
+/* PIPELINE */
+.pipeline{display:flex;flex-wrap:wrap;margin:40px 0 32px;border:1px solid var(--card-border);border-radius:12px;overflow:hidden;}
+.pipe{flex:1;min-width:130px;padding:24px 20px;border-right:1px solid var(--card-border);display:flex;flex-direction:column;gap:6px;background:#fff;transition:background 0.15s;}
+.pipe:last-child{border-right:none;}
+.pipe:hover{background:rgba(16,185,129,0.04);}
+.pipe-n{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--brand-accent);font-weight:700;}
+.pipe-label{font-size:15px;font-weight:700;color:var(--text-primary);}
+.pipe-text{font-size:12px;color:var(--text-muted);line-height:1.6;}
+.pipe-note{font-size:15px;line-height:1.8;color:var(--text-secondary);max-width:620px;border-left:3px solid var(--brand-accent);padding-left:18px;}
+.pipe-note strong{color:var(--text-primary);}
+
+/* BRANDS */
+.brands-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;}
+.brand-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);}
+.brand-card:hover{background:rgba(255,255,255,0.08);border-color:var(--brand-accent);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.4);}
+.brand-badge{display:inline-block;background:rgba(16,185,129,0.15);color:var(--brand-accent);font-size:11px;font-weight:600;letter-spacing:0.5px;padding:4px 12px;border-radius:20px;border:1px solid rgba(16,185,129,0.3);margin-bottom:14px;width:fit-content;}
+.brand-title{font-size:20px;font-weight:700;color:var(--text-inverse);margin-bottom:10px;}
+.brand-desc{font-size:14px;color:var(--text-muted);line-height:1.65;flex:1;margin-bottom:20px;}
+.brand-link{font-size:13px;font-weight:600;color:var(--brand-accent);padding-top:14px;border-top:1px solid rgba(255,255,255,0.1);margin-top:auto;transition:color 0.2s;display:block;}
+.brand-link:hover{color:#fff;}
+.brand-link--off{opacity:0.35;cursor:default;}
+
+/* STATS */
+.stats-section{background:var(--bg-secondary);padding:72px 24px;border-top:1px solid var(--card-border);}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;border:1px solid var(--card-border);border-radius:12px;overflow:hidden;}
+.stat-cell{padding:32px 24px;border-right:1px solid var(--card-border);background:#fff;text-align:center;display:flex;flex-direction:column;gap:8px;transition:background 0.15s;}
+.stat-cell:last-child{border-right:none;}
+.stat-cell:hover{background:rgba(16,185,129,0.04);}
+.stat-val{font-size:clamp(36px,5vw,52px);font-weight:900;color:var(--text-primary);letter-spacing:-2px;line-height:1;}
+.stat-val span{font-size:0.55em;font-weight:700;letter-spacing:-1px;}
+.stat-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);}
+@media(max-width:640px){.stats-grid{grid-template-columns:1fr 1fr;}.stat-cell{border-right:none;border-bottom:1px solid var(--card-border);}.stat-cell:last-child{border-bottom:none;}}
+
+/* FOOTER */
+footer{background:var(--bg-darker);padding:60px 24px 36px;}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:24px;}
+.footer-brand-name{font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-0.5px;}
+.footer-brand-desc{font-size:14px;color:var(--text-muted);max-width:280px;line-height:1.6;}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;align-items:center;}
+.footer-links a{font-size:14px;font-weight:500;color:var(--text-muted);transition:color 0.2s;}
+.footer-links a:hover{color:var(--brand-accent);}
+.footer-bottom{font-size:13px;color:var(--text-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-container{flex-direction:column;height:auto;padding:16px;gap:10px;}
+  .nav-links{gap:4px;flex-wrap:wrap;justify-content:center;}
+  .hero{padding:110px 20px 80px;}
+  .section{padding:70px 20px;}
+  .pipeline{flex-direction:column;}
+  .pipe{border-right:none;border-bottom:1px solid var(--card-border);}
+  .pipe:last-child{border-bottom:none;}
+  .footer-top{flex-direction:column;}
+  .footer-bottom{flex-direction:column;}
+}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="main-nav"></nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">Where Ideas Take Shape</h1>
-            <p class="hero-subtitle">A portfolio of digital experiments, services, and possibilities</p>
-            <p class="hero-description">
-                From fitness platforms to automated laundry solutions, Applesamosa is the home of Messi Kwessi's creative journey. Explore projects, discover services, and see what the future holds.
-            </p>
-            <div class="hero-cta-group">
-                <a href="#messi-projects" class="hero-cta">My Projects</a>
-                <a href="#mirror-machine" class="hero-cta hero-cta--secondary">Mirror Machine</a>
-            </div>
+<!-- NAV -->
+<nav>
+  <div class="nav-container">
+    <a class="nav-logo" href="/">Apple Samosa</a>
+    <ul class="nav-links">
+      <li><a href="#hubalicious">Hubalicious</a></li>
+      <li><a href="#model">The Model</a></li>
+      <li><a href="#brands">Brands</a></li>
+      <li><a href="#hubalicious" class="nav-cta">Explore the lab →</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Directory-first incubator · Est. 2024</div>
+    <h1 class="hero-title">Where Ideas Take Shape</h1>
+    <p class="hero-subtitle">A portfolio of digital experiments, services, and possibilities</p>
+    <p class="hero-desc">From fitness platforms to contractor toolkits, every project starts as a directory. Audiences are built before products are built. Revenue triggers independence.</p>
+    <div class="hero-cta-group">
+      <a href="#hubalicious" class="btn-primary">Hubalicious Lab</a>
+      <a href="#brands" class="btn-outline">Personal Brands</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER (dark strip) -->
+<div class="ticker">
+  <div class="ticker-track" id="hubTrack">
+    <span class="t-item">Directory before product</span><span class="t-sep">✦</span>
+    <span class="t-item">UmbrellaBelle · building</span><span class="t-sep">✦</span>
+    <span class="t-item">Sensorush · building</span><span class="t-sep">✦</span>
+    <span class="t-brand">hubalicious</span><span class="t-sep">✦</span>
+    <span class="t-item">New Pub · concept</span><span class="t-sep">✦</span>
+    <span class="t-item">Spacey Places · concept</span><span class="t-sep">✦</span>
+    <span class="t-item">Idea → Directory → Audience → Product → Company</span><span class="t-sep">✦</span>
+    <span class="t-brand">hubalicious</span><span class="t-sep">✦</span>
+    <span class="t-item">Smart Yards · concept</span><span class="t-sep">✦</span>
+    <span class="t-item">Beef Therapy · concept</span><span class="t-sep">✦</span>
+    <span class="t-item">Fidgetyfarm · live</span><span class="t-sep">✦</span>
+    <span class="t-item">Vector Rider · concept</span><span class="t-sep">✦</span>
+    <span class="t-brand">hubalicious</span><span class="t-sep">✦</span>
+    <span class="t-item">Directory before product</span><span class="t-sep">✦</span>
+    <span class="t-item">UmbrellaBelle · building</span><span class="t-sep">✦</span>
+    <span class="t-item">Sensorush · building</span><span class="t-sep">✦</span>
+    <span class="t-brand">hubalicious</span><span class="t-sep">✦</span>
+    <span class="t-item">New Pub · concept</span><span class="t-sep">✦</span>
+    <span class="t-item">Spacey Places · concept</span><span class="t-sep">✦</span>
+    <span class="t-item">Idea → Directory → Audience → Product → Company</span><span class="t-sep">✦</span>
+    <span class="t-brand">hubalicious</span><span class="t-sep">✦</span>
+    <span class="t-item">Smart Yards · concept</span><span class="t-sep">✦</span>
+    <span class="t-item">Beef Therapy · concept</span><span class="t-sep">✦</span>
+    <span class="t-item">Fidgetyfarm · live</span><span class="t-sep">✦</span>
+    <span class="t-item">Vector Rider · concept</span><span class="t-sep">✦</span>
+    <span class="t-brand">hubalicious</span><span class="t-sep">✦</span>
+  </div>
+</div>
+
+<!-- HUBALICIOUS LAB (dark) -->
+<section class="section section-dark" id="hubalicious">
+  <div class="inner">
+    <div class="s-eyebrow">Hubalicious · Directory Lab</div>
+    <h2 class="s-title s-title--dark">Hub ideas. Scored and staged.</h2>
+    <p class="s-desc s-desc--dark">Every project starts as a curated directory website. Audiences are built before products are built. Revenue triggers independence. These are the active ideas in the pipeline.</p>
+
+    <div class="lab-grid">
+
+      <div class="lab-card">
+        <div class="lab-card__top">
+          <span class="lab-card__cat">Contracting · Compliance</span>
+          <span class="lab-card__status st-build"><span class="s-dot"></span>Building</span>
         </div>
-    </section>
+        <div class="lab-card__name">UmbrellaBelle</div>
+        <p class="lab-card__desc">UK umbrella company directory + IR35 scorer + Golden Pay optimiser. Rate cards, HMRC rates, and FCSA-verified listings. Free to use.</p>
+        <a href="hubalicious/umbrellabelle.html" class="lab-card__link">View brief →</a>
+      </div>
 
-    <!-- Incubator Projects Section -->
-    <section id="incubator" class="section">
-        <div class="section-content">
-            <h2 class="section-title">Incubator</h2>
-            <p class="section-description">
-                Every project starts as a directory. Audiences are built before products. Revenue triggers independence. These are the active companies in the pipeline.
-            </p>
-
-            <div class="incubator-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-top:40px;">
-
-                <div class="incubator-card" style="border:1px solid rgba(255,255,255,0.08);padding:28px;border-radius:4px;display:flex;flex-direction:column;gap:12px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:0.5;">Kids &amp; Family</span>
-                        <span style="display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#4ade80;">
-                            <span style="width:8px;height:8px;border-radius:50%;background:#4ade80;display:inline-block;"></span>Live
-                        </span>
-                    </div>
-                    <h3 style="font-size:18px;font-weight:600;margin:0;">Fidgetyfarm</h3>
-                    <p style="font-size:14px;line-height:1.6;opacity:0.7;margin:0;">Screen-free activity packs for curious kids. The Fomo Gnomes are live on Gumroad.</p>
-                    <a href="https://fidgetyfarm.com" target="_blank" style="font-size:13px;opacity:0.6;text-decoration:none;margin-top:auto;padding-top:8px;">fidgetyfarm.com ↗</a>
-                </div>
-
-                <div class="incubator-card" style="border:1px solid rgba(255,255,255,0.08);padding:28px;border-radius:4px;display:flex;flex-direction:column;gap:12px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:0.5;">Wellness &amp; Running</span>
-                        <span style="display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#facc15;">
-                            <span style="width:8px;height:8px;border-radius:50%;background:#facc15;display:inline-block;"></span>Building
-                        </span>
-                    </div>
-                    <h3 style="font-size:18px;font-weight:600;margin:0;">Sensorush</h3>
-                    <p style="font-size:14px;line-height:1.6;opacity:0.7;margin:0;">The urban women's running directory — clubs, routes, gear. Sonicmood audio platform to follow.</p>
-                    <a href="https://sensorush.com" target="_blank" style="font-size:13px;opacity:0.6;text-decoration:none;margin-top:auto;padding-top:8px;">sensorush.com ↗</a>
-                </div>
-
-                <div class="incubator-card" style="border:1px solid rgba(255,255,255,0.08);padding:28px;border-radius:4px;display:flex;flex-direction:column;gap:12px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:0.5;">Books &amp; Community</span>
-                        <span style="display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#facc15;">
-                            <span style="width:8px;height:8px;border-radius:50%;background:#facc15;display:inline-block;"></span>Building
-                        </span>
-                    </div>
-                    <h3 style="font-size:18px;font-weight:600;margin:0;">Shelf Help</h3>
-                    <p style="font-size:14px;line-height:1.6;opacity:0.7;margin:0;">Reading companion journals for book clubs. Your reading. Your verdict.</p>
-                    <span style="font-size:13px;opacity:0.4;margin-top:auto;padding-top:8px;">Coming soon</span>
-                </div>
-
-                <div class="incubator-card" style="border:1px solid rgba(255,255,255,0.08);padding:28px;border-radius:4px;display:flex;flex-direction:column;gap:12px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:0.5;">Archive &amp; Culture</span>
-                        <span style="display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;">
-                            <span style="width:8px;height:8px;border-radius:50%;background:#94a3b8;display:inline-block;"></span>Foundation
-                        </span>
-                    </div>
-                    <h3 style="font-size:18px;font-weight:600;margin:0;">Prestoria</h3>
-                    <p style="font-size:14px;line-height:1.6;opacity:0.7;margin:0;">A time capsule for ordinary people. Ordinary voices, on record, for whoever comes next.</p>
-                    <span style="font-size:13px;opacity:0.4;margin-top:auto;padding-top:8px;">In development</span>
-                </div>
-
-                <div class="incubator-card" style="border:1px solid rgba(255,255,255,0.08);padding:28px;border-radius:4px;display:flex;flex-direction:column;gap:12px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:0.5;">Developer Tools</span>
-                        <span style="display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;">
-                            <span style="width:8px;height:8px;border-radius:50%;background:#94a3b8;display:inline-block;"></span>Concept
-                        </span>
-                    </div>
-                    <h3 style="font-size:18px;font-weight:600;margin:0;">Chimney</h3>
-                    <p style="font-size:14px;line-height:1.6;opacity:0.7;margin:0;">Automated AI cost router. When LLM pricing shifts, your stack rebalances automatically.</p>
-                    <span style="font-size:13px;opacity:0.4;margin-top:auto;padding-top:8px;">In development</span>
-                </div>
-
-                <div class="incubator-card" style="border:1px solid rgba(255,255,255,0.08);padding:28px;border-radius:4px;display:flex;flex-direction:column;gap:12px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:0.5;">Social &amp; Leisure</span>
-                        <span style="display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;">
-                            <span style="width:8px;height:8px;border-radius:50%;background:#94a3b8;display:inline-block;"></span>Concept
-                        </span>
-                    </div>
-                    <h3 style="font-size:18px;font-weight:600;margin:0;">Beef Therapy</h3>
-                    <p style="font-size:14px;line-height:1.6;opacity:0.7;margin:0;">Non-lethal stress relief shooting experiences — paint guns, water cannons, crossbows, archery. Arch spaces. Leave your baggage at the door.</p>
-                    <a href="beeftherapy.html" style="font-size:13px;opacity:0.6;text-decoration:none;margin-top:auto;padding-top:8px;">View prototype →</a>
-                </div>
-
-                <div class="incubator-card" style="border:1px solid rgba(255,255,255,0.08);padding:28px;border-radius:4px;display:flex;flex-direction:column;gap:12px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:0.5;">Social &amp; Lifestyle</span>
-                        <span style="display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;">
-                            <span style="width:8px;height:8px;border-radius:50%;background:#94a3b8;display:inline-block;"></span>Concept
-                        </span>
-                    </div>
-                    <h3 style="font-size:18px;font-weight:600;margin:0;">New Pub</h3>
-                    <p style="font-size:14px;line-height:1.6;opacity:0.7;margin:0;">The pub is in decline. This is what replaces it. A directory of social activities for the post-pub generation — experiences over drinks.</p>
-                    <a href="newpub.html" style="font-size:13px;opacity:0.6;text-decoration:none;margin-top:auto;padding-top:8px;">View prototype →</a>
-                </div>
-
-                <div class="incubator-card" style="border:1px solid rgba(255,255,255,0.08);padding:28px;border-radius:4px;display:flex;flex-direction:column;gap:12px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:0.5;">Venues &amp; Spaces</span>
-                        <span style="display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;">
-                            <span style="width:8px;height:8px;border-radius:50%;background:#94a3b8;display:inline-block;"></span>Concept
-                        </span>
-                    </div>
-                    <h3 style="font-size:18px;font-weight:600;margin:0;">Spacey Places</h3>
-                    <p style="font-size:14px;line-height:1.6;opacity:0.7;margin:0;">Find the right space for what you actually need. Unusual venues, creative studios, rooftops, off-grid meeting rooms — curated by purpose.</p>
-                    <a href="spaceyplaces.html" style="font-size:13px;opacity:0.6;text-decoration:none;margin-top:auto;padding-top:8px;">View prototype →</a>
-                </div>
-
-            </div>
+      <div class="lab-card">
+        <div class="lab-card__top">
+          <span class="lab-card__cat">Wellness · Running</span>
+          <span class="lab-card__status st-build"><span class="s-dot"></span>Building</span>
         </div>
-    </section>
+        <div class="lab-card__name">Sensorush</div>
+        <p class="lab-card__desc">The urban women's running directory — clubs, routes, gear. Phase 1 directory. Sonicmood audio platform to follow.</p>
+        <a href="https://sensorush.com" target="_blank" class="lab-card__link">sensorush.com ↗</a>
+      </div>
 
-    <!-- MessiKwessi Projects Section -->
-    <section id="messi-projects" class="section messi-section">
-        <div class="section-content">
-            <div class="messi-header">
-                <a href="https://messikwessi.com" class="messi-brand-btn" target="_blank">MessiKwessi ↗</a>
-                <h2 class="section-title messi-title">Personal Brands</h2>
-                <p class="section-description messi-desc">
-                    Five registered domains. Each one a live idea — from finance intelligence to faith-based fitness. These are the ventures, not the experiments.
-                </p>
-            </div>
-
-            <div class="messi-grid">
-                <div class="messi-card">
-                    <div class="messi-card__badge">Finance &amp; Recruitment</div>
-                    <h3 class="messi-card__title">spentIQ.com</h3>
-                    <p class="messi-card__desc">Recruitment finance and spending intelligence platform — bringing clarity to where money goes.</p>
-                    <a href="https://spentiq.com" class="messi-card__link" target="_blank">Visit spentIQ.com ↗</a>
-                </div>
-
-                <div class="messi-card">
-                    <div class="messi-card__badge">Wellness &amp; Running</div>
-                    <h3 class="messi-card__title">sensorush.com</h3>
-                    <p class="messi-card__desc">The urban women's running hub — curated run clubs, safe routes, and gear. Cognitive fuel for the city run.</p>
-                    <a href="https://sensorush.com" class="messi-card__link" target="_blank">Visit sensorush.com ↗</a>
-                </div>
-
-                <div class="messi-card">
-                    <div class="messi-card__badge">Digital Frontier</div>
-                    <h3 class="messi-card__title">digidrifters.com</h3>
-                    <p class="messi-card__desc">Exploring the digital frontier and connected experiences — always in motion, always discovering.</p>
-                    <a href="https://digidrifters.com" class="messi-card__link" target="_blank">Visit digidrifters.com ↗</a>
-                </div>
-
-                <div class="messi-card">
-                    <div class="messi-card__badge">Faith &amp; Fitness</div>
-                    <h3 class="messi-card__title">spirifix.com</h3>
-                    <p class="messi-card__desc">Faith-based fitness platform with curated nutrition, workout guidance, and spiritual wellness integration.</p>
-                    <a href="https://spirifix.com" class="messi-card__link" target="_blank">Visit spirifix.com ↗</a>
-                </div>
-
-                <div class="messi-card">
-                    <div class="messi-card__badge">Kids &amp; Family</div>
-                    <h3 class="messi-card__title">fidgetyfarm.com</h3>
-                    <p class="messi-card__desc">Screen-free activity packs for curious kids aged 4–8. Home to the Fomo Gnomes — printable adventures that keep hands busy and screens off.</p>
-                    <a href="https://fidgetyfarm.com" class="messi-card__link" target="_blank">Visit fidgetyfarm.com ↗</a>
-                </div>
-            </div>
+      <div class="lab-card">
+        <div class="lab-card__top">
+          <span class="lab-card__cat">Kids · Family</span>
+          <span class="lab-card__status st-live"><span class="s-dot"></span>Live</span>
         </div>
-    </section>
+        <div class="lab-card__name">Fidgetyfarm</div>
+        <p class="lab-card__desc">Screen-free activity packs for curious kids. The Fomo Gnomes are live on Gumroad. Activity Pack 1 available now.</p>
+        <a href="https://fidgetyfarm.com" target="_blank" class="lab-card__link">fidgetyfarm.com ↗</a>
+      </div>
 
-    <!-- Mirror Machine Section -->
-    <section id="mirror-machine" class="section">
-        <div class="section-content section-content--wide">
-            <h2 class="section-title">Mirror Machine</h2>
-            <p class="section-description">
-                Every business has a gap between where they are and what they could be. The Mirror shows it — a redesigned website is just the entry point to a deeper look at the whole operation.
-            </p>
-
-            <div class="mirror-grid">
-
-                <!-- Church Associates -->
-                <div class="mirror-card">
-                    <div class="mirror-card__header">
-                        <span class="mirror-card__sector">Plastering &amp; Construction</span>
-                        <h3 class="mirror-card__title">Church Associates</h3>
-                        <p class="mirror-card__desc">Professional plastering services. Service highlights, testimonials, and easy contact options.</p>
-                    </div>
-                    <div class="mirror-card__body">
-                        <div class="mirror-card__side mirror-card__side--live">
-                            <span class="mirror-card__side-label">🌐 Live Site</span>
-                            <p class="mirror-card__side-note">Current business website</p>
-                            <a href="#" class="mirror-card__btn mirror-card__btn--live">View Live Site ↗</a>
-                        </div>
-                        <div class="mirror-card__divider"></div>
-                        <div class="mirror-card__side mirror-card__side--mirror">
-                            <span class="mirror-card__side-label">🪞 The Mirror</span>
-                            <p class="mirror-card__side-note">Redesigned with conversion in mind</p>
-                            <a href="portfolio/church-associates/index.html" class="mirror-card__btn mirror-card__btn--mirror">View Mirror ↗</a>
-                        </div>
-                    </div>
-                    <div class="mirror-card__opportunity">
-                        <span class="opp-icon">💡</span>
-                        <span class="opp-text">Strong local trust signals could drive significantly more inbound leads with a clear booking flow</span>
-                    </div>
-                </div>
-
-                <!-- Prem Dent -->
-                <div class="mirror-card">
-                    <div class="mirror-card__header">
-                        <span class="mirror-card__sector">Dental &amp; Healthcare</span>
-                        <h3 class="mirror-card__title">Prem Dent</h3>
-                        <p class="mirror-card__desc">Dental clinic in Elephant &amp; Castle. Treatments, services, and patient-focused design.</p>
-                    </div>
-                    <div class="mirror-card__body">
-                        <div class="mirror-card__side mirror-card__side--live">
-                            <span class="mirror-card__side-label">🌐 Live Site</span>
-                            <p class="mirror-card__side-note">Current business website</p>
-                            <a href="#" class="mirror-card__btn mirror-card__btn--live">View Live Site ↗</a>
-                        </div>
-                        <div class="mirror-card__divider"></div>
-                        <div class="mirror-card__side mirror-card__side--mirror">
-                            <span class="mirror-card__side-label">🪞 The Mirror</span>
-                            <p class="mirror-card__side-note">Clean, professional aesthetic rebuilt</p>
-                            <a href="portfolio/prem-dent/index.html" class="mirror-card__btn mirror-card__btn--mirror">View Mirror ↗</a>
-                        </div>
-                    </div>
-                    <div class="mirror-card__opportunity">
-                        <span class="opp-icon">💡</span>
-                        <span class="opp-text">Online appointment booking alone could eliminate admin overhead and increase new patient uptake</span>
-                    </div>
-                </div>
-
-                <!-- Long Lane Launderette -->
-                <div class="mirror-card">
-                    <div class="mirror-card__header">
-                        <span class="mirror-card__sector">Retail Services &amp; Local</span>
-                        <h3 class="mirror-card__title">Long Lane Launderette</h3>
-                        <p class="mirror-card__desc">Local launderette in SE1 with clear service options, pricing, and facility information.</p>
-                    </div>
-                    <div class="mirror-card__body">
-                        <div class="mirror-card__side mirror-card__side--live">
-                            <span class="mirror-card__side-label">🌐 Live Site</span>
-                            <p class="mirror-card__side-note">Current business website</p>
-                            <a href="#" class="mirror-card__btn mirror-card__btn--live">View Live Site ↗</a>
-                        </div>
-                        <div class="mirror-card__divider"></div>
-                        <div class="mirror-card__side mirror-card__side--mirror">
-                            <span class="mirror-card__side-label">🪞 The Mirror</span>
-                            <p class="mirror-card__side-note">Glassmorphism redesign with modern UX</p>
-                            <a href="portfolio/longlanelaunderette/index.html" class="mirror-card__btn mirror-card__btn--mirror">View Mirror ↗</a>
-                        </div>
-                    </div>
-                    <div class="mirror-card__opportunity">
-                        <span class="opp-icon">💡</span>
-                        <span class="opp-text">Collection &amp; delivery add-on with simple scheduling could open a new revenue stream with zero new footfall</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div style="text-align:center;margin-top:40px;">
-                <a href="mirror-machine.html" style="display:inline-block;padding:14px 32px;border:1px solid rgba(255,255,255,0.2);border-radius:4px;font-size:14px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;color:inherit;opacity:0.8;transition:opacity 0.2s;">See all 12 mirrors →</a>
-            </div>
+      <div class="lab-card">
+        <div class="lab-card__top">
+          <span class="lab-card__cat">Social · Leisure</span>
+          <span class="lab-card__status st-concept"><span class="s-dot"></span>Concept</span>
         </div>
-    </section>
+        <div class="lab-card__name">New Pub</div>
+        <p class="lab-card__desc">Third Place directory for the post-pub era. Creative, active, games — the pub feeling without the pub. Class E venues, £30–40/head.</p>
+        <a href="newpub.html" class="lab-card__link">View prototype →</a>
+      </div>
 
-    <!-- Tech Republic Section -->
-    <section id="tech-republic" class="section section--strip">
-        <div class="section-content">
-            <h2 class="section-title">Tech Republic</h2>
-            <p class="section-description">
-                Emerging technology, tools, and experiments — from trend navigation to live builds.
-            </p>
-            <div class="tech-strip-grid">
-                <a href="tech-runner.html" class="tech-strip-card">
-                    <span class="tech-strip-card__badge">Directory</span>
-                    <h3 class="tech-strip-card__title">Tech Runner</h3>
-                    <p class="tech-strip-card__desc">Navigate the evolving tech landscape — emerging tools, platforms, and trends curated for builders.</p>
-                    <span class="tech-strip-card__link">Explore Tech Runner →</span>
-                </a>
-                <a href="tech-lab.html" class="tech-strip-card">
-                    <span class="tech-strip-card__badge">Live Build</span>
-                    <h3 class="tech-strip-card__title">Tech Lab</h3>
-                    <p class="tech-strip-card__desc">Spirifix.com — faith-based fitness with curated nutrition, workout guidance, and spiritual wellness. Live and operating.</p>
-                    <span class="tech-strip-card__link">Visit Spirifix.com →</span>
-                </a>
-            </div>
+      <div class="lab-card">
+        <div class="lab-card__top">
+          <span class="lab-card__cat">Property · Venues</span>
+          <span class="lab-card__status st-concept"><span class="s-dot"></span>Concept</span>
         </div>
-    </section>
+        <div class="lab-card__name">Spacey Places</div>
+        <p class="lab-card__desc">Multi-category space finder. Residential, commercial, leisure, storage. Complements New Pub — one finds the activity, one finds the venue.</p>
+        <a href="spaceyplaces.html" class="lab-card__link">View prototype →</a>
+      </div>
 
-    <!-- Applesamosa Section -->
-    <section id="applesamosa" class="section">
-        <div class="section-content">
-            <h2 class="section-title">Applesamosa</h2>
-            <p class="section-description">
-                Preserving the original page as Messi Kwessi's first digital journey — showing how every great venture begins.
-            </p>
-
-            <div class="applesamosa-content">
-                <div class="origin-story">
-                    <h3 class="story-title">Origin Story</h3>
-                    <p class="story-text">
-                        This is where it all started. Applesamosa represents Messi Kwessi's first major project — a testament to ambition, creativity, and the courage to begin. Every successful venture has its roots in that first brave step.
-                    </p>
-                </div>
-
-                <div class="journey-note">
-                    <h3 class="story-title">The Journey Continues</h3>
-                    <p class="story-text">
-                        The Mirror Machine, Tech Republic, and all projects you see here are built on the foundation laid by Applesamosa. It's a living portfolio of growth, learning, and iteration — the ongoing story of a digital creator on a mission to build something meaningful.
-                    </p>
-                </div>
-            </div>
+      <div class="lab-card">
+        <div class="lab-card__top">
+          <span class="lab-card__cat">Leisure · Experiences</span>
+          <span class="lab-card__status st-concept"><span class="s-dot"></span>Concept</span>
         </div>
-    </section>
+        <div class="lab-card__name">Beef Therapy</div>
+        <p class="lab-card__desc">Non-lethal indoor shooting experience directory. Paint guns, archery, axe throwing, airsoft. Stress relief gap — therapy has 6-week waits.</p>
+        <a href="beeftherapy.html" class="lab-card__link">View prototype →</a>
+      </div>
 
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <h3>Applesamosa</h3>
-                <p>Digital Projects by Messi Kwessi</p>
-            </div>
-            <div class="footer-links">
-                <a href="https://messikwessi.com" class="footer-link" target="_blank">MessiKwessi</a>
-                <a href="https://github.com/messikwessi" class="footer-link" target="_blank">GitHub</a>
-                <a href="https://linkedin.com/in/messikwessi" class="footer-link" target="_blank">LinkedIn</a>
-            </div>
+      <div class="lab-card">
+        <div class="lab-card__top">
+          <span class="lab-card__cat">Logistics · B2B</span>
+          <span class="lab-card__status st-concept"><span class="s-dot"></span>Concept</span>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Applesamosa. Built with creativity &amp; code.</p>
-        </div>
-    </footer>
+        <div class="lab-card__name">Smart Yards</div>
+        <p class="lab-card__desc">London industrial yard and logistics space directory. B2B data play for hauliers and last-mile operators. SE London first. Pun on "hard yards."</p>
+        <a href="hubalicious/smart-yards.html" class="lab-card__link">View brief →</a>
+      </div>
 
-    <script src="script.js"></script>
+      <div class="lab-card">
+        <div class="lab-card__top">
+          <span class="lab-card__cat">E-mobility · Courier</span>
+          <span class="lab-card__status st-concept"><span class="s-dot"></span>Concept</span>
+        </div>
+        <div class="lab-card__name">Vector Rider</div>
+        <p class="lab-card__desc">E-bike courier hub. Route optimisation, stopping logic, multi-drop. London-first. MCP server for AI route optimisation built in from day one.</p>
+        <a href="hubalicious/vector-rider.html" class="lab-card__link">View brief →</a>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card__top">
+          <span class="lab-card__cat">Civic · Public sector</span>
+          <span class="lab-card__status st-concept"><span class="s-dot"></span>Concept</span>
+        </div>
+        <div class="lab-card__name">Goverlicious</div>
+        <p class="lab-card__desc">Power Atlas. A navigable directory of UK government bodies, authorities, and regulators. Who they are, what they control, how to reach them.</p>
+        <a href="hubalicious/goverlicious.html" class="lab-card__link">View brief →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- THE MODEL (light) -->
+<section class="section section-light" id="model">
+  <div class="inner">
+    <div class="s-eyebrow">The Operating Model</div>
+    <h2 class="s-title s-title--light">How every idea runs.</h2>
+    <p class="s-desc s-desc--light">No product is built before the directory proves the audience exists. This is the constraint that keeps the lab lean.</p>
+
+    <div class="pipeline">
+      <div class="pipe"><span class="pipe-n">01</span><span class="pipe-label">Idea</span><span class="pipe-text">A gap, a pain point, an underserved audience. Written in Day One first.</span></div>
+      <div class="pipe"><span class="pipe-n">02</span><span class="pipe-label">Directory</span><span class="pipe-text">Curated listings. Static site. No product. GitHub Pages in days.</span></div>
+      <div class="pipe"><span class="pipe-n">03</span><span class="pipe-label">Audience</span><span class="pipe-text">Email list via Brevo. SEO. Social. Proof the people exist.</span></div>
+      <div class="pipe"><span class="pipe-n">04</span><span class="pipe-label">Product</span><span class="pipe-text">First product for the assembled audience. Gumroad or SaaS.</span></div>
+      <div class="pipe"><span class="pipe-n">05</span><span class="pipe-label">Revenue</span><span class="pipe-text">Consistent monthly income. The graduation trigger.</span></div>
+      <div class="pipe"><span class="pipe-n">06</span><span class="pipe-label">Company</span><span class="pipe-text">Standalone entity. Own agents. Own accounts. Graduated.</span></div>
+    </div>
+
+    <p class="pipe-note"><strong>A directory costs nothing to ship. A product costs months.</strong> The directory earns the right to build the product. No audience, no product. No product, no company. The model is the constraint.</p>
+  </div>
+</section>
+
+<!-- PERSONAL BRANDS (dark) -->
+<section class="section section-mid" id="brands">
+  <div class="inner">
+    <div class="s-eyebrow">Personal Brands</div>
+    <h2 class="s-title s-title--dark">The wider portfolio.</h2>
+    <p class="s-desc s-desc--dark">Five registered domains. Each one a live idea — the ventures beyond the directory lab.</p>
+
+    <div class="brands-grid">
+
+      <div class="brand-card">
+        <span class="brand-badge">Books · Community</span>
+        <div class="brand-title">Shelf Help</div>
+        <p class="brand-desc">Reading companion journals for book clubs. Editable PDF journals for popular titles. Gumroad + KDP. Your reading. Your verdict.</p>
+        <span class="brand-link brand-link--off">Coming soon</span>
+      </div>
+
+      <div class="brand-card">
+        <span class="brand-badge">Art · Identity</span>
+        <div class="brand-title">FROMFROM</div>
+        <p class="brand-desc">199-country flag wall art. All PNGs complete. Live on Gumroad. Part of the SIWYS (Say It With Your Style) umbrella brand.</p>
+        <a href="#" target="_blank" class="brand-link">View on Gumroad ↗</a>
+      </div>
+
+      <div class="brand-card">
+        <span class="brand-badge">Finance · Intelligence</span>
+        <div class="brand-title">SpentIQ</div>
+        <p class="brand-desc">Recruitment finance and spending intelligence. Value IQ prototype live. Before the conversation, not instead of it.</p>
+        <a href="https://spentiq.com" target="_blank" class="brand-link">spentiq.com ↗</a>
+      </div>
+
+      <div class="brand-card">
+        <span class="brand-badge">Archive · Culture</span>
+        <div class="brand-title">Prestoria</div>
+        <p class="brand-desc">A time capsule platform for ordinary people. Ordinary voices, on record, for whoever comes next.</p>
+        <span class="brand-link brand-link--off">In development</span>
+      </div>
+
+      <div class="brand-card">
+        <span class="brand-badge">Developer Tools</span>
+        <div class="brand-title">Chimney</div>
+        <p class="brand-desc">Automated AI cost router. When LLM pricing shifts, your stack rebalances automatically. Python + FastAPI + PostgreSQL.</p>
+        <span class="brand-link brand-link--off">In development</span>
+      </div>
+
+      <div class="brand-card">
+        <span class="brand-badge">Digital Frontier</span>
+        <div class="brand-title">Digidrifters</div>
+        <p class="brand-desc">Personal internet magazine. Exploring the digital frontier, connected experiences, and culture in motion. Always discovering.</p>
+        <a href="https://digidrifters.com" target="_blank" class="brand-link">digidrifters.com ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STATS (light) -->
+<section class="stats-section">
+  <div class="inner">
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="stat-val">9</div>
+        <div class="stat-label">Ideas in lab</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val">2</div>
+        <div class="stat-label">Building now</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val">1</div>
+        <div class="stat-label">Live with product</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val">5</div>
+        <div class="stat-label">Domains registered</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val">'<span>24</span></div>
+        <div class="stat-label">Est.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Apple Samosa</div>
+        <p class="footer-brand-desc">Every project starts as a directory. Audiences built before products. Revenue triggers independence.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#hubalicious">Directory Lab</a>
+        <a href="#model">The Model</a>
+        <a href="#brands">Brands</a>
+        <a href="https://messikwessi.com" target="_blank">MessiKwessi ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Apple Samosa · Messi Kwessi</span>
+      <span>Hubalicious · GitHub Pages · Brevo · Gumroad</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const track = document.getElementById('hubTrack');
+  if (!track) return;
+  track.style.willChange = 'transform';
+  const strip = track.closest('.ticker');
+  let paused = false, lastTime = null, pos = 0, setWidth = 0;
+  const SPEED = 40;
+  if (strip) {
+    strip.addEventListener('mouseenter', () => { paused = true; });
+    strip.addEventListener('mouseleave', () => { paused = false; lastTime = null; });
+  }
+  function step(ts) {
+    if (!setWidth) setWidth = track.scrollWidth / 2;
+    if (!paused) {
+      if (lastTime !== null) {
+        pos -= SPEED * ((ts - lastTime) / 1000);
+        if (pos <= -setWidth) pos += setWidth;
+        track.style.transform = `translateX(${pos}px)`;
+      }
+      lastTime = ts;
+    }
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+})();
+</script>
+
 </body>
 </html>

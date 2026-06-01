@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Umbrellabelle — Are You Covered?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#0B0F1A',
+            surface: '#141929',
+            card: '#1A2035',
+            border: '#252D45',
+            belle: '#A78BFA',
+            'belle-light': '#C4B5FD',
+            'belle-dark': '#7C3AED',
+            rose: '#F472B6',
+            muted: '#64748B',
+            soft: '#94A3B8',
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #0B0F1A; font-family: 'Inter', sans-serif; }
+
+    .bell-curve {
+      clip-path: ellipse(60% 100% at 50% 100%);
+    }
+    .wave-top {
+      clip-path: ellipse(70% 55% at 50% 0%);
+    }
+
+    /* Subtle shimmer on hero */
+    .hero-glow {
+      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(167,139,250,0.15) 0%, transparent 70%);
+    }
+
+    /* Card hover */
+    .listing-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .listing-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(167,139,250,0.15);
+    }
+
+    /* IR35 traffic light */
+    .light-green { background: #10B981; box-shadow: 0 0 12px rgba(16,185,129,0.5); }
+    .light-amber { background: #F59E0B; box-shadow: 0 0 12px rgba(245,158,11,0.5); }
+    .light-red   { background: #EF4444; box-shadow: 0 0 12px rgba(239,68,68,0.5); }
+
+    /* Gnome pulse animation */
+    @keyframes gnomePulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+    .gnome-pulse { animation: gnomePulse 3s ease-in-out infinite; }
+
+    /* Subtle grid background */
+    .grid-bg {
+      background-image: linear-gradient(rgba(167,139,250,0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(167,139,250,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .fcsa-badge {
+      background: linear-gradient(135deg, #10B981, #059669);
+    }
+
+    /* Score bar */
+    .score-fill {
+      background: linear-gradient(90deg, #A78BFA, #F472B6);
+      border-radius: 999px;
+      transition: width 0.6s ease;
+    }
+
+    /* Divider wave */
+    .section-wave {
+      background: #0B0F1A;
+    }
+
+    /* ── TICKER STRIP ── */
+    .belle-strip {
+      background: #141929;
+      border-top: 1px solid #252D45;
+      border-bottom: 1px solid #252D45;
+      padding: 14px 0;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    }
+    .belle-strip-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+    }
+    .belle-strip-item {
+      font-size: 12.5px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      color: #94A3B8;
+      padding: 0 28px;
+      white-space: nowrap;
+    }
+    .belle-strip-sep {
+      color: #A78BFA;
+      opacity: 0.5;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .belle-strip-item--brand {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: #A78BFA;
+      padding: 0 36px;
+    }
+
+    /* ── COMING SOON STATES ── */
+    .cs-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: #A78BFA;
+      background: rgba(167,139,250,0.1);
+      border: 1px solid rgba(167,139,250,0.25);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .cs-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #A78BFA; display: inline-block; }
+    .btn-disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="text-white">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-border" style="background: rgba(11,15,26,0.92); backdrop-filter: blur(12px);">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="../index.html" style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;white-space:nowrap;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">← Apple Samosa</a>
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full flex items-center justify-center text-sm" style="background: linear-gradient(135deg, #A78BFA, #F472B6);">☂</div>
+          <span class="font-display font-700 text-lg text-white tracking-tight">umbrella<span class="text-belle">belle</span></span>
+        </div>
+      </div>
+      <div class="hidden md:flex items-center gap-8 text-sm text-soft">
+        <a href="#rate-cards" class="hover:text-white transition-colors">Rate Cards</a>
+        <a href="#golden-pay" class="hover:text-white transition-colors">Golden Pay</a>
+        <a href="#umbrellas" class="hover:text-white transition-colors">Find an Umbrella</a>
+        <a href="#ir35" class="hover:text-white transition-colors">IR35 Check</a>
+      </div>
+      <a href="#rate-cards" class="text-sm font-medium px-4 py-2 rounded-full transition-all hover:scale-105" style="background: linear-gradient(135deg, #A78BFA, #F472B6); color: white;">
+        See Rate Cards →
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="relative min-h-screen flex items-center pt-20 overflow-hidden grid-bg">
+    <div class="hero-glow absolute inset-0 pointer-events-none"></div>
+
+    <!-- Background bell silhouette -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
+      <div class="text-belle" style="font-size: 600px; line-height: 1;">☂</div>
+    </div>
+
+    <div class="relative max-w-6xl mx-auto px-6 py-24 text-center">
+      <!-- Pill label -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-xs text-soft mb-8" style="background: rgba(167,139,250,0.08);">
+        <span class="w-1.5 h-1.5 rounded-full bg-belle inline-block"></span>
+        Rate Cards · Golden Pay · IR35 Compliance · FCSA-Verified Directory
+      </div>
+
+      <h1 class="font-display text-6xl md:text-8xl font-800 text-white leading-tight mb-6">
+        Are you<br/>
+        <span style="background: linear-gradient(135deg, #A78BFA, #F472B6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">covered?</span>
+      </h1>
+
+      <p class="text-lg md:text-xl text-soft max-w-2xl mx-auto mb-10 leading-relaxed">
+        The UK contractor toolkit. Live rate cards, golden pay optimisation, IR35 risk scoring, and FCSA-verified umbrella directory — everything in one place, free.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+        <a href="#umbrellas" class="px-8 py-4 rounded-full font-medium text-white transition-all hover:scale-105 hover:shadow-lg" style="background: linear-gradient(135deg, #A78BFA, #F472B6);">
+          Find My Umbrella
+        </a>
+        <a href="#ir35" class="px-8 py-4 rounded-full font-medium border border-border text-soft hover:text-white hover:border-belle transition-all">
+          Check My IR35 →
+        </a>
+      </div>
+
+      <!-- Stats row -->
+      <div class="flex flex-wrap justify-center gap-8 text-center">
+        <div>
+          <div class="text-2xl font-display font-700 text-white">900<span class="text-belle">+</span></div>
+          <div class="text-xs text-muted mt-1">UK umbrella companies</div>
+        </div>
+        <div class="hidden sm:block w-px bg-border"></div>
+        <div>
+          <div class="text-2xl font-display font-700 text-white">31<span class="text-belle">✓</span></div>
+          <div class="text-xs text-muted mt-1">FCSA-accredited listed</div>
+        </div>
+        <div class="hidden sm:block w-px bg-border"></div>
+        <div>
+          <div class="text-2xl font-display font-700 text-white">IR35<span class="text-belle">→</span></div>
+          <div class="text-xs text-muted mt-1">Instant risk score</div>
+        </div>
+        <div class="hidden sm:block w-px bg-border"></div>
+        <div>
+          <div class="text-2xl font-display font-700 text-white">0<span class="text-belle">£</span></div>
+          <div class="text-xs text-muted mt-1">Free to search</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted text-xs flex flex-col items-center gap-2 animate-bounce">
+      <span>scroll</span>
+      <span>↓</span>
+    </div>
+  </section>
+
+  <!-- TICKER STRIP -->
+  <section class="belle-strip">
+    <div class="belle-strip-track" id="belleTrack">
+      <!-- Set 1 -->
+      <div class="belle-strip-item">45p/mile · HMRC mileage rate 2025–26</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">Average IT contractor · £450/day</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">Holiday pay · 12.07% of earnings</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item--brand">umbrellabelle</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">FCSA accredited · 35 umbrella bodies</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">Auto-enrolment · 3% employer pension minimum</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">Inside IR35? Umbrella company required.</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item--brand">umbrellabelle</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">Average umbrella margin · £22/week</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">2025–26 rates · updated April 2026</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">Rate cards · free · no login needed</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item--brand">umbrellabelle</div>
+      <span class="belle-strip-sep">☂</span>
+      <!-- Set 2 (duplicate — enables seamless loop) -->
+      <div class="belle-strip-item">45p/mile · HMRC mileage rate 2025–26</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">Average IT contractor · £450/day</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">Holiday pay · 12.07% of earnings</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item--brand">umbrellabelle</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">FCSA accredited · 35 umbrella bodies</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">Auto-enrolment · 3% employer pension minimum</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">Inside IR35? Umbrella company required.</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item--brand">umbrellabelle</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">Average umbrella margin · £22/week</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">2025–26 rates · updated April 2026</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item">Rate cards · free · no login needed</div>
+      <span class="belle-strip-sep">☂</span>
+      <div class="belle-strip-item--brand">umbrellabelle</div>
+      <span class="belle-strip-sep">☂</span>
+    </div>
+  </section>
+
+  <!-- HOW BELLE WORKS -->
+  <section class="py-24 relative" style="background: #141929;">
+    <!-- Gnome Easter egg — agents toiling in the background -->
+    <div class="absolute right-8 top-8 gnome-pulse pointer-events-none select-none hidden md:block">
+      <div class="text-4xl opacity-40">🧙</div>
+      <div class="text-xs text-muted text-center mt-1 opacity-60" style="font-size: 9px;">checking data</div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <p class="text-belle text-sm font-medium uppercase tracking-widest mb-3">How Belle Works</p>
+        <h2 class="font-display text-4xl md:text-5xl font-700 text-white">Three steps. Total clarity.</h2>
+        <p class="text-soft mt-4 max-w-xl mx-auto">Belle handles the complexity so you can focus on the work.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="relative p-8 rounded-2xl border border-border" style="background: #1A2035;">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6" style="background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.3);">
+            🔍
+          </div>
+          <div class="text-xs text-belle font-medium uppercase tracking-widest mb-2">Step 1</div>
+          <h3 class="font-display text-xl font-700 text-white mb-3">Tell Belle your situation</h3>
+          <p class="text-soft text-sm leading-relaxed">Your sector, rate, contract type, IR35 preference. 60 seconds. No account required.</p>
+          <!-- Subtle gnome at work -->
+          <div class="absolute bottom-4 right-4 text-lg opacity-20 gnome-pulse" style="animation-delay: 0.5s;">🧙</div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="relative p-8 rounded-2xl border" style="background: rgba(167,139,250,0.06); border-color: rgba(167,139,250,0.3);">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6" style="background: rgba(167,139,250,0.2); border: 1px solid rgba(167,139,250,0.4);">
+            ⚡
+          </div>
+          <div class="text-xs text-belle font-medium uppercase tracking-widest mb-2">Step 2</div>
+          <h3 class="font-display text-xl font-700 text-white mb-3">Belle checks the field</h3>
+          <p class="text-soft text-sm leading-relaxed">FCSA status, fee structures, IR35 track record, HMRC compliance history — verified and matched to your criteria.</p>
+          <div class="absolute bottom-4 right-4 text-lg opacity-20 gnome-pulse" style="animation-delay: 1s;">🧙</div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="relative p-8 rounded-2xl border border-border" style="background: #1A2035;">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6" style="background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.3);">
+            ✓
+          </div>
+          <div class="text-xs text-belle font-medium uppercase tracking-widest mb-2">Step 3</div>
+          <h3 class="font-display text-xl font-700 text-white mb-3">Get covered. Get on with it.</h3>
+          <p class="text-soft text-sm leading-relaxed">Three matched umbrellas, your IR35 risk score, and a plain-English summary. No jargon, no sales calls.</p>
+          <div class="absolute bottom-4 right-4 text-lg opacity-20 gnome-pulse" style="animation-delay: 1.5s;">🧙</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RATE CARDS -->
+  <section id="rate-cards" class="py-24" style="background: #0B0F1A;">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <p class="text-belle text-sm font-medium uppercase tracking-widest mb-3">The Rate Card</p>
+        <h2 class="font-display text-4xl md:text-5xl font-700 text-white">Know your worth.<br/><span style="background: linear-gradient(135deg, #A78BFA, #F472B6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Before they do.</span></h2>
+        <p class="text-soft mt-4 max-w-xl mx-auto">HMRC-approved rates, sector benchmarks, and umbrella margins — updated each tax year. Bookmark this page.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+
+        <!-- Sector Day Rates -->
+        <div class="p-6 rounded-2xl border border-border" style="background: #1A2035;">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base" style="background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.3);">📊</div>
+            <h3 class="font-display text-lg font-700 text-white">Day Rates by Sector</h3>
+          </div>
+          <div class="space-y-0">
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">IT / Software Dev</span><span class="text-white font-medium">£400–£700</span></div>
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Finance / Banking</span><span class="text-white font-medium">£350–£650</span></div>
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Project Management</span><span class="text-white font-medium">£300–£550</span></div>
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Healthcare / Nursing</span><span class="text-white font-medium">£25–£50/hr</span></div>
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Construction / Civils</span><span class="text-white font-medium">£180–£400</span></div>
+            <div class="flex justify-between items-center py-2.5 text-sm"><span class="text-soft">Marketing / Creative</span><span class="text-white font-medium">£250–£450</span></div>
+          </div>
+          <p class="text-muted text-xs mt-4">London/SE weighted averages · 2025–26</p>
+        </div>
+
+        <!-- HMRC Approved Rates -->
+        <div class="p-6 rounded-2xl border" style="background: rgba(167,139,250,0.05); border-color: rgba(167,139,250,0.25);">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base" style="background: rgba(167,139,250,0.2); border: 1px solid rgba(167,139,250,0.4);">🏛️</div>
+            <h3 class="font-display text-lg font-700 text-white">HMRC Approved Rates</h3>
+          </div>
+          <div class="space-y-0">
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Mileage (first 10,000)</span><span class="text-belle font-medium">45p / mile</span></div>
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Mileage (after 10,000)</span><span class="text-belle font-medium">25p / mile</span></div>
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Motorcycle</span><span class="text-belle font-medium">24p / mile</span></div>
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Bicycle</span><span class="text-belle font-medium">20p / mile</span></div>
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Holiday pay (statutory)</span><span class="text-belle font-medium">12.07%</span></div>
+            <div class="flex justify-between items-center py-2.5 text-sm"><span class="text-soft">Auto-enrol pension (min)</span><span class="text-belle font-medium">3% employer</span></div>
+          </div>
+          <p class="text-muted text-xs mt-4">HMRC · Tax year 2025–26</p>
+        </div>
+
+        <!-- Umbrella Margin Benchmarks -->
+        <div class="p-6 rounded-2xl border border-border" style="background: #1A2035;">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base" style="background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.3);">☂</div>
+            <h3 class="font-display text-lg font-700 text-white">Umbrella Margins</h3>
+          </div>
+          <div class="space-y-0">
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Market average</span><span class="text-white font-medium">£20–£25 / wk</span></div>
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Competitive</span><span class="text-green-400 font-medium">£15–£20 / wk</span></div>
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Expensive</span><span class="text-yellow-400 font-medium">£25–£35 / wk</span></div>
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Red flag</span><span class="text-red-400 font-medium">&gt; £35 / wk</span></div>
+            <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">% of day rate (typical)</span><span class="text-white font-medium">3–5%</span></div>
+            <div class="flex justify-between items-center py-2.5 text-sm"><span class="text-soft">Annual cost (avg)</span><span class="text-white font-medium">~£1,100 / yr</span></div>
+          </div>
+          <p class="text-muted text-xs mt-4">Belle benchmark data · 2025–26</p>
+        </div>
+      </div>
+
+      <!-- Annual equivalents bar -->
+      <div class="p-6 rounded-2xl border border-border" style="background: #141929;">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <p class="text-belle text-xs font-medium uppercase tracking-widest mb-1">Quick Reference</p>
+            <h3 class="font-display text-xl font-700 text-white">Annual equivalents</h3>
+            <p class="text-soft text-sm mt-1">Day rate × 220 days = annual equivalent before tax and umbrella costs</p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <div class="text-center px-4 py-3 rounded-xl border border-border" style="background: #0B0F1A;"><div class="text-lg font-display font-700 text-white">£300/day</div><div class="text-xs text-muted mt-1">≈ £66k/yr</div></div>
+            <div class="text-center px-4 py-3 rounded-xl border border-border" style="background: #0B0F1A;"><div class="text-lg font-display font-700 text-white">£400/day</div><div class="text-xs text-muted mt-1">≈ £88k/yr</div></div>
+            <div class="text-center px-4 py-3 rounded-xl border border-border" style="background: #0B0F1A;"><div class="text-lg font-display font-700 text-white">£500/day</div><div class="text-xs text-muted mt-1">≈ £110k/yr</div></div>
+            <div class="text-center px-4 py-3 rounded-xl border border-border" style="background: #0B0F1A;"><div class="text-lg font-display font-700 text-white">£700/day</div><div class="text-xs text-muted mt-1">≈ £154k/yr</div></div>
+            <div class="text-center px-4 py-3 rounded-xl" style="background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.3);"><div class="text-lg font-display font-700 text-belle">Your rate?</div><div class="text-xs text-muted mt-1">→ Golden Pay ↓</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOLDEN PAY -->
+  <section id="golden-pay" class="py-24 relative" style="background: #141929;">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div>
+          <p class="text-belle text-sm font-medium uppercase tracking-widest mb-3">Golden Pay</p>
+          <h2 class="font-display text-4xl md:text-5xl font-700 text-white leading-tight mb-6">
+            What should you<br/>
+            <span class="text-belle">actually take home?</span>
+          </h2>
+          <p class="text-soft leading-relaxed mb-8">
+            Umbrella, LTD, inside or outside IR35 — the difference on a £400/day contract can be over £15,000 a year. Golden Pay shows the optimum structure for your rate, situation, and risk profile. No jargon. No upsell.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-sm text-soft">
+              <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(167,139,250,0.2); color: #A78BFA;">✓</span>
+              HMRC-compliant structures only — no disguised remuneration schemes
+            </li>
+            <li class="flex items-center gap-3 text-sm text-soft">
+              <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(167,139,250,0.2); color: #A78BFA;">✓</span>
+              Compares umbrella inside IR35, LTD outside, and equivalent PAYE
+            </li>
+            <li class="flex items-center gap-3 text-sm text-soft">
+              <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(167,139,250,0.2); color: #A78BFA;">✓</span>
+              Factors in umbrella margin, pension contribution, and holiday pay
+            </li>
+            <li class="flex items-center gap-3 text-sm text-soft">
+              <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(167,139,250,0.2); color: #A78BFA;">✓</span>
+              Retainer and gang rate variants — coming in Belle Pro
+            </li>
+          </ul>
+          <div class="flex items-center gap-4">
+            <button class="px-8 py-4 rounded-full font-medium text-white transition-all hover:scale-105" style="background: linear-gradient(135deg, #A78BFA, #F472B6);">
+              Calculate Golden Pay →
+            </button>
+            <span class="text-muted text-xs">Launching soon</span>
+          </div>
+        </div>
+
+        <!-- Comparison panel -->
+        <div class="p-6 rounded-2xl border border-border" style="background: #0B0F1A;">
+          <p class="text-soft text-sm text-center mb-6">Example: <span class="text-white">£400/day</span> · IT contractor · 220 days</p>
+          <div class="space-y-4">
+            <div class="p-5 rounded-xl border" style="background: rgba(167,139,250,0.06); border-color: rgba(167,139,250,0.3);">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-white font-medium text-sm">Umbrella — Inside IR35</span>
+                <span class="text-xs px-2 py-0.5 rounded-full" style="background: rgba(167,139,250,0.2); color: #C4B5FD;">Most common</span>
+              </div>
+              <div class="text-3xl font-display font-700 text-belle mb-1">~£52,400</div>
+              <div class="text-xs text-muted">Net annual take-home · £22/wk umbrella margin</div>
+            </div>
+            <div class="p-5 rounded-xl border border-border" style="background: #1A2035;">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-white font-medium text-sm">LTD Company — Outside IR35</span>
+                <span class="text-xs text-yellow-400">IR35 risk applies</span>
+              </div>
+              <div class="text-3xl font-display font-700 text-white mb-1">~£61,800</div>
+              <div class="text-xs text-muted">Net annual · salary + dividends structure</div>
+            </div>
+            <div class="p-5 rounded-xl border border-border" style="background: #1A2035;">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-white font-medium text-sm">PAYE — Equivalent Role</span>
+                <span class="text-xs text-muted">Benchmark only</span>
+              </div>
+              <div class="text-3xl font-display font-700 text-white mb-1">~£47,200</div>
+              <div class="text-xs text-muted">Net annual · equiv. £65k PAYE salary</div>
+            </div>
+          </div>
+          <p class="text-muted text-xs mt-5 text-center">Illustrative · 2025–26 tax rates · full interactive calculator coming soon</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UMBRELLA DIRECTORY -->
+  <section id="umbrellas" class="py-24" style="background: #0B0F1A;">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <p class="text-belle text-sm font-medium uppercase tracking-widest mb-3">The Directory</p>
+          <h2 class="font-display text-4xl md:text-5xl font-700 text-white">FCSA-verified umbrellas</h2>
+          <p class="text-soft mt-3">Every listing independently checked. Compliance data updated monthly.</p>
+        </div>
+        <!-- Filters -->
+        <div class="flex flex-wrap gap-2">
+          <button class="px-4 py-2 rounded-full text-sm font-medium text-white" style="background: rgba(167,139,250,0.2); border: 1px solid rgba(167,139,250,0.4);">All</button>
+          <button class="px-4 py-2 rounded-full text-sm border border-border text-soft hover:border-belle hover:text-white transition-colors">FCSA Only</button>
+          <button class="px-4 py-2 rounded-full text-sm border border-border text-soft hover:border-belle hover:text-white transition-colors">IR35 Inside</button>
+          <button class="px-4 py-2 rounded-full text-sm border border-border text-soft hover:border-belle hover:text-white transition-colors">Low Fees</button>
+          <button class="px-4 py-2 rounded-full text-sm border border-border text-soft hover:border-belle hover:text-white transition-colors">Tech Sector</button>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Card 1: Parasol -->
+        <div class="listing-card p-6 rounded-2xl border border-border" style="background: #1A2035;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="fcsa-badge text-white text-xs font-medium px-2 py-0.5 rounded-full">FCSA ✓</span>
+                <span class="text-xs text-soft border border-border px-2 py-0.5 rounded-full">Est. 2000</span>
+              </div>
+              <h3 class="font-display text-xl font-700 text-white mt-2">Parasol</h3>
+              <p class="text-soft text-sm">One of the UK's largest — all sectors</p>
+            </div>
+            <div class="text-3xl">☂</div>
+          </div>
+          <div class="space-y-2 mb-5">
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">Weekly fee</span>
+              <span class="text-soft">£20–£25 / week</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">IR35 position</span>
+              <span class="text-green-400">Inside & Outside</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">Pay frequency</span>
+              <span class="text-soft">Weekly</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">HMRC status</span>
+              <span class="text-green-400">✓ Compliant</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-border">
+            <div class="flex items-center gap-1">
+              <span class="text-yellow-400 text-sm">★★★★</span><span class="text-border text-sm">★</span>
+              <span class="text-muted text-xs ml-1">(412)</span>
+            </div>
+            <button class="text-sm font-medium text-belle hover:text-belle-light transition-colors">View Details →</button>
+          </div>
+        </div>
+
+        <!-- Card 2: Brookson -->
+        <div class="listing-card p-6 rounded-2xl border border-border" style="background: #1A2035;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="fcsa-badge text-white text-xs font-medium px-2 py-0.5 rounded-full">FCSA ✓</span>
+                <span class="text-xs text-soft border border-border px-2 py-0.5 rounded-full">Est. 1995</span>
+              </div>
+              <h3 class="font-display text-xl font-700 text-white mt-2">Brookson</h3>
+              <p class="text-soft text-sm">Finance, engineering & professional services</p>
+            </div>
+            <div class="text-3xl">☂</div>
+          </div>
+          <div class="space-y-2 mb-5">
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">Weekly fee</span>
+              <span class="text-soft">£24–£28 / week</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">IR35 position</span>
+              <span class="text-green-400">Inside & Outside</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">Pay frequency</span>
+              <span class="text-soft">Weekly / Monthly</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">HMRC status</span>
+              <span class="text-green-400">✓ Compliant</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-border">
+            <div class="flex items-center gap-1">
+              <span class="text-yellow-400 text-sm">★★★★★</span>
+              <span class="text-muted text-xs ml-1">(287)</span>
+            </div>
+            <button class="text-sm font-medium text-belle hover:text-belle-light transition-colors">View Details →</button>
+          </div>
+        </div>
+
+        <!-- Card 3: PayStream -->
+        <div class="listing-card p-6 rounded-2xl border" style="background: rgba(167,139,250,0.05); border-color: rgba(167,139,250,0.25);">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="fcsa-badge text-white text-xs font-medium px-2 py-0.5 rounded-full">FCSA ✓</span>
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background: rgba(167,139,250,0.2); color: #C4B5FD; border: 1px solid rgba(167,139,250,0.3);">Belle's Pick</span>
+              </div>
+              <h3 class="font-display text-xl font-700 text-white mt-2">PayStream</h3>
+              <p class="text-soft text-sm">Tech & IT contractors — transparent pricing</p>
+            </div>
+            <div class="text-3xl">☂</div>
+          </div>
+          <div class="space-y-2 mb-5">
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">Weekly fee</span>
+              <span class="text-soft">£22 flat / week</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">IR35 position</span>
+              <span class="text-green-400">Inside & Outside</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">Pay frequency</span>
+              <span class="text-soft">Weekly</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">HMRC status</span>
+              <span class="text-green-400">✓ Compliant</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t" style="border-color: rgba(167,139,250,0.2);">
+            <div class="flex items-center gap-1">
+              <span class="text-yellow-400 text-sm">★★★★★</span>
+              <span class="text-muted text-xs ml-1">(534)</span>
+            </div>
+            <button class="text-sm font-medium text-belle hover:text-belle-light transition-colors">View Details →</button>
+          </div>
+        </div>
+
+        <!-- Card 4: Giant Group -->
+        <div class="listing-card p-6 rounded-2xl border border-border" style="background: #1A2035;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="fcsa-badge text-white text-xs font-medium px-2 py-0.5 rounded-full">FCSA ✓</span>
+              </div>
+              <h3 class="font-display text-xl font-700 text-white mt-2">Giant Group</h3>
+              <p class="text-soft text-sm">Healthcare, education & public sector</p>
+            </div>
+            <div class="text-3xl">☂</div>
+          </div>
+          <div class="space-y-2 mb-5">
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">Weekly fee</span>
+              <span class="text-soft">£19–£22 / week</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">IR35 position</span>
+              <span class="text-green-400">Inside specialist</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">Pay frequency</span>
+              <span class="text-soft">Weekly</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">HMRC status</span>
+              <span class="text-green-400">✓ Compliant</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-border">
+            <div class="flex items-center gap-1">
+              <span class="text-yellow-400 text-sm">★★★★</span><span class="text-border text-sm">★</span>
+              <span class="text-muted text-xs ml-1">(198)</span>
+            </div>
+            <button class="text-sm font-medium text-belle hover:text-belle-light transition-colors">View Details →</button>
+          </div>
+        </div>
+
+        <!-- Card 5: Workwell -->
+        <div class="listing-card p-6 rounded-2xl border border-border" style="background: #1A2035;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="fcsa-badge text-white text-xs font-medium px-2 py-0.5 rounded-full">FCSA ✓</span>
+              </div>
+              <h3 class="font-display text-xl font-700 text-white mt-2">Workwell</h3>
+              <p class="text-soft text-sm">Construction, rail & infrastructure</p>
+            </div>
+            <div class="text-3xl">☂</div>
+          </div>
+          <div class="space-y-2 mb-5">
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">Weekly fee</span>
+              <span class="text-soft">£20 flat / week</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">IR35 position</span>
+              <span class="text-yellow-400">Inside only</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">Pay frequency</span>
+              <span class="text-soft">Weekly</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">HMRC status</span>
+              <span class="text-green-400">✓ Compliant</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-border">
+            <div class="flex items-center gap-1">
+              <span class="text-yellow-400 text-sm">★★★</span><span class="text-border text-sm">★★</span>
+              <span class="text-muted text-xs ml-1">(156)</span>
+            </div>
+            <button class="text-sm font-medium text-belle hover:text-belle-light transition-colors">View Details →</button>
+          </div>
+        </div>
+
+        <!-- Card 6: Danbro -->
+        <div class="listing-card p-6 rounded-2xl border border-border" style="background: #1A2035;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="fcsa-badge text-white text-xs font-medium px-2 py-0.5 rounded-full">FCSA ✓</span>
+                <span class="text-xs text-soft border border-border px-2 py-0.5 rounded-full">Est. 1983</span>
+              </div>
+              <h3 class="font-display text-xl font-700 text-white mt-2">Danbro</h3>
+              <p class="text-soft text-sm">Independent, family-run — all sectors</p>
+            </div>
+            <div class="text-3xl">☂</div>
+          </div>
+          <div class="space-y-2 mb-5">
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">Weekly fee</span>
+              <span class="text-soft">£18–£20 / week</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">IR35 position</span>
+              <span class="text-green-400">Inside & Outside</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">Pay frequency</span>
+              <span class="text-soft">Weekly / Monthly</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">HMRC status</span>
+              <span class="text-green-400">✓ Compliant</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-border">
+            <div class="flex items-center gap-1">
+              <span class="text-yellow-400 text-sm">★★★★</span><span class="text-border text-sm">★</span>
+              <span class="text-muted text-xs ml-1">(89)</span>
+            </div>
+            <button class="text-sm font-medium text-belle hover:text-belle-light transition-colors">View Details →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-10">
+        <button class="px-8 py-3 rounded-full border border-border text-soft hover:border-belle hover:text-white transition-all text-sm font-medium">
+          View all 31 FCSA-verified umbrellas →
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- IR35 SCORER -->
+  <section id="ir35" class="py-24 relative" style="background: #141929;">
+    <div class="absolute left-8 bottom-8 gnome-pulse pointer-events-none select-none hidden md:block">
+      <div class="text-3xl opacity-30">🧙</div>
+      <div class="text-xs text-muted text-center mt-1 opacity-50" style="font-size: 9px;">scoring...</div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <!-- Left: copy -->
+        <div>
+          <p class="text-belle text-sm font-medium uppercase tracking-widest mb-3">IR35 Risk Check</p>
+          <h2 class="font-display text-4xl md:text-5xl font-700 text-white leading-tight mb-6">
+            Know your position.<br/>
+            <span class="text-belle">Before someone else does.</span>
+          </h2>
+          <p class="text-soft leading-relaxed mb-8">
+            Seven questions. Sixty seconds. Belle scores your contract against HMRC's seven status tests and tells you exactly where you stand — in plain English, not legalese.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-sm text-soft">
+              <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(167,139,250,0.2); color: #A78BFA;">✓</span>
+              Covers all 7 HMRC status tests — substitution, control, MOO and more
+            </li>
+            <li class="flex items-center gap-3 text-sm text-soft">
+              <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(167,139,250,0.2); color: #A78BFA;">✓</span>
+              Paste your contract for clause-level analysis <span class="text-belle text-xs ml-1">(coming soon)</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-soft">
+              <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(167,139,250,0.2); color: #A78BFA;">✓</span>
+              More reliable than HMRC's CEST — actually gives a clear verdict
+            </li>
+            <li class="flex items-center gap-3 text-sm text-soft">
+              <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(167,139,250,0.2); color: #A78BFA;">✓</span>
+              Matched to the right umbrella for your risk profile
+            </li>
+          </ul>
+          <div class="flex items-center gap-4">
+            <button class="btn-disabled px-8 py-4 rounded-full font-medium text-white" style="background: linear-gradient(135deg, #A78BFA, #F472B6);">
+              Check My IR35 →
+            </button>
+            <span class="cs-badge">Coming soon</span>
+          </div>
+          <p class="text-muted text-xs mt-3">Informational only — not tax or legal advice. For borderline determinations, consult a qualified IR35 specialist.</p>
+        </div>
+
+        <!-- Right: Traffic light visual -->
+        <div class="flex flex-col items-center gap-6">
+          <!-- Traffic light housing -->
+          <div class="p-8 rounded-3xl border border-border w-full max-w-sm" style="background: #0B0F1A;">
+            <div class="text-center mb-6">
+              <p class="text-soft text-sm">Sample result</p>
+              <p class="font-display text-2xl font-700 text-white mt-1">Contract: Tech Lead</p>
+              <p class="text-muted text-xs">6-month engagement, financial services</p>
+            </div>
+
+            <!-- Traffic lights -->
+            <div class="flex justify-center gap-6 mb-8">
+              <div class="flex flex-col items-center gap-2">
+                <div class="w-14 h-14 rounded-full light-red opacity-30"></div>
+                <span class="text-xs text-muted">Inside</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <div class="w-14 h-14 rounded-full light-amber"></div>
+                <span class="text-xs text-belle font-medium">Amber</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <div class="w-14 h-14 rounded-full light-green opacity-30"></div>
+                <span class="text-xs text-muted">Outside</span>
+              </div>
+            </div>
+
+            <!-- Score breakdown -->
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-soft">Substitution</span>
+                  <span class="text-green-400">✓ Pass</span>
+                </div>
+                <div class="h-1.5 rounded-full bg-surface overflow-hidden">
+                  <div class="score-fill h-full" style="width: 80%;"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-soft">Control</span>
+                  <span class="text-yellow-400">⚠ Review</span>
+                </div>
+                <div class="h-1.5 rounded-full bg-surface overflow-hidden">
+                  <div class="score-fill h-full" style="width: 45%;"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-soft">Mutuality of Obligation</span>
+                  <span class="text-yellow-400">⚠ Review</span>
+                </div>
+                <div class="h-1.5 rounded-full bg-surface overflow-hidden">
+                  <div class="score-fill h-full" style="width: 40%;"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-soft">Financial Risk</span>
+                  <span class="text-green-400">✓ Pass</span>
+                </div>
+                <div class="h-1.5 rounded-full bg-surface overflow-hidden">
+                  <div class="score-fill h-full" style="width: 75%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 p-4 rounded-xl text-sm" style="background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2);">
+              <p class="text-yellow-400 font-medium mb-1">Amber: Negotiate two clauses</p>
+              <p class="text-muted text-xs">Control and MOO clauses need review. Belle recommends 2 umbrellas with strong IR35-inside track records for this sector.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR RECRUITERS -->
+  <section id="recruiters" class="py-24" style="background: #0B0F1A;">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <p class="text-belle text-sm font-medium uppercase tracking-widest mb-3">For Recruiters</p>
+        <h2 class="font-display text-4xl md:text-5xl font-700 text-white">Your preferred supplier list.<br/>Verified.</h2>
+        <p class="text-soft mt-4 max-w-xl mx-auto">Belle tracks which umbrellas your candidates actually use — and flags the ones that could expose you to a compliance risk.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-12">
+        <div class="p-6 rounded-2xl border border-border" style="background: #1A2035;">
+          <div class="text-2xl mb-4">📋</div>
+          <h3 class="font-display text-lg font-700 text-white mb-2">Compliance Monitoring</h3>
+          <p class="text-soft text-sm leading-relaxed">Get alerted the moment an umbrella on your PSL is investigated by HMRC, loses FCSA status, or raises a Companies House flag.</p>
+        </div>
+        <div class="p-6 rounded-2xl border border-border" style="background: #1A2035;">
+          <div class="text-2xl mb-4">🎁</div>
+          <h3 class="font-display text-lg font-700 text-white mb-2">Gifting Transparency</h3>
+          <p class="text-soft text-sm leading-relaxed">Know which umbrellas are earning their PSL position on merit — and which are buying their way in with merchandise and hospitality.</p>
+        </div>
+        <div class="p-6 rounded-2xl border border-border" style="background: #1A2035;">
+          <div class="text-2xl mb-4">📊</div>
+          <h3 class="font-display text-lg font-700 text-white mb-2">PSL Benchmarking</h3>
+          <p class="text-soft text-sm leading-relaxed">Compare your preferred suppliers against the market. Are your contractors getting the best deal — or just the most visible one?</p>
+        </div>
+      </div>
+
+      <div class="p-8 rounded-2xl border text-center" style="background: rgba(167,139,250,0.06); border-color: rgba(167,139,250,0.25);">
+        <p class="text-soft text-sm mb-4">Recruiter agency access — launching Q3 2026</p>
+        <h3 class="font-display text-2xl font-700 text-white mb-2">Get early access to Belle for Recruiters</h3>
+        <div class="flex justify-center mb-4"><span class="cs-badge">Launching Q3 2026 — register interest below</span></div>
+        <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+          <input type="email" placeholder="your@agency.com" class="flex-1 px-4 py-3 rounded-full text-sm bg-surface border border-border text-soft placeholder-muted focus:outline-none focus:border-belle" />
+          <button class="btn-disabled px-6 py-3 rounded-full text-sm font-medium text-white whitespace-nowrap" style="background: linear-gradient(135deg, #A78BFA, #F472B6);">Join Waitlist</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMAIL CAPTURE -->
+  <section class="py-24 relative overflow-hidden" style="background: #141929;">
+    <!-- Gnome cluster — the agents at full shift -->
+    <div class="absolute right-16 top-1/2 -translate-y-1/2 pointer-events-none select-none hidden lg:flex flex-col gap-1 items-end opacity-25">
+      <div class="text-3xl gnome-pulse">🧙</div>
+      <div class="text-2xl gnome-pulse" style="animation-delay:0.7s;">🧙</div>
+      <div class="text-xl gnome-pulse" style="animation-delay:1.4s;">🧙</div>
+      <div class="text-xs text-muted mt-2" style="font-size: 9px; letter-spacing: 0.1em;">BELLE'S AGENTS</div>
+    </div>
+
+    <div class="max-w-xl mx-auto px-6 text-center">
+      <div class="text-4xl mb-6">☂</div>
+      <h2 class="font-display text-4xl font-700 text-white mb-4">Belle's weekly brief</h2>
+      <p class="text-soft mb-8">Umbrella compliance news, IR35 updates, and HMRC changes — curated weekly. No noise.</p>
+      <div class="flex justify-center mb-4"><span class="cs-badge">Newsletter launching soon</span></div>
+      <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto opacity-50 pointer-events-none">
+        <input type="email" placeholder="you@email.com" class="flex-1 px-4 py-3 rounded-full text-sm bg-surface border border-border text-soft placeholder-muted focus:outline-none" disabled />
+        <button class="px-6 py-3 rounded-full text-sm font-medium text-white whitespace-nowrap" style="background: linear-gradient(135deg, #A78BFA, #F472B6);">Subscribe Free</button>
+      </div>
+      <p class="text-muted text-xs mt-4">No spam. Unsubscribe any time. Belle's agents do the reading so you don't have to.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 border-t border-border" style="background: #0B0F1A;">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs" style="background: linear-gradient(135deg, #A78BFA, #F472B6);">☂</div>
+          <span class="font-display font-700 text-white tracking-tight">umbrella<span class="text-belle">belle</span></span>
+        </div>
+        <div class="flex flex-wrap justify-center gap-6 text-sm text-muted">
+          <a href="#rate-cards" class="hover:text-soft transition-colors">Rate Cards</a>
+          <a href="#golden-pay" class="hover:text-soft transition-colors">Golden Pay</a>
+          <a href="#ir35" class="hover:text-soft transition-colors">IR35 Check</a>
+          <a href="#umbrellas" class="hover:text-soft transition-colors">Find an Umbrella</a>
+          <a href="#recruiters" class="hover:text-soft transition-colors">For Recruiters</a>
+          <a href="#" class="hover:text-soft transition-colors">Privacy</a>
+        </div>
+        <div class="text-xs text-muted text-center md:text-right">
+          <p>© 2026 Umbrellabelle · Not tax or legal advice</p>
+          <!-- The wink -->
+          <p class="mt-1 text-muted opacity-50">Monitored by very small, very diligent agents 🧙</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const track = document.getElementById('belleTrack');
+      if (!track) return;
+      track.style.willChange = 'transform';
+      const strip = track.closest('.belle-strip');
+      let paused = false, lastTime = null, pos = 0, setWidth = 0;
+      const SPEED = 38;
+      if (strip) {
+        strip.addEventListener('mouseenter', () => { paused = true; });
+        strip.addEventListener('mouseleave', () => { paused = false; lastTime = null; });
+      }
+      function step(ts) {
+        if (!setWidth) setWidth = track.scrollWidth / 2;
+        if (!paused) {
+          if (lastTime !== null) {
+            pos -= SPEED * ((ts - lastTime) / 1000);
+            if (pos <= -setWidth) pos += setWidth;
+            track.style.transform = `translateX(${pos}px)`;
+          }
+          lastTime = ts;
+        }
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    })();
+  </script>
+</body>
+</html>

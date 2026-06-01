@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vector Rider — London E-Bike Courier Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              DEFAULT: '#0F172A',
+              800: '#1E293B',
+              700: '#334155',
+            },
+            sky: {
+              500: '#0EA5E9',
+            },
+            amber: {
+              400: '#FBBF24',
+              500: '#F59E0B',
+            },
+            emerald: {
+              500: '#10B981',
+            },
+            violet: {
+              500: '#8B5CF6',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #ffffff;
+      color: #1E293B;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Nav */
+    .nav-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #0F172A;
+      border-bottom: 1px solid rgba(14,165,233,0.2);
+    }
+
+    /* Gradient hero */
+    .hero-bg {
+      background: linear-gradient(135deg, #0F172A 0%, #0c1e3a 60%, #0a2540 100%);
+    }
+
+    /* Stat pill */
+    .stat-pill {
+      background: rgba(14,165,233,0.12);
+      border: 1px solid rgba(14,165,233,0.3);
+      color: #e2f4fc;
+      border-radius: 9999px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* Category tile hover */
+    .cat-tile {
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .cat-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    /* Borough pill active/hover */
+    .boro-pill {
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 9999px;
+      padding: 6px 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #475569;
+      background: #fff;
+    }
+    .boro-pill:hover, .boro-pill.active {
+      background: #0EA5E9;
+      color: #fff;
+      border-color: #0EA5E9;
+    }
+    .boro-pill.active {
+      background: #0EA5E9;
+      color: #fff;
+      border-color: #0EA5E9;
+    }
+
+    /* Card */
+    .listing-card {
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      background: #fff;
+      transition: box-shadow 0.15s;
+    }
+    .listing-card:hover {
+      box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+    }
+
+    /* Category badge colours */
+    .badge-parking  { background: rgba(14,165,233,0.12); color: #0369A1; }
+    .badge-charging { background: rgba(245,158,11,0.12); color: #B45309; }
+    .badge-rest     { background: rgba(16,185,129,0.12); color: #065F46; }
+    .badge-repair   { background: rgba(139,92,246,0.12); color: #5B21B6; }
+
+    .dot-parking  { background: #0EA5E9; }
+    .dot-charging { background: #F59E0B; }
+    .dot-rest     { background: #10B981; }
+    .dot-repair   { background: #8B5CF6; }
+
+    /* Stars */
+    .star-filled { color: #F59E0B; }
+    .star-empty  { color: #CBD5E1; }
+
+    /* Directions button */
+    .btn-directions {
+      background: #0F172A;
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: background 0.12s;
+      white-space: nowrap;
+    }
+    .btn-directions:hover {
+      background: #0EA5E9;
+    }
+
+    /* Feature strip */
+    .feature-strip {
+      background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
+    }
+
+    /* Tip card */
+    .tip-card {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Lead magnet card */
+    .lead-card {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      border: 1px solid rgba(14,165,233,0.2);
+      border-radius: 16px;
+    }
+
+    /* CTA buttons */
+    .btn-teal {
+      background: #0EA5E9;
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 700;
+      transition: background 0.12s, transform 0.1s;
+      display: inline-block;
+    }
+    .btn-teal:hover {
+      background: #0284C7;
+      transform: translateY(-1px);
+    }
+    .btn-outline-white {
+      border: 2px solid rgba(255,255,255,0.7);
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 700;
+      transition: background 0.12s, border-color 0.12s;
+      display: inline-block;
+    }
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #fff;
+    }
+
+    /* W3W */
+    .w3w {
+      color: #0EA5E9;
+      font-family: monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Coming soon badge */
+    .badge-soon {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      border-radius: 9999px;
+      padding: 2px 8px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+
+    /* Email input */
+    .email-input {
+      background: #1E293B;
+      border: 1.5px solid rgba(14,165,233,0.3);
+      color: #fff;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.12s;
+    }
+    .email-input::placeholder { color: #64748B; }
+    .email-input:focus { border-color: #0EA5E9; }
+
+    /* Scrollable stat pills on mobile */
+    .stat-row {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .stat-row::-webkit-scrollbar { display: none; }
+
+    /* Borough filter scroll */
+    .boro-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      flex-wrap: nowrap;
+    }
+    .boro-row::-webkit-scrollbar { display: none; }
+
+    @media (min-width: 640px) {
+      .stat-row { flex-wrap: wrap; overflow-x: visible; }
+      .boro-row { flex-wrap: wrap; overflow-x: visible; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+============================================================ -->
+<nav class="nav-sticky">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+
+    <!-- Back nav + Logo -->
+    <div class="flex items-center gap-4">
+    <a href="../index.html" style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;white-space:nowrap;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">← Apple Samosa</a>
+    <a href="#" class="flex items-center gap-2 flex-shrink-0">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12.5 2L4 13h7l-1.5 7L18 9h-7l1.5-7z" fill="#0EA5E9" stroke="#0EA5E9" stroke-width="1" stroke-linejoin="round"/>
+      </svg>
+      <span class="text-white font-bold text-base tracking-tight">Vector Rider</span>
+    </a>
+    </div>
+
+    <!-- Nav links — hidden on smallest screens -->
+    <div class="hidden sm:flex items-center gap-6">
+      <a href="#listings" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Map</a>
+      <a href="#resources" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Resources</a>
+      <a href="#community" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Community</a>
+    </div>
+
+    <!-- CTA -->
+    <a href="#lead-magnet" class="btn-teal px-4 py-2 text-sm font-bold flex-shrink-0">
+      Get the Rider Pack
+    </a>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero-bg py-14 px-4">
+  <div class="max-w-3xl mx-auto text-center">
+
+    <p class="text-sky-400 text-sm font-semibold uppercase tracking-widest mb-3">The e-bike courier resource hub for London</p>
+
+    <h1 class="text-white text-4xl sm:text-5xl font-black leading-tight mb-4">
+      Find it. Park it.<br class="hidden sm:block" /> Deliver faster.
+    </h1>
+
+    <p class="text-slate-300 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto">
+      The London e-bike courier hub — safe parking, charging points, rest stops and multi-drop strategy in one place.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row gap-3 justify-center mb-10">
+      <a href="#listings" class="btn-teal px-7 py-3.5 text-base font-bold text-center">
+        Find Nearby Spots
+      </a>
+      <a href="#lead-magnet" class="btn-outline-white px-7 py-3.5 text-base font-bold text-center">
+        Download Rider Pack
+      </a>
+    </div>
+
+    <!-- Stat pills -->
+    <div class="stat-row justify-center">
+      <span class="stat-pill">✅ 247 verified spots</span>
+      <span class="stat-pill">🗺 12 London boroughs</span>
+      <span class="stat-pill">🆓 Free to use</span>
+      <span class="stat-pill">🔄 Updated weekly</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CATEGORY TILES
+============================================================ -->
+<section id="resources" class="py-12 px-4 bg-slate-50">
+  <div class="max-w-5xl mx-auto">
+
+    <h2 class="text-2xl font-bold text-slate-900 mb-2 text-center">What are you looking for?</h2>
+    <p class="text-slate-500 text-sm text-center mb-8">Tap a category to filter the listings below.</p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+
+      <!-- Safe Parking -->
+      <a href="#listings" class="cat-tile bg-white rounded-2xl p-5 text-center border border-slate-200 block">
+        <div class="text-3xl mb-3">🅿</div>
+        <div class="text-sky-600 font-bold text-sm mb-1">Safe Parking</div>
+        <p class="text-slate-500 text-xs leading-snug">Secure spots near busy restaurant zones</p>
+        <div class="mt-3 h-1 w-10 rounded-full bg-sky-400 mx-auto"></div>
+      </a>
+
+      <!-- Charging Points -->
+      <a href="#listings" class="cat-tile bg-white rounded-2xl p-5 text-center border border-slate-200 block">
+        <div class="text-3xl mb-3">⚡</div>
+        <div class="text-amber-600 font-bold text-sm mb-1">Charging Points</div>
+        <p class="text-slate-500 text-xs leading-snug">E-bike charge stations &amp; battery swap</p>
+        <div class="mt-3 h-1 w-10 rounded-full bg-amber-400 mx-auto"></div>
+      </a>
+
+      <!-- Rest Stops -->
+      <a href="#listings" class="cat-tile bg-white rounded-2xl p-5 text-center border border-slate-200 block">
+        <div class="text-3xl mb-3">☕</div>
+        <div class="text-emerald-600 font-bold text-sm mb-1">Rest Stops</div>
+        <p class="text-slate-500 text-xs leading-snug">Toilets, shelter, water, seating</p>
+        <div class="mt-3 h-1 w-10 rounded-full bg-emerald-400 mx-auto"></div>
+      </a>
+
+      <!-- Repair Shops -->
+      <a href="#listings" class="cat-tile bg-white rounded-2xl p-5 text-center border border-slate-200 block">
+        <div class="text-3xl mb-3">🔧</div>
+        <div class="text-violet-600 font-bold text-sm mb-1">Repair Shops</div>
+        <p class="text-slate-500 text-xs leading-snug">Bike mechanics friendly to delivery riders</p>
+        <div class="mt-3 h-1 w-10 rounded-full bg-violet-400 mx-auto"></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     BOROUGH FILTER + LISTINGS
+============================================================ -->
+<section id="listings" class="py-12 px-4 bg-white">
+  <div class="max-w-5xl mx-auto">
+
+    <h2 class="text-2xl font-bold text-slate-900 mb-6">Spots near you</h2>
+
+    <!-- Filter row -->
+    <div class="flex flex-col sm:flex-row gap-3 mb-6">
+
+      <!-- Borough pills -->
+      <div class="boro-row flex-1">
+        <button class="boro-pill active">All</button>
+        <button class="boro-pill">Central</button>
+        <button class="boro-pill">South</button>
+        <button class="boro-pill">East</button>
+        <button class="boro-pill">North</button>
+        <button class="boro-pill">West</button>
+      </div>
+
+      <!-- Search -->
+      <div class="relative flex-shrink-0 sm:w-64">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">🔍</span>
+        <input
+          type="text"
+          placeholder="Postcode or street..."
+          class="w-full pl-9 pr-4 py-2.5 border border-slate-200 rounded-full text-sm text-slate-700 placeholder-slate-400 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-100"
+        />
+      </div>
+    </div>
+
+    <!-- Listing cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+
+      <!-- Card 1: Bermondsey Street Racks -->
+      <div class="listing-card p-4 flex flex-col gap-3">
+        <div class="flex items-start justify-between gap-2">
+          <span class="badge-parking inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full">
+            <span class="dot-parking inline-block w-2 h-2 rounded-full"></span>
+            Safe Parking
+          </span>
+          <span class="text-xs text-slate-400 font-medium">SE1 3UD</span>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-base leading-snug">Bermondsey Street Racks</h3>
+          <p class="text-slate-500 text-xs mt-0.5">Bermondsey, South London</p>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 text-xs">📍</span>
+          <span class="w3w">///lucky.bright.cabs</span>
+        </div>
+
+        <div class="flex flex-col gap-1 text-xs text-slate-600">
+          <div class="flex items-center gap-1.5"><span>🕐</span> <span class="font-medium">24/7</span></div>
+          <div class="flex items-center gap-1.5"><span>ℹ️</span> <span>Covered, 12 racks, CCTV</span></div>
+        </div>
+
+        <div class="flex items-center justify-between mt-auto pt-2 border-t border-slate-100">
+          <div class="flex items-center gap-1.5">
+            <div class="flex">
+              <span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span>
+            </div>
+            <span class="text-slate-400 text-xs">(34)</span>
+          </div>
+          <button class="btn-directions">Get Directions →</button>
+        </div>
+      </div>
+
+
+      <!-- Card 2: Deliverista Hub -->
+      <div class="listing-card p-4 flex flex-col gap-3">
+        <div class="flex items-start justify-between gap-2">
+          <span class="badge-charging inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full">
+            <span class="dot-charging inline-block w-2 h-2 rounded-full"></span>
+            Charging Point
+          </span>
+          <span class="text-xs text-slate-400 font-medium">SE1</span>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-base leading-snug">Deliverista Hub — London Bridge</h3>
+          <p class="text-slate-500 text-xs mt-0.5">London Bridge, South London</p>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 text-xs">📍</span>
+          <span class="w3w">///moved.extra.jets</span>
+        </div>
+
+        <div class="flex flex-col gap-1 text-xs text-slate-600">
+          <div class="flex items-center gap-1.5"><span>🕐</span> <span class="font-medium">7am – 11pm</span></div>
+          <div class="flex items-center gap-1.5"><span>ℹ️</span> <span>6 Type-2 points, free to use</span></div>
+        </div>
+
+        <div class="flex items-center justify-between mt-auto pt-2 border-t border-slate-100">
+          <div class="flex items-center gap-1.5">
+            <div class="flex">
+              <span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-empty text-sm">★</span>
+            </div>
+            <span class="text-slate-400 text-xs">(18)</span>
+          </div>
+          <button class="btn-directions">Get Directions →</button>
+        </div>
+      </div>
+
+
+      <!-- Card 3: Flat Iron Square -->
+      <div class="listing-card p-4 flex flex-col gap-3">
+        <div class="flex items-start justify-between gap-2">
+          <span class="badge-rest inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full">
+            <span class="dot-rest inline-block w-2 h-2 rounded-full"></span>
+            Rest Stop
+          </span>
+          <span class="text-xs text-slate-400 font-medium">SE1</span>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-base leading-snug">Flat Iron Square Rest Area</h3>
+          <p class="text-slate-500 text-xs mt-0.5">Borough, South London</p>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 text-xs">📍</span>
+          <span class="w3w">///cool.trams.lamp</span>
+        </div>
+
+        <div class="flex flex-col gap-1 text-xs text-slate-600">
+          <div class="flex items-center gap-1.5"><span>🕐</span> <span class="font-medium">8am – 10pm</span></div>
+          <div class="flex items-center gap-1.5"><span>ℹ️</span> <span>Toilets, tap water, seating, covered</span></div>
+        </div>
+
+        <div class="flex items-center justify-between mt-auto pt-2 border-t border-slate-100">
+          <div class="flex items-center gap-1.5">
+            <div class="flex">
+              <span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span>
+            </div>
+            <span class="text-slate-400 text-xs">(52)</span>
+          </div>
+          <button class="btn-directions">Get Directions →</button>
+        </div>
+      </div>
+
+
+      <!-- Card 4: Wheelsmith Bermondsey -->
+      <div class="listing-card p-4 flex flex-col gap-3">
+        <div class="flex items-start justify-between gap-2">
+          <span class="badge-repair inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full">
+            <span class="dot-repair inline-block w-2 h-2 rounded-full"></span>
+            Repair Shop
+          </span>
+          <span class="text-xs text-slate-400 font-medium">SE1 5QE</span>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-base leading-snug">Wheelsmith Bermondsey</h3>
+          <p class="text-slate-500 text-xs mt-0.5">Bermondsey, South London</p>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 text-xs">📍</span>
+          <span class="w3w">///jump.spin.mile</span>
+        </div>
+
+        <div class="flex flex-col gap-1 text-xs text-slate-600">
+          <div class="flex items-center gap-1.5"><span>🕐</span> <span class="font-medium">Mon–Sat 8am – 6pm</span></div>
+          <div class="flex items-center gap-1.5"><span>ℹ️</span> <span>Courier-friendly, no appointment</span></div>
+        </div>
+
+        <div class="flex items-center justify-between mt-auto pt-2 border-t border-slate-100">
+          <div class="flex items-center gap-1.5">
+            <div class="flex">
+              <span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-empty text-sm">★</span>
+            </div>
+            <span class="text-slate-400 text-xs">(27)</span>
+          </div>
+          <button class="btn-directions">Get Directions →</button>
+        </div>
+      </div>
+
+
+      <!-- Card 5: Peckham Rye Station Racks -->
+      <div class="listing-card p-4 flex flex-col gap-3">
+        <div class="flex items-start justify-between gap-2">
+          <span class="badge-parking inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full">
+            <span class="dot-parking inline-block w-2 h-2 rounded-full"></span>
+            Safe Parking
+          </span>
+          <span class="text-xs text-slate-400 font-medium">SE15</span>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-base leading-snug">Peckham Rye Station Racks</h3>
+          <p class="text-slate-500 text-xs mt-0.5">Peckham, South London</p>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 text-xs">📍</span>
+          <span class="w3w">///ship.fast.rain</span>
+        </div>
+
+        <div class="flex flex-col gap-1 text-xs text-slate-600">
+          <div class="flex items-center gap-1.5"><span>🕐</span> <span class="font-medium">24/7</span></div>
+          <div class="flex items-center gap-1.5"><span>ℹ️</span> <span>20 spaces, lit, near main restaurant strip</span></div>
+        </div>
+
+        <div class="flex items-center justify-between mt-auto pt-2 border-t border-slate-100">
+          <div class="flex items-center gap-1.5">
+            <div class="flex">
+              <span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-empty text-sm">★</span><span class="star-empty text-sm">★</span>
+            </div>
+            <span class="text-slate-400 text-xs">(11)</span>
+          </div>
+          <button class="btn-directions">Get Directions →</button>
+        </div>
+      </div>
+
+
+      <!-- Card 6: Elephant & Castle Pod -->
+      <div class="listing-card p-4 flex flex-col gap-3">
+        <div class="flex items-start justify-between gap-2">
+          <span class="badge-charging inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full">
+            <span class="dot-charging inline-block w-2 h-2 rounded-full"></span>
+            Charging Point
+          </span>
+          <span class="text-xs text-slate-400 font-medium">SE17</span>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-base leading-snug">Elephant &amp; Castle Pod</h3>
+          <p class="text-slate-500 text-xs mt-0.5">Elephant &amp; Castle, South London</p>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 text-xs">📍</span>
+          <span class="w3w">///glow.drum.note</span>
+        </div>
+
+        <div class="flex flex-col gap-1 text-xs text-slate-600">
+          <div class="flex items-center gap-1.5"><span>🕐</span> <span class="font-medium">24/7</span></div>
+          <div class="flex items-center gap-1.5"><span>ℹ️</span> <span>4 points, 50p/30min, fast charge available</span></div>
+        </div>
+
+        <div class="flex items-center justify-between mt-auto pt-2 border-t border-slate-100">
+          <div class="flex items-center gap-1.5">
+            <div class="flex">
+              <span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-filled text-sm">★</span><span class="star-empty text-sm">★</span>
+            </div>
+            <span class="text-slate-400 text-xs">(22)</span>
+          </div>
+          <button class="btn-directions">Get Directions →</button>
+        </div>
+      </div>
+
+
+    </div><!-- /grid -->
+
+    <!-- Load more -->
+    <div class="text-center mt-8">
+      <button class="border-2 border-slate-200 text-slate-600 font-semibold px-8 py-3 rounded-full text-sm hover:border-sky-400 hover:text-sky-600 transition-colors">
+        Load more spots
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MULTI-DROP FEATURE STRIP
+============================================================ -->
+<section class="feature-strip py-12 px-4">
+  <div class="max-w-5xl mx-auto">
+
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <p class="text-sky-100 text-sm font-semibold uppercase tracking-widest mb-2">Route Intelligence</p>
+      <h2 class="text-white text-2xl sm:text-3xl font-black mb-3">Smarter drops, more orders per shift.</h2>
+      <p class="text-sky-100 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        Use our route planner to sequence your drops by What3Words grid — shorter rides, less time, more deliveries.
+      </p>
+
+      <div class="mt-6 flex justify-center">
+        <a href="#" class="inline-flex items-center gap-2 bg-white text-sky-700 font-bold px-7 py-3 rounded-lg hover:bg-sky-50 transition-colors text-sm">
+          Try Route Planner →
+          <span class="badge-soon">Coming soon</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Tip cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+
+      <div class="tip-card p-5">
+        <div class="text-2xl mb-3">🗺</div>
+        <h3 class="text-white font-bold text-sm mb-1.5">Cluster your drops</h3>
+        <p class="text-sky-100 text-xs leading-relaxed">Cluster your drops geographically before accepting. Fewer dead miles = more orders per hour.</p>
+      </div>
+
+      <div class="tip-card p-5">
+        <div class="text-2xl mb-3">⏰</div>
+        <h3 class="text-white font-bold text-sm mb-1.5">Zone SE1–SE5 peak times</h3>
+        <p class="text-sky-100 text-xs leading-relaxed">Zone SE1–SE5 peaks 12–2pm and 6–9pm. Position yourself inside the zone before the rush hits.</p>
+      </div>
+
+      <div class="tip-card p-5">
+        <div class="text-2xl mb-3">📍</div>
+        <h3 class="text-white font-bold text-sm mb-1.5">What3Words for blocks</h3>
+        <p class="text-sky-100 text-xs leading-relaxed">Always note the What3Words for apartment blocks. Postcodes cover whole streets — W3W gets you to the door.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     LEAD MAGNET
+============================================================ -->
+<section id="lead-magnet" class="py-14 px-4 bg-slate-50">
+  <div class="max-w-2xl mx-auto">
+    <div class="lead-card p-7 sm:p-10">
+
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-sky-500 mb-4">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M13 2L5 14h7l-1 8 8-12h-7l1-8z" fill="white" stroke="white" stroke-width="0.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2 class="text-white text-2xl font-black mb-2">Free Rider Resource Pack</h2>
+        <p class="text-slate-300 text-sm leading-relaxed max-w-md mx-auto">
+          Safe zones, peak hour maps, top charging spots and earnings tips for London e-bike couriers. Zero fluff — just what you need on shift.
+        </p>
+      </div>
+
+      <!-- Included list -->
+      <div class="grid grid-cols-2 gap-2 mb-7">
+        <div class="flex items-center gap-2 text-slate-300 text-xs">
+          <span class="text-sky-400 font-bold">✓</span> Safe parking zones map
+        </div>
+        <div class="flex items-center gap-2 text-slate-300 text-xs">
+          <span class="text-sky-400 font-bold">✓</span> Peak hour borough guide
+        </div>
+        <div class="flex items-center gap-2 text-slate-300 text-xs">
+          <span class="text-sky-400 font-bold">✓</span> Top 20 charging spots
+        </div>
+        <div class="flex items-center gap-2 text-slate-300 text-xs">
+          <span class="text-sky-400 font-bold">✓</span> Multi-drop strategy tips
+        </div>
+        <div class="flex items-center gap-2 text-slate-300 text-xs">
+          <span class="text-sky-400 font-bold">✓</span> Courier-friendly mechanics
+        </div>
+        <div class="flex items-center gap-2 text-slate-300 text-xs">
+          <span class="text-sky-400 font-bold">✓</span> Earnings optimisation sheet
+        </div>
+      </div>
+
+      <!-- Email form -->
+      <form class="flex flex-col sm:flex-row gap-3" onsubmit="return false;">
+        <input
+          type="email"
+          placeholder="Your email address"
+          class="email-input flex-1"
+          required
+        />
+        <button type="submit" class="btn-teal px-6 py-3 text-sm font-bold text-center flex-shrink-0">
+          Send Me the Pack
+        </button>
+      </form>
+
+      <p class="text-slate-500 text-xs text-center mt-4">No spam. No faff. Unsubscribe anytime.</p>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer id="community" class="bg-navy py-8 px-4">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+
+      <!-- Logo + copy -->
+      <div class="flex items-center gap-2">
+        <svg width="18" height="18" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12.5 2L4 13h7l-1.5 7L18 9h-7l1.5-7z" fill="#0EA5E9" stroke="#0EA5E9" stroke-width="1" stroke-linejoin="round"/>
+        </svg>
+        <span class="text-slate-400 text-sm">Vector Rider © 2026 · London · Free for couriers</span>
+      </div>
+
+      <!-- Links -->
+      <div class="flex items-center gap-5 text-sm">
+        <a href="#" class="text-slate-400 hover:text-sky-400 transition-colors">Submit a Spot</a>
+        <a href="#" class="text-slate-400 hover:text-sky-400 transition-colors">Courier Forum</a>
+        <a href="#" class="text-slate-400 hover:text-sky-400 transition-colors">Privacy</a>
+      </div>
+
+    </div>
+
+    <div class="border-t border-slate-800 mt-6 pt-5 text-center">
+      <p class="text-slate-600 text-xs">
+        Your city. Your route. Optimised. — Built for London's e-bike delivery community.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
