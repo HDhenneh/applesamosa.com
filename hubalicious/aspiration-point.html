@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aspiration Point — The Club for the Talent You Never Stopped Being</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#0C0A06',
+            surface:  '#161309',
+            card:     '#1E1A0E',
+            border:   '#2A2415',
+            ap:       '#D97706',
+            'ap-light': '#F59E0B',
+            rust:     '#B5451B',
+            sage:     '#4A5C47',
+            muted:    '#78716C',
+            soft:     '#A8A29E',
+            cream:    '#F5F0E8',
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body:    ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #0C0A06; font-family: 'Inter', sans-serif; }
+
+    .grid-bg {
+      background-image: linear-gradient(rgba(217,119,6,0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(217,119,6,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .hero-glow {
+      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(217,119,6,0.13) 0%, transparent 70%);
+    }
+
+    /* Gradient text */
+    .grad-text {
+      background: linear-gradient(135deg, #D97706, #B5451B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .btn-grad { background: linear-gradient(135deg, #D97706, #B5451B); }
+
+    /* Card hover */
+    .listing-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .listing-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(217,119,6,0.15);
+    }
+
+    /* Persona pulse */
+    @keyframes apPulse {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50%       { opacity: 0.65; transform: scale(1.06); }
+    }
+    .ap-pulse { animation: apPulse 3s ease-in-out infinite; }
+
+    /* ── TICKER STRIP ── */
+    .ap-strip {
+      background: #161309;
+      border-top: 1px solid #2A2415;
+      border-bottom: 1px solid #2A2415;
+      padding: 14px 0;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    }
+    .ap-strip-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+    }
+    .ap-strip-item {
+      font-size: 12.5px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      color: #A8A29E;
+      padding: 0 28px;
+      white-space: nowrap;
+    }
+    .ap-strip-sep {
+      color: #D97706;
+      opacity: 0.5;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .ap-strip-item--brand {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: #D97706;
+      padding: 0 36px;
+    }
+
+    /* Coming soon */
+    .cs-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: #D97706;
+      background: rgba(217,119,6,0.1);
+      border: 1px solid rgba(217,119,6,0.25);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .cs-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #D97706;
+      display: inline-block;
+    }
+
+    /* Activity roster grid */
+    .activity-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: #E5DDD4;
+    }
+    .activity-cell {
+      padding: 28px 24px;
+      background: #F5F0E8;
+      transition: background 0.2s;
+    }
+    .activity-cell:hover { background: #EDE5D8; }
+
+    /* Flywheel rings */
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .fw-ring { position: absolute; border-radius: 50%; }
+
+    @media (max-width: 768px) {
+      .activity-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body class="text-stone-200">
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-border" style="background: rgba(12,10,6,0.92); backdrop-filter: blur(12px);">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="../index.html"
+         style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.25);text-decoration:none;transition:color 0.2s;"
+         onmouseover="this.style.color='rgba(255,255,255,0.55)'"
+         onmouseout="this.style.color='rgba(255,255,255,0.25)'">← Apple Samosa</a>
+      <span style="color:rgba(255,255,255,0.1);">|</span>
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-full flex items-center justify-center text-sm btn-grad">✦</div>
+        <span class="font-display font-700 text-lg tracking-tight">Aspiration <span class="grad-text">Point</span></span>
+      </div>
+    </div>
+    <div class="hidden md:flex items-center gap-8 text-sm text-soft">
+      <a href="#programme" class="hover:text-white transition-colors">Programme</a>
+      <a href="#membership" class="hover:text-white transition-colors">Membership</a>
+      <a href="#model" class="hover:text-white transition-colors">The Model</a>
+      <a href="#roadmap" class="hover:text-white transition-colors">Roadmap</a>
+    </div>
+    <a href="#membership" class="btn-grad text-sm font-medium px-4 py-2 rounded-full transition-all hover:scale-105 hover:shadow-lg text-white">
+      Join the Waitlist →
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden grid-bg">
+  <div class="hero-glow absolute inset-0 pointer-events-none"></div>
+
+  <!-- Background watermark -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.025] select-none">
+    <span class="font-display font-black" style="font-size:520px; line-height:1; color:#D97706;">✦</span>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-6 py-24 text-center">
+
+    <!-- Pill label -->
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-xs text-soft mb-8" style="background: rgba(217,119,6,0.07);">
+      <span class="w-1.5 h-1.5 rounded-full bg-ap inline-block"></span>
+      Choir · Orchestra · League · Design House · Writers' Room · Members' Club
+    </div>
+
+    <h1 class="font-display text-6xl md:text-8xl font-800 text-white leading-tight mb-6">
+      The talent<br/>
+      <span class="grad-text">never left.</span>
+    </h1>
+
+    <p class="text-lg md:text-xl text-soft max-w-2xl mx-auto mb-10 leading-relaxed">
+      The members' club for adults who were genuinely good at something — and stopped. Aspiration Point gives that talent back its stage, its peers, and its purpose.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+      <a href="#membership" class="btn-grad px-8 py-4 rounded-full font-medium text-white transition-all hover:scale-105 hover:shadow-lg">
+        Join the Waitlist
+      </a>
+      <a href="#programme" class="px-8 py-4 rounded-full font-medium border border-border text-soft hover:text-white hover:border-ap transition-all">
+        See the Programme →
+      </a>
+    </div>
+
+    <!-- Stats row -->
+    <div class="flex flex-wrap justify-center gap-8 text-center">
+      <div>
+        <div class="text-2xl font-display font-700 text-white">68%<span class="grad-text"> of adults</span></div>
+        <div class="text-xs text-muted mt-1">with an abandoned creative pursuit</div>
+      </div>
+      <div class="hidden sm:block w-px bg-border"></div>
+      <div>
+        <div class="text-2xl font-display font-700 text-white">£4.2B<span class="grad-text">+</span></div>
+        <div class="text-xs text-muted mt-1">UK adult leisure spend untapped by community models</div>
+      </div>
+      <div class="hidden sm:block w-px bg-border"></div>
+      <div>
+        <div class="text-2xl font-display font-700 text-white">3×<span class="grad-text"> retention</span></div>
+        <div class="text-xs text-muted mt-1">vs solo hobby platforms</div>
+      </div>
+      <div class="hidden sm:block w-px bg-border"></div>
+      <div>
+        <div class="text-2xl font-display font-700 text-white">40K<span class="grad-text">+</span></div>
+        <div class="text-xs text-muted mt-1">Rock Choir members proving the model</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted text-xs flex flex-col items-center gap-2 animate-bounce">
+    <span>scroll</span><span>↓</span>
+  </div>
+</section>
+
+<!-- TICKER STRIP -->
+<section class="ap-strip">
+  <div class="ap-strip-track" id="apTrack">
+    <!-- Set 1 -->
+    <div class="ap-strip-item">Grade 6 piano at 16 · untouched for 20 years</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">The Choir — modelled on Rock Choir · 40,000 monthly members</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">Amateur Orchestra · rehearse · perform · take it seriously</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item--brand">Aspiration Point</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">The Acting Company · 3 productions a year · real venues</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">Performance horizon · every member performs within 3 months</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">The League · football · tennis · swimming · proper fixtures</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item--brand">Aspiration Point</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">Identity reclamation · "I was actually good at this"</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">Writers' Room · Design House · Language Society · Bake Off</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">London first · Manchester · Edinburgh · then the world</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item--brand">Aspiration Point</div>
+    <span class="ap-strip-sep">✦</span>
+    <!-- Set 2 — duplicate for seamless loop -->
+    <div class="ap-strip-item">Grade 6 piano at 16 · untouched for 20 years</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">The Choir — modelled on Rock Choir · 40,000 monthly members</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">Amateur Orchestra · rehearse · perform · take it seriously</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item--brand">Aspiration Point</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">The Acting Company · 3 productions a year · real venues</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">Performance horizon · every member performs within 3 months</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">The League · football · tennis · swimming · proper fixtures</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item--brand">Aspiration Point</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">Identity reclamation · "I was actually good at this"</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">Writers' Room · Design House · Language Society · Bake Off</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item">London first · Manchester · Edinburgh · then the world</div>
+    <span class="ap-strip-sep">✦</span>
+    <div class="ap-strip-item--brand">Aspiration Point</div>
+    <span class="ap-strip-sep">✦</span>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="py-24 relative" style="background: #161309;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-ap text-sm font-medium uppercase tracking-widest mb-3">How It Works</p>
+      <h2 class="font-display text-4xl md:text-5xl font-700 text-white">Three steps. <span class="grad-text">Total reactivation.</span></h2>
+      <p class="text-soft mt-4 max-w-xl mx-auto">Aspiration Point removes every barrier between who you were and who you still could be.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="p-8 rounded-2xl border border-border" style="background: #1E1A0E;">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6" style="background: rgba(217,119,6,0.12); border: 1px solid rgba(217,119,6,0.3);">🎯</div>
+        <div class="text-xs text-ap font-medium uppercase tracking-widest mb-2">Step 1</div>
+        <h3 class="font-display text-xl font-700 text-white mb-3">Declare your aspiration</h3>
+        <p class="text-soft text-sm leading-relaxed">Tell us what you were good at and what you want to return to. Your aspiration profile matches you to your cluster immediately — no awkward cold starts.</p>
+      </div>
+
+      <div class="p-8 rounded-2xl border" style="background: rgba(217,119,6,0.06); border-color: rgba(217,119,6,0.3);">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6" style="background: rgba(217,119,6,0.18); border: 1px solid rgba(217,119,6,0.4);">✦</div>
+        <div class="text-xs text-ap font-medium uppercase tracking-widest mb-2">Step 2</div>
+        <h3 class="font-display text-xl font-700 text-white mb-3">Your first session</h3>
+        <p class="text-soft text-sm leading-relaxed">Designed to be emotionally memorable. Members walk away feeling seen and capable, often for the first time in years. This is the retention moment — and we protect it.</p>
+      </div>
+
+      <div class="p-8 rounded-2xl border border-border" style="background: #1E1A0E;">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6" style="background: rgba(217,119,6,0.12); border: 1px solid rgba(217,119,6,0.3);">🎭</div>
+        <div class="text-xs text-ap font-medium uppercase tracking-widest mb-2">Step 3</div>
+        <h3 class="font-display text-xl font-700 text-white mb-3">Perform. For real.</h3>
+        <p class="text-soft text-sm leading-relaxed">Within 3 months of joining, every member has a showcase in their diary. A real audience. Real stakes. Purpose-driven practice that creates extraordinary engagement — and identity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="py-24" style="background: #0C0A06;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-ap text-sm font-medium uppercase tracking-widest mb-3">The Member</p>
+      <h2 class="font-display text-4xl md:text-5xl font-700 text-white">Who is <span class="grad-text">Aspiration Point</span> for?</h2>
+      <p class="text-soft mt-4 max-w-xl mx-auto">Six portraits. One common thread — a talent that never quite went away.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="listing-card p-8 rounded-2xl border border-border" style="background: #1E1A0E;">
+        <div class="text-3xl mb-5 ap-pulse inline-block">🎹</div>
+        <h3 class="font-display text-xl font-700 mb-3" style="color:#D97706;">The Dormant Artist</h3>
+        <p class="text-soft text-sm leading-relaxed">Grade 6 piano at 16. Hasn't touched a keyboard in 20 years. Knows the muscle memory is still there. Wants permission to care again.</p>
+      </div>
+      <div class="listing-card p-8 rounded-2xl border border-border" style="background: #1E1A0E;">
+        <div class="text-3xl mb-5 ap-pulse inline-block" style="animation-delay:0.5s;">⚽</div>
+        <h3 class="font-display text-xl font-700 mb-3" style="color:#D97706;">The Shelved Athlete</h3>
+        <p class="text-soft text-sm leading-relaxed">County-level footballer or swimmer. Life got in the way. Still watches every match. Wants to feel that belonging again.</p>
+      </div>
+      <div class="listing-card p-8 rounded-2xl border border-border" style="background: #1E1A0E;">
+        <div class="text-3xl mb-5 ap-pulse inline-block" style="animation-delay:1s;">🎭</div>
+        <h3 class="font-display text-xl font-700 mb-3" style="color:#D97706;">The Almost Professional</h3>
+        <p class="text-soft text-sm leading-relaxed">The drama student who went into finance. The design graduate who became a lawyer. Successful but quietly unfulfilled by the road not taken.</p>
+      </div>
+      <div class="listing-card p-8 rounded-2xl border border-border" style="background: #1E1A0E;">
+        <div class="text-3xl mb-5 ap-pulse inline-block" style="animation-delay:1.5s;">📖</div>
+        <h3 class="font-display text-xl font-700 mb-3" style="color:#D97706;">The Hidden Creator</h3>
+        <p class="text-soft text-sm leading-relaxed">Writes in private. Bakes to an extraordinary level. Suspects they could be genuinely good if they had a stage and peers.</p>
+      </div>
+      <div class="listing-card p-8 rounded-2xl border border-border" style="background: #1E1A0E;">
+        <div class="text-3xl mb-5 ap-pulse inline-block" style="animation-delay:2s;">🌍</div>
+        <h3 class="font-display text-xl font-700 mb-3" style="color:#D97706;">The New-to-Country Member</h3>
+        <p class="text-soft text-sm leading-relaxed">Arrived with a skill or art form from back home. Wants to share it, develop it, and connect with others who see culture as craft.</p>
+      </div>
+      <div class="listing-card p-8 rounded-2xl border border-border" style="background: #1E1A0E;">
+        <div class="text-3xl mb-5 ap-pulse inline-block" style="animation-delay:2.5s;">🔄</div>
+        <h3 class="font-display text-xl font-700 mb-3" style="color:#D97706;">The Life-Stage Returner</h3>
+        <p class="text-soft text-sm leading-relaxed">Post-children. Post-career change. Retirement approaching. Suddenly has time and a long-dormant hunger. Ready to invest in themselves.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROGRAMME -->
+<section id="programme" class="py-24" style="background: #F5F0E8;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div>
+        <p class="text-sm font-medium uppercase tracking-widest mb-3" style="color:#92400E;">The Programme</p>
+        <h2 class="font-display text-4xl md:text-5xl font-700" style="color:#1C1917;">Your aspiration, <em class="italic" style="color:#B5451B;">activated</em></h2>
+        <p class="mt-3 max-w-lg text-sm leading-relaxed" style="color:#78716C;">Not classes. Not courses. Companies, leagues, orchestras, and collectives — run by members, shaped by aspiration.</p>
+      </div>
+      <p class="font-display italic text-xl max-w-sm" style="color:#1C1917;border-top:2px solid #1C1917;padding-top:1rem;">"The structure creates accountability. The community creates joy."</p>
+    </div>
+
+    <div class="activity-grid rounded-2xl overflow-hidden">
+      <div class="activity-cell">
+        <div class="text-2xl mb-3">🎻</div>
+        <h4 class="font-display font-700 text-base mb-2" style="color:#1C1917;">The Orchestra</h4>
+        <p class="text-xs leading-relaxed" style="color:#78716C;">Amateur players form sections, rehearse, perform ticketed concerts. Beginner to advanced.</p>
+      </div>
+      <div class="activity-cell">
+        <div class="text-2xl mb-3">🎭</div>
+        <h4 class="font-display font-700 text-base mb-2" style="color:#1C1917;">The Acting Company</h4>
+        <p class="text-xs leading-relaxed" style="color:#78716C;">Three productions a year. Real scripts, member-led directors, real performances at partner venues.</p>
+      </div>
+      <div class="activity-cell">
+        <div class="text-2xl mb-3">⚽</div>
+        <h4 class="font-display font-700 text-base mb-2" style="color:#1C1917;">The League</h4>
+        <p class="text-xs leading-relaxed" style="color:#78716C;">Football, tennis, swimming, cycling — structured competitive leagues that feel like belonging to a proper club.</p>
+      </div>
+      <div class="activity-cell">
+        <div class="text-2xl mb-3">🎨</div>
+        <h4 class="font-display font-700 text-base mb-2" style="color:#1C1917;">The Design House</h4>
+        <p class="text-xs leading-relaxed" style="color:#78716C;">Monthly briefs. Peer critique. Annual showcase. For designers and illustrators who never stopped thinking this way.</p>
+      </div>
+      <div class="activity-cell">
+        <div class="text-2xl mb-3">🍞</div>
+        <h4 class="font-display font-700 text-base mb-2" style="color:#1C1917;">The Bake Off</h4>
+        <p class="text-xs leading-relaxed" style="color:#78716C;">Seasonal competitions. Member recipe archives. Collaborative pop-up supper clubs with ticket sales.</p>
+      </div>
+      <div class="activity-cell">
+        <div class="text-2xl mb-3">🗣️</div>
+        <h4 class="font-display font-700 text-base mb-2" style="color:#1C1917;">The Language Society</h4>
+        <p class="text-xs leading-relaxed" style="color:#78716C;">Conversation tables, immersion weekends, paired learning. Grouped by language and level.</p>
+      </div>
+      <div class="activity-cell">
+        <div class="text-2xl mb-3">✍️</div>
+        <h4 class="font-display font-700 text-base mb-2" style="color:#1C1917;">The Writers' Room</h4>
+        <p class="text-xs leading-relaxed" style="color:#78716C;">Workshops, manuscript swaps, a members' anthology published annually. Short fiction to screenwriting.</p>
+      </div>
+      <div class="activity-cell">
+        <div class="text-2xl mb-3">🎤</div>
+        <h4 class="font-display font-700 text-base mb-2" style="color:#1C1917;">The Choir</h4>
+        <p class="text-xs leading-relaxed" style="color:#78716C;">The proof of concept. Modelled on Rock Choir — more intimate, more ambitious, more varied.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE MODEL — TWO PILLARS -->
+<section id="model" class="py-24 relative" style="background: #161309;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="text-ap text-sm font-medium uppercase tracking-widest mb-3">The Platform</p>
+        <h2 class="font-display text-4xl md:text-5xl font-700 text-white leading-tight mb-6">
+          Physical &amp; virtual,<br/>
+          <span class="grad-text">inseparable.</span>
+        </h2>
+        <p class="text-soft leading-relaxed mb-8">Two complementary layers — the Clubhouse gives you roots in a city, the Digital Club means geography never limits you. Together they create something neither can alone: genuine belonging at scale.</p>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-3 text-sm text-soft">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(217,119,6,0.2); color: #D97706;">✓</span>
+            Rehearsal rooms, studio space, kitchen, pitch access via venue partners
+          </li>
+          <li class="flex items-center gap-3 text-sm text-soft">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(217,119,6,0.2); color: #D97706;">✓</span>
+            Monthly showcases and performances open to member guests
+          </li>
+          <li class="flex items-center gap-3 text-sm text-soft">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(217,119,6,0.2); color: #D97706;">✓</span>
+            Live virtual rehearsals, masterclasses, and critique sessions
+          </li>
+          <li class="flex items-center gap-3 text-sm text-soft">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(217,119,6,0.2); color: #D97706;">✓</span>
+            Member-to-member matching by aspiration type and level
+          </li>
+          <li class="flex items-center gap-3 text-sm text-soft">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(217,119,6,0.2); color: #D97706;">✓</span>
+            Annual national gathering — Glastonbury meets Hay Festival for amateurs
+          </li>
+          <li class="flex items-center gap-3 text-sm text-soft">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(217,119,6,0.2); color: #D97706;">✓</span>
+            Virtual orchestra performances using live-sync technology
+          </li>
+        </ul>
+      </div>
+
+      <!-- Two pillar cards -->
+      <div class="flex flex-col gap-4">
+        <div class="p-8 rounded-2xl" style="background: #4A5C47;">
+          <div class="inline-flex items-center px-3 py-1 rounded-full border text-xs tracking-widest uppercase mb-4" style="border-color:rgba(217,119,6,0.5);color:#D97706;">Physical Spaces</div>
+          <h3 class="font-display font-700 text-2xl text-white mb-3">The Clubhouse</h3>
+          <p class="text-sm leading-relaxed" style="color:rgba(245,240,232,0.75);">Dedicated or partner-venue spaces in key cities. Not a co-working space — a creative home. City-based aspiration chapters launching in London, Manchester, and Edinburgh.</p>
+        </div>
+        <div class="p-8 rounded-2xl border" style="background: rgba(217,119,6,0.05); border-color: rgba(217,119,6,0.25);">
+          <div class="inline-flex items-center px-3 py-1 rounded-full border text-xs tracking-widest uppercase mb-4" style="border-color:rgba(217,119,6,0.5);color:#D97706;">Virtual Layer</div>
+          <h3 class="font-display font-700 text-2xl text-white mb-3">The Digital Club</h3>
+          <p class="text-sm leading-relaxed text-soft">The platform that makes geography irrelevant and keeps members engaged between physical sessions. Your aspiration profile, your cluster, your archive — always on.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section id="membership" class="py-24" style="background: #F5F0E8;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-sm font-medium uppercase tracking-widest mb-3" style="color:#92400E;">Membership</p>
+      <h2 class="font-display text-4xl md:text-5xl font-700" style="color:#1C1917;">One club, <em class="italic" style="color:#B5451B;">three depths.</em></h2>
+      <p class="mt-4 max-w-xl mx-auto text-sm leading-relaxed" style="color:#78716C;">Start digital, go physical, or go all-in as a Founding Member — the level of commitment is yours to choose.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Associate -->
+      <div class="listing-card p-8 rounded-2xl border relative" style="background:white; border-color:#E5DDD4;">
+        <h3 class="font-display font-700 text-2xl mb-2" style="color:#1C1917;">Associate</h3>
+        <div class="font-display font-900 mb-1 leading-none" style="font-size:3rem;color:#B5451B;">£29<span class="font-sans font-400 text-lg" style="color:#78716C;">/mo</span></div>
+        <p class="text-sm italic leading-relaxed mb-6" style="color:#78716C;">Digital-first. For those exploring, returning, or outside a club city.</p>
+        <ul class="space-y-0">
+          <li class="flex gap-3 py-2.5 border-b text-sm" style="border-color:#EDE5D8;color:#44403C;"><span class="font-700" style="color:#4A5C47;">✓</span> Full virtual platform access</li>
+          <li class="flex gap-3 py-2.5 border-b text-sm" style="border-color:#EDE5D8;color:#44403C;"><span class="font-700" style="color:#4A5C47;">✓</span> One aspiration cluster</li>
+          <li class="flex gap-3 py-2.5 border-b text-sm" style="border-color:#EDE5D8;color:#44403C;"><span class="font-700" style="color:#4A5C47;">✓</span> Live virtual sessions &amp; archive</li>
+          <li class="flex gap-3 py-2.5 border-b text-sm" style="border-color:#EDE5D8;color:#44403C;"><span class="font-700" style="color:#4A5C47;">✓</span> Member community access</li>
+          <li class="flex gap-3 py-2.5 text-sm" style="color:#44403C;"><span class="font-700" style="color:#4A5C47;">✓</span> Discounted event tickets</li>
+        </ul>
+        <div class="mt-6">
+          <button class="w-full py-3 rounded-full border text-sm font-medium transition-all hover:scale-105" style="border-color:#D97706;color:#D97706;" onmouseover="this.style.background='rgba(217,119,6,0.08)'" onmouseout="this.style.background='transparent'">Join as Associate</button>
+        </div>
+      </div>
+
+      <!-- Member — featured -->
+      <div class="listing-card p-8 rounded-2xl relative" style="background:#1C1917; border:1px solid #D97706;">
+        <div class="absolute -top-4 left-8 btn-grad text-xs font-medium px-4 py-1.5 rounded-full text-white">Most Popular</div>
+        <h3 class="font-display font-700 text-2xl mb-2 mt-2 text-white">Member</h3>
+        <div class="font-display font-900 mb-1 leading-none" style="font-size:3rem;color:#D97706;">£79<span class="font-sans font-400 text-lg" style="color:#78716C;">/mo</span></div>
+        <p class="text-sm italic leading-relaxed mb-6" style="color:rgba(245,240,232,0.6);">The full experience. Physical + digital, full access.</p>
+        <ul class="space-y-0">
+          <li class="flex gap-3 py-2.5 border-b text-sm" style="border-color:rgba(255,255,255,0.08);color:rgba(245,240,232,0.85);"><span class="font-700" style="color:#D97706;">✓</span> Everything in Associate</li>
+          <li class="flex gap-3 py-2.5 border-b text-sm" style="border-color:rgba(255,255,255,0.08);color:rgba(245,240,232,0.85);"><span class="font-700" style="color:#D97706;">✓</span> City Clubhouse access</li>
+          <li class="flex gap-3 py-2.5 border-b text-sm" style="border-color:rgba(255,255,255,0.08);color:rgba(245,240,232,0.85);"><span class="font-700" style="color:#D97706;">✓</span> Up to three aspiration clusters</li>
+          <li class="flex gap-3 py-2.5 border-b text-sm" style="border-color:rgba(255,255,255,0.08);color:rgba(245,240,232,0.85);"><span class="font-700" style="color:#D97706;">✓</span> Guest passes (2/month)</li>
+          <li class="flex gap-3 py-2.5 text-sm" style="color:rgba(245,240,232,0.85);"><span class="font-700" style="color:#D97706;">✓</span> Annual gathering included</li>
+        </ul>
+        <div class="mt-6">
+          <button class="w-full py-3 rounded-full btn-grad text-sm font-medium text-white transition-all hover:scale-105 hover:shadow-lg">Join as Member</button>
+        </div>
+      </div>
+
+      <!-- Founding -->
+      <div class="listing-card p-8 rounded-2xl border relative" style="background:white; border-color:#E5DDD4;">
+        <h3 class="font-display font-700 text-2xl mb-2" style="color:#1C1917;">Founding Member</h3>
+        <div class="font-display font-900 mb-1 leading-none" style="font-size:3rem;color:#B5451B;">£149<span class="font-sans font-400 text-lg" style="color:#78716C;">/mo</span></div>
+        <p class="text-sm italic leading-relaxed mb-6" style="color:#78716C;">Shape the club. Lead within your community.</p>
+        <ul class="space-y-0">
+          <li class="flex gap-3 py-2.5 border-b text-sm" style="border-color:#EDE5D8;color:#44403C;"><span class="font-700" style="color:#4A5C47;">✓</span> Everything in Member</li>
+          <li class="flex gap-3 py-2.5 border-b text-sm" style="border-color:#EDE5D8;color:#44403C;"><span class="font-700" style="color:#4A5C47;">✓</span> Unlimited aspiration clusters</li>
+          <li class="flex gap-3 py-2.5 border-b text-sm" style="border-color:#EDE5D8;color:#44403C;"><span class="font-700" style="color:#4A5C47;">✓</span> Cluster leadership opportunities</li>
+          <li class="flex gap-3 py-2.5 border-b text-sm" style="border-color:#EDE5D8;color:#44403C;"><span class="font-700" style="color:#4A5C47;">✓</span> Unlimited guest passes</li>
+          <li class="flex gap-3 py-2.5 text-sm" style="color:#44403C;"><span class="font-700" style="color:#4A5C47;">✓</span> Named in club history</li>
+        </ul>
+        <div class="mt-6">
+          <button class="w-full py-3 rounded-full border text-sm font-medium transition-all hover:scale-105" style="border-color:#D97706;color:#D97706;" onmouseover="this.style.background='rgba(217,119,6,0.08)'" onmouseout="this.style.background='transparent'">Become a Founder</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE + UNIT ECONOMICS -->
+<section class="py-24" style="background: #0C0A06;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="text-ap text-sm font-medium uppercase tracking-widest mb-3">Revenue Architecture</p>
+        <h2 class="font-display text-4xl md:text-5xl font-700 text-white leading-tight mb-6">
+          Multiple streams.<br/>
+          <span class="grad-text">One flywheel.</span>
+        </h2>
+        <p class="text-soft leading-relaxed mb-8">Subscriptions anchor the model. Events, B2B, merchandise, and residencies layer on top — each reinforcing member identity rather than diluting it.</p>
+        <div class="space-y-0">
+          <div class="flex justify-between items-center py-4 border-b border-border">
+            <div>
+              <div class="text-white font-medium text-sm">Membership Subscriptions</div>
+              <div class="text-xs text-muted mt-0.5">Associate, Member, Founding tiers</div>
+            </div>
+            <div class="font-display font-700 text-2xl" style="color:#B5451B;">55%</div>
+          </div>
+          <div class="flex justify-between items-center py-4 border-b border-border">
+            <div>
+              <div class="text-white font-medium text-sm">Event Tickets &amp; Showcases</div>
+              <div class="text-xs text-muted mt-0.5">Public performances, annual gathering</div>
+            </div>
+            <div class="font-display font-700 text-2xl" style="color:#B5451B;">15%</div>
+          </div>
+          <div class="flex justify-between items-center py-4 border-b border-border">
+            <div>
+              <div class="text-white font-medium text-sm">Corporate Gifting &amp; B2B</div>
+              <div class="text-xs text-muted mt-0.5">Employee wellbeing; team workshops</div>
+            </div>
+            <div class="font-display font-700 text-2xl" style="color:#B5451B;">12%</div>
+          </div>
+          <div class="flex justify-between items-center py-4 border-b border-border">
+            <div>
+              <div class="text-white font-medium text-sm">Premium Workshops &amp; Residencies</div>
+              <div class="text-xs text-muted mt-0.5">Intensive retreats led by professionals</div>
+            </div>
+            <div class="font-display font-700 text-2xl" style="color:#B5451B;">10%</div>
+          </div>
+          <div class="flex justify-between items-center py-4">
+            <div>
+              <div class="text-white font-medium text-sm">Merchandise &amp; Media</div>
+              <div class="text-xs text-muted mt-0.5">Book, apparel, recorded performances</div>
+            </div>
+            <div class="font-display font-700 text-2xl" style="color:#B5451B;">8%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unit economics -->
+      <div class="p-8 rounded-2xl border border-border" style="background: #161309;">
+        <p class="text-ap text-xs font-medium uppercase tracking-widest mb-1">Unit Economics</p>
+        <h3 class="font-display text-xl font-700 text-white mb-6">Year 2 City Hub</h3>
+        <div class="space-y-0">
+          <div class="flex justify-between py-3 border-b border-border text-sm">
+            <span class="text-soft">Target members per city</span>
+            <span class="text-white font-medium">800</span>
+          </div>
+          <div class="flex justify-between py-3 border-b border-border text-sm">
+            <span class="text-soft">Average revenue per member/yr</span>
+            <span class="text-white font-medium">£720</span>
+          </div>
+          <div class="flex justify-between py-3 border-b border-border text-sm">
+            <span class="text-soft">Membership revenue/city/yr</span>
+            <span class="text-white font-medium">£576K</span>
+          </div>
+          <div class="flex justify-between py-3 border-b border-border text-sm">
+            <span class="text-soft">Events + ancillary</span>
+            <span class="text-white font-medium">£140K</span>
+          </div>
+          <div class="flex justify-between py-3 border-b border-border text-sm">
+            <span class="text-soft">Venue + ops cost/city/yr</span>
+            <span class="text-white font-medium">£380K</span>
+          </div>
+          <div class="flex justify-between py-4 border-b" style="border-color:rgba(217,119,6,0.3);">
+            <span class="text-white font-medium">City contribution margin</span>
+            <span class="font-display font-700 text-xl" style="color:#D97706;">~£336K</span>
+          </div>
+          <div class="flex justify-between py-3 border-b border-border text-sm">
+            <span class="text-soft">Virtual-only member cost/yr</span>
+            <span class="text-white font-medium">£42</span>
+          </div>
+          <div class="flex justify-between py-3 text-sm">
+            <span class="text-soft">Payback period (city hub)</span>
+            <span class="text-white font-medium">18 months</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="py-24" style="background: #161309;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-ap text-sm font-medium uppercase tracking-widest mb-3">Roadmap</p>
+      <h2 class="font-display text-4xl md:text-5xl font-700 text-white">Three phases. <span class="grad-text">One vision.</span></h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="p-8 rounded-2xl border border-border" style="background:#1E1A0E; border-top:3px solid #D97706;">
+        <div class="text-xs tracking-widest uppercase text-muted mb-4">Months 1–12 — Proof</div>
+        <h3 class="font-display font-700 text-xl text-white mb-2">The Founding Chapter</h3>
+        <p class="font-display italic text-sm mb-6" style="color:#F59E0B;">One city. One hundred founding members. Absolute focus.</p>
+        <ul class="space-y-2">
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Launch London: Choir, Orchestra, Acting Company</li>
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Virtual platform soft-launch</li>
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Partner spaces only — no owned real estate</li>
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>First public showcase at month 6</li>
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Target: 300 members · £250K ARR · NPS &gt;65</li>
+        </ul>
+      </div>
+      <div class="p-8 rounded-2xl border border-border" style="background:#1E1A0E; border-top:3px solid #B5451B;">
+        <div class="text-xs tracking-widest uppercase text-muted mb-4">Months 12–30 — Scale</div>
+        <h3 class="font-display font-700 text-xl text-white mb-2">The National Network</h3>
+        <p class="font-display italic text-sm mb-6" style="color:#F59E0B;">Three cities. Eight clusters. Virtual-first growth.</p>
+        <ul class="space-y-2">
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Open Manchester and Edinburgh chapters</li>
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Expand to 8 cluster types</li>
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Full virtual platform with live-sync tech</li>
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>First Annual Aspiration Point Gathering</li>
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Target: 2,500 members · £1.8M ARR</li>
+        </ul>
+      </div>
+      <div class="p-8 rounded-2xl border border-border" style="background:#1E1A0E; border-top:3px solid #4A5C47;">
+        <div class="text-xs tracking-widest uppercase text-muted mb-4">Months 30–60 — Establish</div>
+        <h3 class="font-display font-700 text-xl text-white mb-2">The Platform Play</h3>
+        <p class="font-display italic text-sm mb-6" style="color:#F59E0B;">International chapters. Member-led expansion.</p>
+        <ul class="space-y-2">
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Dublin, Amsterdam, New York</li>
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Member-led chapter franchise model</li>
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Documentary series · podcast · anthology</li>
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Inter-city competitions &amp; exchanges</li>
+          <li class="flex gap-3 text-sm text-soft"><span style="color:rgba(217,119,6,0.6);">—</span>Target: 12,000+ members · £8M+ ARR</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST / EMAIL CAPTURE -->
+<section class="py-24 relative overflow-hidden" style="background: #0C0A06;">
+  <div class="absolute right-16 top-1/2 -translate-y-1/2 pointer-events-none select-none hidden lg:flex flex-col gap-2 items-end opacity-20">
+    <div class="text-4xl ap-pulse font-display" style="color:#D97706;">✦</div>
+    <div class="text-3xl ap-pulse font-display" style="color:#D97706;animation-delay:0.9s;">✦</div>
+    <div class="text-2xl ap-pulse font-display" style="color:#D97706;animation-delay:1.8s;">✦</div>
+    <div class="text-xs text-muted mt-2" style="font-size:9px;letter-spacing:0.1em;">ASPIRATION POINT</div>
+  </div>
+
+  <div class="max-w-xl mx-auto px-6 text-center">
+    <div class="font-display text-4xl mb-6" style="color:#D97706;">✦</div>
+    <h2 class="font-display text-4xl font-700 text-white mb-4">Join the founding waitlist</h2>
+    <p class="text-soft mb-8">London launch is coming. Founding Members get a locked-in rate and their name in club history. Be early.</p>
+    <div class="flex justify-center mb-4"><span class="cs-badge">Founding cohort — register below</span></div>
+    <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+      <input type="email" placeholder="you@email.com" class="flex-1 px-4 py-3 rounded-full text-sm border border-border text-soft placeholder-muted focus:outline-none focus:border-ap" style="background: #161309;" />
+      <button class="btn-grad px-6 py-3 rounded-full text-sm font-medium text-white whitespace-nowrap hover:scale-105 transition-all">Join Waitlist</button>
+    </div>
+    <p class="text-muted text-xs mt-4">No spam. Just the signal when London launches.</p>
+  </div>
+</section>
+
+<!-- MANIFESTO CLOSE -->
+<section style="background: #B5451B;" class="py-24 px-6 text-center relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none opacity-5 select-none flex items-center justify-center">
+    <span class="font-display font-black" style="font-size:600px;line-height:1;color:white;">"</span>
+  </div>
+  <div class="max-w-3xl mx-auto relative z-10">
+    <h2 class="font-display font-900 italic leading-tight mb-8" style="font-size:clamp(2.2rem,5vw,4rem);color:#F5F0E8;line-height:1.15;">
+      "The talent didn't go anywhere.<br/>We just stopped giving it space."
+    </h2>
+    <p class="text-lg leading-relaxed mb-10" style="color:rgba(245,240,232,0.75);max-width:520px;margin-left:auto;margin-right:auto;">
+      Aspiration Point exists to give that space back — with the structure, community, and ambition it always deserved.
+    </p>
+    <a href="#membership" class="inline-block btn-grad px-8 py-4 rounded-full text-sm font-medium text-white transition-all hover:scale-105 hover:shadow-lg" style="background:linear-gradient(135deg,#0C0A06,#1E1A0E);">
+      Reserve Your Place →
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-12 border-t border-border" style="background: #0C0A06;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs btn-grad">✦</div>
+        <span class="font-display font-700 text-white tracking-tight">Aspiration <span class="grad-text">Point</span></span>
+      </div>
+      <div class="flex flex-wrap justify-center gap-6 text-sm text-muted">
+        <a href="#programme" class="hover:text-soft transition-colors">Programme</a>
+        <a href="#model" class="hover:text-soft transition-colors">The Model</a>
+        <a href="#membership" class="hover:text-soft transition-colors">Membership</a>
+        <a href="#roadmap" class="hover:text-soft transition-colors">Roadmap</a>
+      </div>
+      <div class="text-xs text-muted text-center md:text-right">
+        <p>© 2026 Aspiration Point · Hubalicious · Apple Samosa</p>
+        <p class="mt-1 opacity-50">The talent never left ✦</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const track = document.getElementById('apTrack');
+    if (!track) return;
+    track.style.willChange = 'transform';
+    const strip = track.closest('.ap-strip');
+    let paused = false, lastTime = null, pos = 0, setWidth = 0;
+    const SPEED = 38;
+    if (strip) {
+      strip.addEventListener('mouseenter', () => { paused = true; });
+      strip.addEventListener('mouseleave', () => { paused = false; lastTime = null; });
+    }
+    function step(ts) {
+      if (!setWidth) setWidth = track.scrollWidth / 2;
+      if (!paused) {
+        if (lastTime !== null) {
+          pos -= SPEED * ((ts - lastTime) / 1000);
+          if (pos <= -setWidth) pos += setWidth;
+          track.style.transform = `translateX(${pos}px)`;
+        }
+        lastTime = ts;
+      }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Securisignal — UK Security Services Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#060C14',
+            surface:  '#0D1828',
+            card:     '#132035',
+            border:   '#1D3050',
+            signal:   '#0EA5E9',
+            'signal-light': '#38BDF8',
+            indigo:   '#6366F1',
+            muted:    '#64748B',
+            soft:     '#94A3B8',
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body:    ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #060C14; font-family: 'Inter', sans-serif; }
+
+    /* Hero grid + glow */
+    .grid-bg {
+      background-image: linear-gradient(rgba(14,165,233,0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(14,165,233,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .hero-glow {
+      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(14,165,233,0.14) 0%, transparent 70%);
+    }
+
+    /* Gradient text helper */
+    .grad-text {
+      background: linear-gradient(135deg, #0EA5E9, #6366F1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Gradient button */
+    .btn-grad {
+      background: linear-gradient(135deg, #0EA5E9, #6366F1);
+    }
+
+    /* ACS badge */
+    .acs-badge {
+      background: linear-gradient(135deg, #0EA5E9, #6366F1);
+    }
+
+    /* Card hover */
+    .listing-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .listing-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(14,165,233,0.15);
+    }
+
+    /* Signal pulse */
+    @keyframes signalPulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50%       { opacity: 0.6; transform: scale(1.08); }
+    }
+    .signal-pulse { animation: signalPulse 3s ease-in-out infinite; }
+
+    /* Scan ring */
+    @keyframes scanRing {
+      0%   { transform: scale(0.7); opacity: 0.8; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+    .scan-ring::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1.5px solid #0EA5E9;
+      animation: scanRing 2.2s ease-out infinite;
+    }
+
+    /* ── TICKER STRIP ── */
+    .ss-strip {
+      background: #0D1828;
+      border-top: 1px solid #1D3050;
+      border-bottom: 1px solid #1D3050;
+      padding: 14px 0;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    }
+    .ss-strip-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+    }
+    .ss-strip-item {
+      font-size: 12.5px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      color: #94A3B8;
+      padding: 0 28px;
+      white-space: nowrap;
+    }
+    .ss-strip-sep {
+      color: #0EA5E9;
+      opacity: 0.5;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .ss-strip-item--brand {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: #0EA5E9;
+      padding: 0 36px;
+    }
+
+    /* Coming soon */
+    .cs-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: #0EA5E9;
+      background: rgba(14,165,233,0.1);
+      border: 1px solid rgba(14,165,233,0.25);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .cs-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #0EA5E9;
+      display: inline-block;
+    }
+    .btn-disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Traffic light style dots */
+    .dot-green { background: #10B981; box-shadow: 0 0 10px rgba(16,185,129,0.5); }
+    .dot-amber { background: #F59E0B; box-shadow: 0 0 10px rgba(245,158,11,0.5); }
+    .dot-red   { background: #EF4444; box-shadow: 0 0 10px rgba(239,68,68,0.5); }
+  </style>
+</head>
+<body class="text-white">
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-border" style="background: rgba(6,12,20,0.92); backdrop-filter: blur(12px);">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="../index.html"
+         style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.25);text-decoration:none;transition:color 0.2s;"
+         onmouseover="this.style.color='rgba(255,255,255,0.55)'"
+         onmouseout="this.style.color='rgba(255,255,255,0.25)'">← Apple Samosa</a>
+      <span style="color:rgba(255,255,255,0.1);">|</span>
+      <div class="flex items-center gap-2">
+        <div class="relative w-7 h-7 rounded-full flex items-center justify-center scan-ring" style="background: linear-gradient(135deg, #0EA5E9, #6366F1);">
+          <span style="font-size:13px;">◉</span>
+        </div>
+        <span class="font-display font-700 text-lg tracking-tight">Securi<span class="grad-text">signal</span></span>
+      </div>
+    </div>
+    <div class="hidden md:flex items-center gap-8 text-sm text-soft">
+      <a href="#services" class="hover:text-white transition-colors">Services</a>
+      <a href="#hirers" class="hover:text-white transition-colors">Hire</a>
+      <a href="#directory" class="hover:text-white transition-colors">Directory</a>
+      <a href="#enter" class="hover:text-white transition-colors">Enter Industry</a>
+    </div>
+    <a href="#directory" class="btn-grad text-sm font-medium px-4 py-2 rounded-full transition-all hover:scale-105 hover:shadow-lg text-white">
+      Find a Company →
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden grid-bg">
+  <div class="hero-glow absolute inset-0 pointer-events-none"></div>
+
+  <!-- Background signal icon -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
+    <span style="font-size:560px; line-height:1; color:#0EA5E9;">◉</span>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-6 py-24 text-center">
+
+    <!-- Pill label -->
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-xs text-soft mb-8" style="background: rgba(14,165,233,0.07);">
+      <span class="w-1.5 h-1.5 rounded-full bg-signal inline-block"></span>
+      Find a Company · Pricing Benchmarks · SIA Licence Guide · ACS-Verified Directory
+    </div>
+
+    <h1 class="font-display text-6xl md:text-8xl font-800 text-white leading-tight mb-6">
+      Every signal<br/>
+      <span class="grad-text">answered</span>
+    </h1>
+
+    <p class="text-lg md:text-xl text-soft max-w-2xl mx-auto mb-10 leading-relaxed">
+      The UK's security services hub. Find ACS-approved companies, benchmark your costs, and navigate every route into the industry — all in one place, free.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+      <a href="#directory" class="btn-grad px-8 py-4 rounded-full font-medium text-white transition-all hover:scale-105 hover:shadow-lg">
+        Find a Company
+      </a>
+      <a href="#enter" class="px-8 py-4 rounded-full font-medium border border-border text-soft hover:text-white hover:border-signal transition-all">
+        Get my SIA Licence →
+      </a>
+    </div>
+
+    <!-- Stats row -->
+    <div class="flex flex-wrap justify-center gap-8 text-center">
+      <div>
+        <div class="text-2xl font-display font-700 text-white">£6.5B<span class="grad-text">+</span></div>
+        <div class="text-xs text-muted mt-1">UK private security market</div>
+      </div>
+      <div class="hidden sm:block w-px bg-border"></div>
+      <div>
+        <div class="text-2xl font-display font-700 text-white">400K<span class="grad-text">+</span></div>
+        <div class="text-xs text-muted mt-1">SIA licensed officers</div>
+      </div>
+      <div class="hidden sm:block w-px bg-border"></div>
+      <div>
+        <div class="text-2xl font-display font-700 text-white">9,000<span class="grad-text">+</span></div>
+        <div class="text-xs text-muted mt-1">Registered UK firms</div>
+      </div>
+      <div class="hidden sm:block w-px bg-border"></div>
+      <div>
+        <div class="text-2xl font-display font-700 text-white">0<span class="grad-text">£</span></div>
+        <div class="text-xs text-muted mt-1">Free to search</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted text-xs flex flex-col items-center gap-2 animate-bounce">
+    <span>scroll</span><span>↓</span>
+  </div>
+</section>
+
+<!-- TICKER STRIP -->
+<section class="ss-strip">
+  <div class="ss-strip-track" id="ssTrack">
+    <!-- Set 1 -->
+    <div class="ss-strip-item">ACS Approved Contractor · SIA's quality benchmark</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">Manned guarding · £14–£18/hr · London 2026</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">BS 7858 · 5-year employment history vetting standard</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item--brand">Securisignal</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">SIA Door Supervisor licence · £190 application fee</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">Close protection · £350–£600/day market rate</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">Mobile patrol · 4 visits/night · from £80</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item--brand">Securisignal</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">400,000+ SIA licensed officers currently active in the UK</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">Key holding · from £60/month per premises</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">SIA licence required before first shift · no exceptions</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item--brand">Securisignal</div>
+    <span class="ss-strip-sep">◉</span>
+    <!-- Set 2 — duplicate for seamless loop -->
+    <div class="ss-strip-item">ACS Approved Contractor · SIA's quality benchmark</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">Manned guarding · £14–£18/hr · London 2026</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">BS 7858 · 5-year employment history vetting standard</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item--brand">Securisignal</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">SIA Door Supervisor licence · £190 application fee</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">Close protection · £350–£600/day market rate</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">Mobile patrol · 4 visits/night · from £80</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item--brand">Securisignal</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">400,000+ SIA licensed officers currently active in the UK</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">Key holding · from £60/month per premises</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item">SIA licence required before first shift · no exceptions</div>
+    <span class="ss-strip-sep">◉</span>
+    <div class="ss-strip-item--brand">Securisignal</div>
+    <span class="ss-strip-sep">◉</span>
+  </div>
+</section>
+
+<!-- HOW SECURISIGNAL WORKS -->
+<section id="services" class="py-24 relative" style="background: #0D1828;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-signal text-sm font-medium uppercase tracking-widest mb-3">How Securisignal Works</p>
+      <h2 class="font-display text-4xl md:text-5xl font-700 text-white">Two audiences. One hub.</h2>
+      <p class="text-soft mt-4 max-w-xl mx-auto">Whether you're hiring security or entering the industry, Securisignal cuts through the noise in three steps.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="p-8 rounded-2xl border border-border" style="background: #132035;">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6" style="background: rgba(14,165,233,0.12); border: 1px solid rgba(14,165,233,0.3);">🏢</div>
+        <div class="text-xs text-signal font-medium uppercase tracking-widest mb-2">For Hirers</div>
+        <h3 class="font-display text-xl font-700 text-white mb-3">Tell us what you need</h3>
+        <p class="text-soft text-sm leading-relaxed">Service type, location, contract length. Filter by ACS accreditation, BS 7858 vetting, and sector speciality. Compare three matched companies with pricing benchmarks included.</p>
+      </div>
+
+      <div class="p-8 rounded-2xl border" style="background: rgba(14,165,233,0.06); border-color: rgba(14,165,233,0.3);">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6" style="background: rgba(14,165,233,0.18); border: 1px solid rgba(14,165,233,0.4);">◉</div>
+        <div class="text-xs text-signal font-medium uppercase tracking-widest mb-2">The Signal</div>
+        <h3 class="font-display text-xl font-700 text-white mb-3">Securisignal checks the field</h3>
+        <p class="text-soft text-sm leading-relaxed">ACS status, insurance verification, BS 7858 compliance, HMRC employer record — cross-checked against the SIA's live register before any company appears in results.</p>
+      </div>
+
+      <div class="p-8 rounded-2xl border border-border" style="background: #132035;">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6" style="background: rgba(14,165,233,0.12); border: 1px solid rgba(14,165,233,0.3);">🪪</div>
+        <div class="text-xs text-signal font-medium uppercase tracking-widest mb-2">For Entrants</div>
+        <h3 class="font-display text-xl font-700 text-white mb-3">Map your route in</h3>
+        <p class="text-soft text-sm leading-relaxed">Pick the right SIA licence for your situation. Find an approved training provider. Understand the costs, timelines, and earning potential — from first application to first shift.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RATE BENCHMARKS -->
+<section id="hirers" class="py-24" style="background: #060C14;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-signal text-sm font-medium uppercase tracking-widest mb-3">The Rate Benchmark</p>
+      <h2 class="font-display text-4xl md:text-5xl font-700 text-white">Know your costs.<br/><span class="grad-text">Before they quote.</span></h2>
+      <p class="text-soft mt-4 max-w-xl mx-auto">Current market rates, accreditation costs, and vetting standards — updated quarterly. Bookmark this page before you call anyone.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 mb-8">
+
+      <!-- Service Rates -->
+      <div class="p-6 rounded-2xl border border-border" style="background: #132035;">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base" style="background: rgba(14,165,233,0.12); border: 1px solid rgba(14,165,233,0.3);">💷</div>
+          <h3 class="font-display text-lg font-700 text-white">Service Rates</h3>
+        </div>
+        <div class="space-y-0">
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Manned Guarding</span><span class="text-white font-medium">£14–£18/hr</span></div>
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Door Supervision</span><span class="text-white font-medium">£16–£22/hr</span></div>
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Event Security</span><span class="text-white font-medium">£12–£17/hr</span></div>
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Close Protection</span><span class="text-white font-medium">£350–£600/day</span></div>
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Mobile Patrol (4 visits)</span><span class="text-white font-medium">£80–£140/night</span></div>
+          <div class="flex justify-between items-center py-2.5 text-sm"><span class="text-soft">Key Holding</span><span class="text-white font-medium">£60–£100/mo</span></div>
+        </div>
+        <p class="text-muted text-xs mt-4">London/SE rates · 2026 benchmarks</p>
+      </div>
+
+      <!-- What to check -->
+      <div class="p-6 rounded-2xl border" style="background: rgba(14,165,233,0.05); border-color: rgba(14,165,233,0.25);">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base" style="background: rgba(14,165,233,0.18); border: 1px solid rgba(14,165,233,0.4);">🏅</div>
+          <h3 class="font-display text-lg font-700 text-white">What to Check</h3>
+        </div>
+        <div class="space-y-0">
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">ACS accreditation</span><span class="text-signal font-medium">Verify on SIA site</span></div>
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">BS 7858 vetting</span><span class="text-signal font-medium">Ask for confirmation</span></div>
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Public liability (min)</span><span class="text-signal font-medium">£5M cover</span></div>
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Employer liability</span><span class="text-signal font-medium">£10M cover</span></div>
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Officer SIA licence</span><span class="text-signal font-medium">Check licence number</span></div>
+          <div class="flex justify-between items-center py-2.5 text-sm"><span class="text-soft">TUPE obligations</span><span class="text-signal font-medium">Ask if applicable</span></div>
+        </div>
+        <p class="text-muted text-xs mt-4">Hirer's due diligence checklist · 2026</p>
+      </div>
+
+      <!-- Red Flags -->
+      <div class="p-6 rounded-2xl border border-border" style="background: #132035;">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base" style="background: rgba(14,165,233,0.12); border: 1px solid rgba(14,165,233,0.3);">⚠️</div>
+          <h3 class="font-display text-lg font-700 text-white">Red Flags</h3>
+        </div>
+        <div class="space-y-0">
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">No ACS accreditation</span><span class="text-red-400 font-medium">Walk away</span></div>
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Quote below £10/hr</span><span class="text-red-400 font-medium">Not NMW-compliant</span></div>
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">No BS 7858 vetting</span><span class="text-yellow-400 font-medium">Escalate</span></div>
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">No written contract</span><span class="text-red-400 font-medium">Refuse</span></div>
+          <div class="flex justify-between items-center py-2.5 border-b border-border text-sm"><span class="text-soft">Can't check officer licence</span><span class="text-red-400 font-medium">Terminate shift</span></div>
+          <div class="flex justify-between items-center py-2.5 text-sm"><span class="text-soft">No public liability proof</span><span class="text-red-400 font-medium">Do not proceed</span></div>
+        </div>
+        <p class="text-muted text-xs mt-4">Securisignal hirer guidance · 2026</p>
+      </div>
+    </div>
+
+    <!-- Quick reference bar -->
+    <div class="p-6 rounded-2xl border border-border" style="background: #0D1828;">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <p class="text-signal text-xs font-medium uppercase tracking-widest mb-1">Quick Reference</p>
+          <h3 class="font-display text-xl font-700 text-white">Verify any SIA licence in 30 seconds</h3>
+          <p class="text-soft text-sm mt-1">Every licensed officer has a unique SIA licence number. Check it on the SIA's public register before any shift starts.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <div class="text-center px-4 py-3 rounded-xl border border-border" style="background: #060C14;"><div class="text-base font-display font-700 text-white">Manned Guard</div><div class="text-xs text-muted mt-1">SG licence</div></div>
+          <div class="text-center px-4 py-3 rounded-xl border border-border" style="background: #060C14;"><div class="text-base font-display font-700 text-white">Door Super.</div><div class="text-xs text-muted mt-1">DS licence</div></div>
+          <div class="text-center px-4 py-3 rounded-xl border border-border" style="background: #060C14;"><div class="text-base font-display font-700 text-white">Close Prot.</div><div class="text-xs text-muted mt-1">CP licence</div></div>
+          <div class="text-center px-4 py-3 rounded-xl border border-border" style="background: #060C14;"><div class="text-base font-display font-700 text-white">CCTV Op.</div><div class="text-xs text-muted mt-1">CV licence</div></div>
+          <div class="text-center px-4 py-3 rounded-xl" style="background: rgba(14,165,233,0.08); border: 1px solid rgba(14,165,233,0.3);"><div class="text-base font-display font-700 text-signal">Not sure?</div><div class="text-xs text-muted mt-1">→ Check SIA ↓</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY DIRECTORY -->
+<section id="directory" class="py-24" style="background: #0D1828;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div>
+        <p class="text-signal text-sm font-medium uppercase tracking-widest mb-3">The Directory</p>
+        <h2 class="font-display text-4xl md:text-5xl font-700 text-white">ACS-verified companies</h2>
+        <p class="text-soft mt-3">Every listing independently checked. ACS status verified against the live SIA register.</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button class="px-4 py-2 rounded-full text-sm font-medium text-white" style="background: rgba(14,165,233,0.2); border: 1px solid rgba(14,165,233,0.4);">All</button>
+        <button class="px-4 py-2 rounded-full text-sm border border-border text-soft hover:border-signal hover:text-white transition-colors">ACS Only</button>
+        <button class="px-4 py-2 rounded-full text-sm border border-border text-soft hover:border-signal hover:text-white transition-colors">Events</button>
+        <button class="px-4 py-2 rounded-full text-sm border border-border text-soft hover:border-signal hover:text-white transition-colors">Close Prot.</button>
+        <button class="px-4 py-2 rounded-full text-sm border border-border text-soft hover:border-signal hover:text-white transition-colors">London</button>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Megaforce -->
+      <div class="listing-card p-6 rounded-2xl border border-border" style="background: #132035;">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="acs-badge text-white text-xs font-medium px-2 py-0.5 rounded-full">ACS ✓</span>
+              <span class="text-xs text-soft border border-border px-2 py-0.5 rounded-full">BS 7858</span>
+            </div>
+            <h3 class="font-display text-xl font-700 text-white mt-2">Megaforce Security</h3>
+            <p class="text-soft text-sm">London · National coverage</p>
+          </div>
+          <div class="text-3xl signal-pulse">◉</div>
+        </div>
+        <div class="space-y-2 mb-5">
+          <div class="flex justify-between text-sm"><span class="text-muted">Speciality</span><span class="text-soft">Manned, Events, Retail LP</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">ACS status</span><span class="text-green-400">✓ Verified</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">Insurance</span><span class="text-green-400">✓ £5M+ PL</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">Guarding rate (est.)</span><span class="text-soft">£14–£17/hr</span></div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-border">
+          <div class="flex items-center gap-1">
+            <span class="text-yellow-400 text-sm">★★★★</span><span class="text-border text-sm">★</span>
+            <span class="text-muted text-xs ml-1">(312)</span>
+          </div>
+          <button class="text-sm font-medium text-signal hover:text-signal-light transition-colors">View Details →</button>
+        </div>
+      </div>
+
+      <!-- Caleb Alexander -->
+      <div class="listing-card p-6 rounded-2xl border border-border" style="background: #132035;">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="acs-badge text-white text-xs font-medium px-2 py-0.5 rounded-full">ACS ✓</span>
+              <span class="text-xs text-soft border border-border px-2 py-0.5 rounded-full">CP Specialist</span>
+            </div>
+            <h3 class="font-display text-xl font-700 text-white mt-2">Caleb Alexander &amp; Assoc.</h3>
+            <p class="text-soft text-sm">London · South East</p>
+          </div>
+          <div class="text-3xl signal-pulse" style="animation-delay:0.7s;">◉</div>
+        </div>
+        <div class="space-y-2 mb-5">
+          <div class="flex justify-between text-sm"><span class="text-muted">Speciality</span><span class="text-soft">Close Protection, Corporate</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">ACS status</span><span class="text-green-400">✓ Verified</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">Insurance</span><span class="text-green-400">✓ £10M+ PL</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">CP day rate (est.)</span><span class="text-soft">£400–£600/day</span></div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-border">
+          <div class="flex items-center gap-1">
+            <span class="text-yellow-400 text-sm">★★★★★</span>
+            <span class="text-muted text-xs ml-1">(189)</span>
+          </div>
+          <button class="text-sm font-medium text-signal hover:text-signal-light transition-colors">View Details →</button>
+        </div>
+      </div>
+
+      <!-- Embassy Solutions — Securisignal Pick -->
+      <div class="listing-card p-6 rounded-2xl border" style="background: rgba(14,165,233,0.05); border-color: rgba(14,165,233,0.25);">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="acs-badge text-white text-xs font-medium px-2 py-0.5 rounded-full">ACS ✓</span>
+              <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background: rgba(14,165,233,0.18); color: #38BDF8; border: 1px solid rgba(14,165,233,0.3);">Signal Pick</span>
+            </div>
+            <h3 class="font-display text-xl font-700 text-white mt-2">Embassy Solutions</h3>
+            <p class="text-soft text-sm">London · Midlands</p>
+          </div>
+          <div class="text-3xl signal-pulse" style="animation-delay:1.4s;">◉</div>
+        </div>
+        <div class="space-y-2 mb-5">
+          <div class="flex justify-between text-sm"><span class="text-muted">Speciality</span><span class="text-soft">Concierge, CCTV, Residential</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">ACS status</span><span class="text-green-400">✓ Verified</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">Insurance</span><span class="text-green-400">✓ £5M+ PL</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">Concierge rate (est.)</span><span class="text-soft">£15–£18/hr</span></div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t" style="border-color: rgba(14,165,233,0.2);">
+          <div class="flex items-center gap-1">
+            <span class="text-yellow-400 text-sm">★★★★★</span>
+            <span class="text-muted text-xs ml-1">(451)</span>
+          </div>
+          <button class="text-sm font-medium text-signal hover:text-signal-light transition-colors">View Details →</button>
+        </div>
+      </div>
+
+      <!-- G4S Professional -->
+      <div class="listing-card p-6 rounded-2xl border border-border" style="background: #132035;">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="acs-badge text-white text-xs font-medium px-2 py-0.5 rounded-full">ACS ✓</span>
+              <span class="text-xs text-soft border border-border px-2 py-0.5 rounded-full">National</span>
+            </div>
+            <h3 class="font-display text-xl font-700 text-white mt-2">G4S Security Solutions</h3>
+            <p class="text-soft text-sm">UK-wide · Enterprise contracts</p>
+          </div>
+          <div class="text-3xl">◉</div>
+        </div>
+        <div class="space-y-2 mb-5">
+          <div class="flex justify-between text-sm"><span class="text-muted">Speciality</span><span class="text-soft">Facilities, Critical Infrastructure</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">ACS status</span><span class="text-green-400">✓ Verified</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">Insurance</span><span class="text-green-400">✓ £20M+ PL</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">Min. contract</span><span class="text-soft">12 months typically</span></div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-border">
+          <div class="flex items-center gap-1">
+            <span class="text-yellow-400 text-sm">★★★★</span><span class="text-border text-sm">★</span>
+            <span class="text-muted text-xs ml-1">(872)</span>
+          </div>
+          <button class="text-sm font-medium text-signal hover:text-signal-light transition-colors">View Details →</button>
+        </div>
+      </div>
+
+      <!-- Titan Security -->
+      <div class="listing-card p-6 rounded-2xl border border-border" style="background: #132035;">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="acs-badge text-white text-xs font-medium px-2 py-0.5 rounded-full">ACS ✓</span>
+            </div>
+            <h3 class="font-display text-xl font-700 text-white mt-2">Titan Security Europe</h3>
+            <p class="text-soft text-sm">London · Events specialist</p>
+          </div>
+          <div class="text-3xl">◉</div>
+        </div>
+        <div class="space-y-2 mb-5">
+          <div class="flex justify-between text-sm"><span class="text-muted">Speciality</span><span class="text-soft">Events, Festivals, Venues</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">ACS status</span><span class="text-green-400">✓ Verified</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">Insurance</span><span class="text-green-400">✓ £5M+ PL</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">Event rate (est.)</span><span class="text-soft">£13–£16/hr</span></div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-border">
+          <div class="flex items-center gap-1">
+            <span class="text-yellow-400 text-sm">★★★</span><span class="text-border text-sm">★★</span>
+            <span class="text-muted text-xs ml-1">(234)</span>
+          </div>
+          <button class="text-sm font-medium text-signal hover:text-signal-light transition-colors">View Details →</button>
+        </div>
+      </div>
+
+      <!-- Kingdom Services -->
+      <div class="listing-card p-6 rounded-2xl border border-border" style="background: #132035;">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="acs-badge text-white text-xs font-medium px-2 py-0.5 rounded-full">ACS ✓</span>
+              <span class="text-xs text-soft border border-border px-2 py-0.5 rounded-full">Est. 1993</span>
+            </div>
+            <h3 class="font-display text-xl font-700 text-white mt-2">Kingdom Services Group</h3>
+            <p class="text-soft text-sm">National · Retail &amp; FM</p>
+          </div>
+          <div class="text-3xl">◉</div>
+        </div>
+        <div class="space-y-2 mb-5">
+          <div class="flex justify-between text-sm"><span class="text-muted">Speciality</span><span class="text-soft">Retail LP, FM, Mobile</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">ACS status</span><span class="text-green-400">✓ Verified</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">Insurance</span><span class="text-green-400">✓ £10M+ PL</span></div>
+          <div class="flex justify-between text-sm"><span class="text-muted">Retail LP rate (est.)</span><span class="text-soft">£12–£15/hr</span></div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-border">
+          <div class="flex items-center gap-1">
+            <span class="text-yellow-400 text-sm">★★★★</span><span class="text-border text-sm">★</span>
+            <span class="text-muted text-xs ml-1">(167)</span>
+          </div>
+          <button class="text-sm font-medium text-signal hover:text-signal-light transition-colors">View Details →</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-10">
+      <button class="px-8 py-3 rounded-full border border-border text-soft hover:border-signal hover:text-white transition-all text-sm font-medium">
+        View all 200+ ACS-verified companies →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- SIA LICENCE GUIDE -->
+<section id="enter" class="py-24 relative" style="background: #060C14;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="text-signal text-sm font-medium uppercase tracking-widest mb-3">SIA Licence Guide</p>
+        <h2 class="font-display text-4xl md:text-5xl font-700 text-white leading-tight mb-6">
+          Your route in.<br/>
+          <span class="grad-text">Mapped properly.</span>
+        </h2>
+        <p class="text-soft leading-relaxed mb-8">
+          The UK security industry employs 400,000+ licensed officers and is growing. Every route starts with the right SIA licence — there are six types, and picking the right one from the start saves time and money.
+        </p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center gap-3 text-sm text-soft">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(14,165,233,0.2); color: #0EA5E9;">✓</span>
+            Covers all six SIA licence types with costs and timelines
+          </li>
+          <li class="flex items-center gap-3 text-sm text-soft">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(14,165,233,0.2); color: #0EA5E9;">✓</span>
+            Find SIA-approved training providers near you
+          </li>
+          <li class="flex items-center gap-3 text-sm text-soft">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(14,165,233,0.2); color: #0EA5E9;">✓</span>
+            Realistic earnings from year 1 through to senior / CP level
+          </li>
+          <li class="flex items-center gap-3 text-sm text-soft">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background: rgba(14,165,233,0.2); color: #0EA5E9;">✓</span>
+            DBS, right to work, and vetting — what to prepare <span class="text-signal text-xs ml-1">(full guide coming soon)</span>
+          </li>
+        </ul>
+        <div class="flex items-center gap-4">
+          <button class="btn-disabled btn-grad px-8 py-4 rounded-full font-medium text-white">
+            Build My Licence Plan →
+          </button>
+          <span class="cs-badge">Launching soon</span>
+        </div>
+        <p class="text-muted text-xs mt-3">Informational only — verify all requirements directly with the SIA before applying.</p>
+      </div>
+
+      <!-- Licence comparison panel -->
+      <div class="p-6 rounded-2xl border border-border" style="background: #0D1828;">
+        <p class="text-soft text-sm text-center mb-6">Pick the right licence for <span class="text-white">your situation</span></p>
+        <div class="space-y-4">
+          <div class="p-5 rounded-xl border" style="background: rgba(14,165,233,0.06); border-color: rgba(14,165,233,0.3);">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-white font-medium text-sm">Door Supervisor</span>
+              <span class="text-xs px-2 py-0.5 rounded-full" style="background: rgba(14,165,233,0.2); color: #38BDF8;">Most Versatile</span>
+            </div>
+            <div class="text-3xl font-display font-700 text-signal mb-1">£800–£1,200</div>
+            <div class="text-xs text-muted">6–10 days training · covers guarding AND venue door work · £190 SIA fee</div>
+          </div>
+          <div class="p-5 rounded-xl border border-border" style="background: #132035;">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-white font-medium text-sm">Security Guard</span>
+              <span class="text-xs text-green-400">Entry Point</span>
+            </div>
+            <div class="text-3xl font-display font-700 text-white mb-1">£500–£750</div>
+            <div class="text-xs text-muted">4–6 days training · manned guarding roles only · £190 SIA fee</div>
+          </div>
+          <div class="p-5 rounded-xl border border-border" style="background: #132035;">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-white font-medium text-sm">Close Protection</span>
+              <span class="text-xs text-yellow-400">Advanced — Level 3</span>
+            </div>
+            <div class="text-3xl font-display font-700 text-white mb-1">£3,000–£5,000</div>
+            <div class="text-xs text-muted">28 days residential · prior experience required · day rate £350–£600+</div>
+          </div>
+        </div>
+        <p class="text-muted text-xs mt-5 text-center">Illustrative costs · verify with SIA-approved training providers</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR SECURITY COMPANIES -->
+<section class="py-24" style="background: #0D1828;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-signal text-sm font-medium uppercase tracking-widest mb-3">For Security Companies</p>
+      <h2 class="font-display text-4xl md:text-5xl font-700 text-white">Your listing. Verified.</h2>
+      <p class="text-soft mt-4 max-w-xl mx-auto">Securisignal drives qualified hirer enquiries to ACS-approved companies — no cold leads, no unqualified enquiries.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <div class="p-6 rounded-2xl border border-border" style="background: #132035;">
+        <div class="text-2xl mb-4">📋</div>
+        <h3 class="font-display text-lg font-700 text-white mb-2">Verified Listings</h3>
+        <p class="text-soft text-sm leading-relaxed">Your ACS accreditation, BS 7858 status, insurance, and specialisms verified and displayed to hirers. No unaccredited competitors alongside you.</p>
+      </div>
+      <div class="p-6 rounded-2xl border border-border" style="background: #132035;">
+        <div class="text-2xl mb-4">🎯</div>
+        <h3 class="font-display text-lg font-700 text-white mb-2">Qualified Enquiries</h3>
+        <p class="text-soft text-sm leading-relaxed">Hirers who reach your listing have already filtered by service type, location, and accreditation. They're ready to buy, not browsing.</p>
+      </div>
+      <div class="p-6 rounded-2xl border border-border" style="background: #132035;">
+        <div class="text-2xl mb-4">📡</div>
+        <h3 class="font-display text-lg font-700 text-white mb-2">Signal Boost</h3>
+        <p class="text-soft text-sm leading-relaxed">Featured placements, sector-specific visibility, and priority ranking for ACS-accredited companies with verified compliance records.</p>
+      </div>
+    </div>
+
+    <div class="p-8 rounded-2xl border text-center" style="background: rgba(14,165,233,0.06); border-color: rgba(14,165,233,0.25);">
+      <p class="text-soft text-sm mb-4">Company portal launching with London directory — Q3 2026</p>
+      <h3 class="font-display text-2xl font-700 text-white mb-2">Register your company early</h3>
+      <div class="flex justify-center mb-4"><span class="cs-badge">Early access — submit below</span></div>
+      <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+        <input type="email" placeholder="enquiries@yourcompany.co.uk" class="flex-1 px-4 py-3 rounded-full text-sm border text-soft placeholder-muted focus:outline-none focus:border-signal" style="background: #0D1828; border-color: #1D3050;" />
+        <button class="btn-disabled btn-grad px-6 py-3 rounded-full text-sm font-medium text-white whitespace-nowrap">Register Interest</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="py-24 relative overflow-hidden" style="background: #060C14;">
+  <div class="absolute right-16 top-1/2 -translate-y-1/2 pointer-events-none select-none hidden lg:flex flex-col gap-2 items-end opacity-20">
+    <div class="text-4xl signal-pulse">◉</div>
+    <div class="text-3xl signal-pulse" style="animation-delay:0.8s;">◉</div>
+    <div class="text-2xl signal-pulse" style="animation-delay:1.6s;">◉</div>
+    <div class="text-xs text-muted mt-2" style="font-size: 9px; letter-spacing: 0.1em;">SIGNAL ACTIVE</div>
+  </div>
+
+  <div class="max-w-xl mx-auto px-6 text-center">
+    <div class="text-4xl mb-6">◉</div>
+    <h2 class="font-display text-4xl font-700 text-white mb-4">The Securisignal brief</h2>
+    <p class="text-soft mb-8">SIA updates, ACS changes, rate movements, and industry intelligence — curated monthly. No noise.</p>
+    <div class="flex justify-center mb-4"><span class="cs-badge">Newsletter launching soon</span></div>
+    <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto opacity-50 pointer-events-none">
+      <input type="email" placeholder="you@email.com" class="flex-1 px-4 py-3 rounded-full text-sm border border-border text-soft placeholder-muted focus:outline-none" style="background: #0D1828;" disabled />
+      <button class="btn-grad px-6 py-3 rounded-full text-sm font-medium text-white whitespace-nowrap">Subscribe Free</button>
+    </div>
+    <p class="text-muted text-xs mt-4">No spam. Unsubscribe any time.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-12 border-t border-border" style="background: #060C14;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs btn-grad">◉</div>
+        <span class="font-display font-700 text-white tracking-tight">Securi<span class="grad-text">signal</span></span>
+      </div>
+      <div class="flex flex-wrap justify-center gap-6 text-sm text-muted">
+        <a href="#services" class="hover:text-soft transition-colors">How it Works</a>
+        <a href="#hirers" class="hover:text-soft transition-colors">Rate Benchmarks</a>
+        <a href="#directory" class="hover:text-soft transition-colors">Directory</a>
+        <a href="#enter" class="hover:text-soft transition-colors">SIA Guide</a>
+        <a href="#" class="hover:text-soft transition-colors">Privacy</a>
+      </div>
+      <div class="text-xs text-muted text-center md:text-right">
+        <p>© 2026 Securisignal · Not legal or regulatory advice</p>
+        <p class="mt-1 text-muted opacity-50">Verify all SIA requirements directly with the SIA ◉</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const track = document.getElementById('ssTrack');
+    if (!track) return;
+    track.style.willChange = 'transform';
+    const strip = track.closest('.ss-strip');
+    let paused = false, lastTime = null, pos = 0, setWidth = 0;
+    const SPEED = 38;
+    if (strip) {
+      strip.addEventListener('mouseenter', () => { paused = true; });
+      strip.addEventListener('mouseleave', () => { paused = false; lastTime = null; });
+    }
+    function step(ts) {
+      if (!setWidth) setWidth = track.scrollWidth / 2;
+      if (!paused) {
+        if (lastTime !== null) {
+          pos -= SPEED * ((ts - lastTime) / 1000);
+          if (pos <= -setWidth) pos += setWidth;
+          track.style.transform = `translateX(${pos}px)`;
+        }
+        lastTime = ts;
+      }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  })();
+</script>
+</body>
+</html>
