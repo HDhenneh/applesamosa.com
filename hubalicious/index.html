@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hubalicious — Directory of Directories</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#080B12',
+            surface: '#0E1420',
+            card: '#131C2E',
+            border: '#1C2A44',
+            hub: '#F97316',
+            'hub-light': '#FB923C',
+            muted: '#64748B',
+            soft: '#94A3B8',
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background: #080B12; color: #E2E8F0; font-family: 'Inter', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .grad-text {
+      background: linear-gradient(135deg, #F97316, #EF4444);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .btn-grad {
+      background: linear-gradient(135deg, #F97316, #EF4444);
+      transition: opacity 0.2s;
+    }
+    .btn-grad:hover { opacity: 0.88; }
+    .grid-bg {
+      background-image: radial-gradient(circle, rgba(249,115,22,0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .hero-glow {
+      background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(249,115,22,0.12) 0%, transparent 70%);
+    }
+
+    /* Ticker */
+    .hub-strip { background: #0E1420; border-top: 1px solid #1C2A44; border-bottom: 1px solid #1C2A44; padding: 14px 0; overflow: hidden; white-space: nowrap; }
+    .hub-strip-track { display: inline-flex; align-items: center; gap: 0; }
+    .hub-strip-item { display: inline-block; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em; color: #94A3B8; text-transform: uppercase; padding: 0 28px; }
+    .hub-strip-sep { color: #F97316; font-size: 0.9rem; padding: 0 4px; }
+    .hub-strip-item--brand { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.9rem; color: #F97316; padding: 0 28px; font-weight: 600; text-transform: none; }
+
+    /* Cards */
+    .dir-card {
+      background: #131C2E; border: 1px solid #1C2A44; border-radius: 16px;
+      padding: 24px; transition: transform 0.22s, box-shadow 0.22s;
+      position: relative; overflow: hidden;
+    }
+    .dir-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+    .dir-card .accent-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 16px 16px 0 0; }
+    .stage-pill {
+      display: inline-block; font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 99px; margin-bottom: 12px;
+    }
+    .stage-live { background: rgba(16,185,129,0.15); color: #34D399; border: 1px solid rgba(16,185,129,0.3); }
+    .stage-dev  { background: rgba(249,115,22,0.12); color: #FB923C; border: 1px solid rgba(249,115,22,0.3); }
+    .stage-idea { background: rgba(148,163,184,0.1); color: #94A3B8; border: 1px solid rgba(148,163,184,0.2); }
+
+    .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #F97316; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-border" style="background: rgba(8,11,18,0.92); backdrop-filter: blur(12px);">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-6">
+      <a href="../index.html" class="text-xs font-medium tracking-wide transition-colors" style="color: rgba(255,255,255,0.3);"
+        onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">← Apple Samosa</a>
+      <span class="font-display font-bold text-lg tracking-tight">
+        Hubal<span class="grad-text">icious</span>
+      </span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted hidden sm:block">Directory of Directories</span>
+      <a href="#pipeline" class="btn-grad text-white text-xs font-semibold px-4 py-2 rounded-full">See Pipeline →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden grid-bg">
+  <div class="hero-glow absolute inset-0 pointer-events-none"></div>
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+    <span style="font-family:'Playfair Display',serif; font-size:22vw; font-weight:800; color:rgba(255,255,255,0.018); line-height:1;">H</span>
+  </div>
+  <div class="relative max-w-4xl mx-auto px-6 text-center">
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-xs font-medium tracking-widest uppercase text-muted mb-8" style="background:rgba(255,255,255,0.03);">
+      <span style="width:6px;height:6px;border-radius:50%;background:#F97316;display:inline-block;"></span>
+      Apple Samosa · Hubalicious Lab
+    </div>
+    <h1 class="font-display text-6xl md:text-8xl font-bold leading-none tracking-tight mb-6">
+      One hub.<br/><span class="grad-text">Every hub.</span>
+    </h1>
+    <p class="text-lg text-muted max-w-xl mx-auto mb-10 leading-relaxed">
+      Hubalicious is the incubator for directory-first web businesses — each one a focused resource hub for a specific audience. This is the directory of directories.
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+      <a href="#live" class="btn-grad text-white font-semibold px-8 py-3 rounded-full text-sm">Browse Live Sites →</a>
+      <a href="#pipeline" class="text-sm font-medium px-8 py-3 rounded-full border border-border text-soft hover:border-hub hover:text-hub transition-colors">See Pipeline</a>
+    </div>
+    <div class="flex items-center justify-center gap-8 text-center flex-wrap">
+      <div class="px-6 border-r border-border last:border-0">
+        <div class="font-display text-3xl font-bold text-white">8</div>
+        <div class="text-xs text-muted mt-1 uppercase tracking-wide">Prototypes Live</div>
+      </div>
+      <div class="px-6 border-r border-border last:border-0">
+        <div class="font-display text-3xl font-bold text-white">4</div>
+        <div class="text-xs text-muted mt-1 uppercase tracking-wide">In Development</div>
+      </div>
+      <div class="px-6 border-r border-border last:border-0">
+        <div class="font-display text-3xl font-bold text-white">20+</div>
+        <div class="text-xs text-muted mt-1 uppercase tracking-wide">Concept Pipeline</div>
+      </div>
+      <div class="px-6">
+        <div class="font-display text-3xl font-bold text-white">1</div>
+        <div class="text-xs text-muted mt-1 uppercase tracking-wide">Incubator</div>
+      </div>
+    </div>
+    <div class="mt-16 flex flex-col items-center gap-2 text-muted">
+      <span class="text-xs uppercase tracking-widest">Scroll</span>
+      <div class="animate-bounce text-lg">↓</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<section class="hub-strip">
+  <div class="hub-strip-track" id="hubTrack">
+    <div class="hub-strip-item">Umbrellabelle</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Smart Yards</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Vector Rider</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item--brand">Hubalicious</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Aspiration Point</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Securisignal</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Cloud Forest</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Bee2BeeHive</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">PetCountry</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Urban Rainforest</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item--brand">Hubalicious</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Goverlicious</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Legitimark</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Cribclub</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Capital Call</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item--brand">Hubalicious</div><span class="hub-strip-sep">◈</span>
+    <!-- duplicate for seamless loop -->
+    <div class="hub-strip-item">Umbrellabelle</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Smart Yards</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Vector Rider</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item--brand">Hubalicious</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Aspiration Point</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Securisignal</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Cloud Forest</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Bee2BeeHive</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">PetCountry</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Urban Rainforest</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item--brand">Hubalicious</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Goverlicious</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Legitimark</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Cribclub</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item">Capital Call</div><span class="hub-strip-sep">◈</span>
+    <div class="hub-strip-item--brand">Hubalicious</div><span class="hub-strip-sep">◈</span>
+  </div>
+</section>
+
+<!-- LIVE PROTOTYPES -->
+<section id="live" class="py-24" style="background:#080B12;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-label">Live Prototypes</div>
+    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Built &amp; running.</h2>
+    <p class="text-muted mb-14 max-w-lg">These directories have working prototypes. Some are in launch prep, others are live experiments.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Umbrellabelle -->
+      <a href="umbrellabelle.html" class="dir-card block no-underline group">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#A78BFA,#7C3AED);"></div>
+        <div class="stage-pill stage-live">Live</div>
+        <h3 class="font-display text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">Umbrellabelle</h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">UK umbrella company directory and IR35 scorer. For contractors navigating the post-IR35 landscape.</p>
+        <span class="text-xs font-semibold" style="color:#A78BFA;">View prototype →</span>
+      </a>
+
+      <!-- Smart Yards -->
+      <a href="smart-yards.html" class="dir-card block no-underline group">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#14B8A6,#0D9488);"></div>
+        <div class="stage-pill stage-live">Live</div>
+        <h3 class="font-display text-xl font-bold text-white mb-2 group-hover:text-teal-300 transition-colors">Smart Yards</h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">London industrial yard and IOS directory. B2B commercial property sourcing, SE London first.</p>
+        <span class="text-xs font-semibold" style="color:#14B8A6;">View prototype →</span>
+      </a>
+
+      <!-- Vector Rider -->
+      <a href="vector-rider.html" class="dir-card block no-underline group">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#F97316,#EF4444);"></div>
+        <div class="stage-pill stage-live">Live</div>
+        <h3 class="font-display text-xl font-bold text-white mb-2 group-hover:text-orange-300 transition-colors">Vector Rider</h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">E-bike courier hub. Finding stops, route optimisation, multi-drop support. London-first.</p>
+        <span class="text-xs font-semibold" style="color:#F97316;">View prototype →</span>
+      </a>
+
+      <!-- Aspiration Point -->
+      <a href="aspiration-point.html" class="dir-card block no-underline group">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#D97706,#B5451B);"></div>
+        <div class="stage-pill stage-live">Live</div>
+        <h3 class="font-display text-xl font-bold text-white mb-2 group-hover:text-amber-300 transition-colors">Aspiration Point</h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">Adults reactivating lapsed childhood skills — piano, tennis, dance. Find groups, form teams, showcase.</p>
+        <span class="text-xs font-semibold" style="color:#D97706;">View prototype →</span>
+      </a>
+
+      <!-- Securisignal -->
+      <a href="securisignal.html" class="dir-card block no-underline group">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#0EA5E9,#6366F1);"></div>
+        <div class="stage-pill stage-live">Live</div>
+        <h3 class="font-display text-xl font-bold text-white mb-2 group-hover:text-sky-300 transition-colors">Securisignal</h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">UK security services hub. Vetted firms for hirers. SIA licence guide for entrants. Bat-signal energy.</p>
+        <span class="text-xs font-semibold" style="color:#0EA5E9;">View prototype →</span>
+      </a>
+
+      <!-- Goverlicious -->
+      <a href="goverlicious.html" class="dir-card block no-underline group">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#22C55E,#16A34A);"></div>
+        <div class="stage-pill stage-live">Live</div>
+        <h3 class="font-display text-xl font-bold text-white mb-2 group-hover:text-green-300 transition-colors">Goverlicious</h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">UK government data and public sector resource atlas. Making civic data navigable.</p>
+        <span class="text-xs font-semibold" style="color:#22C55E;">View prototype →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- IN DEVELOPMENT -->
+<section id="pipeline" class="py-24" style="background:#0E1420;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-label">In Development</div>
+    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Coming to the hive.</h2>
+    <p class="text-muted mb-14 max-w-lg">Concepts with briefs written and prototypes in progress. Each has a defined audience and monetisation path.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5">
+
+      <!-- Cloud Forest -->
+      <div class="dir-card">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#10B981,#059669);"></div>
+        <div class="stage-pill stage-dev">In Development</div>
+        <h3 class="font-display text-xl font-bold text-white mb-2">Cloud Forest</h3>
+        <p class="text-sm text-muted leading-relaxed mb-3">Resource hub for migrating and optimising your digital life. Cloud storage comparison, migration guides, subscription audit tools, stack recommendations.</p>
+        <p class="text-xs" style="color:#10B981;">"Your cloud life, untangled."</p>
+      </div>
+
+      <!-- Bee2BeeHive -->
+      <div class="dir-card">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#F59E0B,#D97706);"></div>
+        <div class="stage-pill stage-dev">In Development</div>
+        <h3 class="font-display text-xl font-bold text-white mb-2">Bee2BeeHive</h3>
+        <p class="text-sm text-muted leading-relaxed mb-3">B2B resource hub and supplier directory for side hustlers and micro-businesses. Tools, suppliers, templates, and community for the solo operator.</p>
+        <p class="text-xs" style="color:#F59E0B;">"Work like a bee. Build like a hive."</p>
+      </div>
+
+      <!-- PetCountry -->
+      <div class="dir-card">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#8B5CF6,#7C3AED);"></div>
+        <div class="stage-pill stage-dev">In Development</div>
+        <h3 class="font-display text-xl font-bold text-white mb-2">PetCountry</h3>
+        <p class="text-sm text-muted leading-relaxed mb-3">UK hub for pet socialising, boarding, welfare, and daycare. Vet directory, dog-friendly venues, adoption signposting, and community.</p>
+        <p class="text-xs" style="color:#8B5CF6;">"It's a big country for small paws."</p>
+      </div>
+
+      <!-- Urban Rainforest -->
+      <div class="dir-card">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#059669,#047857);"></div>
+        <div class="stage-pill stage-dev">In Development</div>
+        <h3 class="font-display text-xl font-bold text-white mb-2">Urban Rainforest</h3>
+        <p class="text-sm text-muted leading-relaxed mb-3">Year-round directory for plant markets, farmers markets, and botanical experiences. Find markets, follow vendors, never miss the good ones.</p>
+        <p class="text-xs" style="color:#059669;">"Every city has a rainforest."</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT BACKLOG -->
+<section class="py-24" style="background:#080B12;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-label">Concept Backlog</div>
+    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Ideas in the log.</h2>
+    <p class="text-muted mb-12 max-w-lg">Raw concepts captured from journals. Each has passed the initial "is there an audience?" test.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Backlog items as compact cards -->
+      <div class="dir-card" style="padding:16px 20px;">
+        <div class="stage-pill stage-idea" style="margin-bottom:8px;">Concept</div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Legitimark / Trust Track</h4>
+        <p class="text-xs text-muted">Business and individual authentication — high-standard endorsement and verification service.</p>
+      </div>
+      <div class="dir-card" style="padding:16px 20px;">
+        <div class="stage-pill stage-idea" style="margin-bottom:8px;">Concept</div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Cribclub</h4>
+        <p class="text-xs text-muted">Safe spaces for motor skill development. Live nursery waitlists, pram clubs, parental resources.</p>
+      </div>
+      <div class="dir-card" style="padding:16px 20px;">
+        <div class="stage-pill stage-idea" style="margin-bottom:8px;">Concept</div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Capital Call</h4>
+        <p class="text-xs text-muted">Business funding directory. Grants, angels, debt, crowdfunding — mapped and filterable.</p>
+      </div>
+      <div class="dir-card" style="padding:16px 20px;">
+        <div class="stage-pill stage-idea" style="margin-bottom:8px;">Concept</div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Subzero / Subhero</h4>
+        <p class="text-xs text-muted">All subscriptions and repeat expenditure in one place. Webapp + browser plugin.</p>
+      </div>
+      <div class="dir-card" style="padding:16px 20px;">
+        <div class="stage-pill stage-idea" style="margin-bottom:8px;">Concept</div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Dad Bod Squad</h4>
+        <p class="text-xs text-muted">Gym resources, coaching, and community for dad bods. Affiliate-first.</p>
+      </div>
+      <div class="dir-card" style="padding:16px 20px;">
+        <div class="stage-pill stage-idea" style="margin-bottom:8px;">Concept</div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Agent Pools</h4>
+        <p class="text-xs text-muted">Any service converted into a modern secretarial pool. Property hunting, concierge, and more.</p>
+      </div>
+      <div class="dir-card" style="padding:16px 20px;">
+        <div class="stage-pill stage-idea" style="margin-bottom:8px;">Concept</div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Private Barracks</h4>
+        <p class="text-xs text-muted">Young professional and student London survival hub. Co-living, resources, community.</p>
+      </div>
+      <div class="dir-card" style="padding:16px 20px;">
+        <div class="stage-pill stage-idea" style="margin-bottom:8px;">Concept</div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Standard Bearer</h4>
+        <p class="text-xs text-muted">Standardisation and certification resource hub. The unofficial official record.</p>
+      </div>
+      <div class="dir-card" style="padding:16px 20px;">
+        <div class="stage-pill stage-idea" style="margin-bottom:8px;">Concept</div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Snowflake Mountain</h4>
+        <p class="text-xs text-muted">Prepper and survivalist directory with a narrative hook.</p>
+      </div>
+      <div class="dir-card" style="padding:16px 20px;">
+        <div class="stage-pill stage-idea" style="margin-bottom:8px;">Concept</div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Mediana</h4>
+        <p class="text-xs text-muted">All media resources hub. Dreamers to Streamers — production, distribution, monetisation.</p>
+      </div>
+      <div class="dir-card" style="padding:16px 20px;">
+        <div class="stage-pill stage-idea" style="margin-bottom:8px;">Concept</div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Capacity</h4>
+        <p class="text-xs text-muted">Unsold seat and ticket marketplace — flights, coaches, events. Last-minute, friction-free.</p>
+      </div>
+      <div class="dir-card" style="padding:16px 20px;">
+        <div class="stage-pill stage-idea" style="margin-bottom:8px;">Concept</div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Food Hygiene Hub</h4>
+        <p class="text-xs text-muted">UK food hygiene resources, ratings directory, compliance guides for operators.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE MODEL -->
+<section class="py-24" style="background:#0E1420;">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <div class="section-label">The Hubalicious Model</div>
+    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">Static first. <span class="grad-text">Scale when proven.</span></h2>
+    <p class="text-muted text-lg leading-relaxed mb-12 max-w-2xl mx-auto">Every Hubalicious directory starts as a static site — zero infrastructure cost, built in a week, deployed the same day. Audience comes first. Monetisation follows. Dynamic features only when the data justifies the investment.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+      <div class="dir-card text-center">
+        <div class="font-display text-4xl font-bold mb-3" style="color:#F97316;">01</div>
+        <h4 class="font-display font-bold text-white mb-2">Static MVP</h4>
+        <p class="text-xs text-muted leading-relaxed">HTML, Tailwind, GitHub Pages. No backend. Build in days, not months. Get it in front of people.</p>
+      </div>
+      <div class="dir-card text-center">
+        <div class="font-display text-4xl font-bold mb-3" style="color:#F97316;">02</div>
+        <h4 class="font-display font-bold text-white mb-2">Audience First</h4>
+        <p class="text-xs text-muted leading-relaxed">Email list. SEO. Waitlist. Affiliate links. Prove there's demand before building infrastructure.</p>
+      </div>
+      <div class="dir-card text-center">
+        <div class="font-display text-4xl font-bold mb-3" style="color:#F97316;">03</div>
+        <h4 class="font-display font-bold text-white mb-2">Dynamic When Ready</h4>
+        <p class="text-xs text-muted leading-relaxed">Listings, search, user accounts, and paid features only when the audience justifies the build.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-border py-10" style="background:#080B12;">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <span class="font-display font-bold text-lg">Hubal<span class="grad-text">icious</span></span>
+    <div class="flex items-center gap-6 text-xs text-muted">
+      <a href="../index.html" class="hover:text-soft transition-colors">Apple Samosa</a>
+      <a href="#live" class="hover:text-soft transition-colors">Live Sites</a>
+      <a href="#pipeline" class="hover:text-soft transition-colors">Pipeline</a>
+    </div>
+    <p class="text-xs text-muted">© 2026 Hubalicious · Apple Samosa</p>
+  </div>
+</footer>
+
+<script>
+  const track = document.getElementById('hubTrack');
+  let offset = 0;
+  const SPEED = 38;
+  let lastTime = null;
+  let paused = false;
+
+  track.addEventListener('mouseenter', () => paused = true);
+  track.addEventListener('mouseleave', () => paused = false);
+
+  function tick(ts) {
+    if (lastTime !== null && !paused) {
+      const dt = (ts - lastTime) / 1000;
+      offset += SPEED * dt;
+      const half = track.scrollWidth / 2;
+      if (offset >= half) offset -= half;
+      track.style.transform = `translateX(-${offset}px)`;
+    }
+    lastTime = ts;
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+</script>
+</body>
+</html>
